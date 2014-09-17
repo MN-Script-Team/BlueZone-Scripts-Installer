@@ -29,7 +29,6 @@ Partial Class scripts_config_form
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.county_selection = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.access_DB_check = New System.Windows.Forms.CheckBox()
         Me.EDMS_check = New System.Windows.Forms.CheckBox()
         Me.EDMS_choice = New System.Windows.Forms.TextBox()
         Me.county_address_line_01 = New System.Windows.Forms.TextBox()
@@ -37,19 +36,22 @@ Partial Class scripts_config_form
         Me.Label3 = New System.Windows.Forms.Label()
         Me.county_address_line_02 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.new_file_path = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.old_file_path = New System.Windows.Forms.TextBox()
+        Me.custom_file_path = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.run_configuration_button = New System.Windows.Forms.Button()
         Me.intake_dates_check = New System.Windows.Forms.CheckBox()
         Me.Tab_Control_Main_Form = New System.Windows.Forms.TabControl()
         Me.basic_settings_tab = New System.Windows.Forms.TabPage()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.location_to_save_script_files = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.advanced_script_mods_tab = New System.Windows.Forms.TabPage()
         Me.move_verifs_needed_check = New System.Windows.Forms.CheckBox()
         Me.advanced_file_path_mods_tab = New System.Windows.Forms.TabPage()
         Me.Update_Files_Label = New System.Windows.Forms.Label()
+        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.MenuStrip1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Tab_Control_Main_Form.SuspendLayout()
@@ -103,7 +105,7 @@ Partial Class scripts_config_form
         Me.county_selection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.county_selection.FormattingEnabled = True
         Me.county_selection.Items.AddRange(New Object() {"01 - Aitkin", "02 - Anoka", "03 - Becker", "04 - Beltrami", "05 - Benton", "06 - Big Stone", "07 - Blue Earth", "08 - Brown", "09 - Carlton", "10 - Carver", "11 - Cass", "12 - Chippewa", "13 - Chisago", "14 - Clay", "15 - Clearwater", "16 - Cook", "17 - Cottonwood", "18 - Crow Wing", "19 - Dakota", "20 - Dodge", "21 - Douglas", "22 - Faribault", "23 - Fillmore", "24 - Freeborn", "25 - Goodhue", "26 - Grant", "27 - Hennepin", "28 - Houston", "29 - Hubbard", "30 - Isanti", "31 - Itasca", "32 - Jackson", "33 - Kanabec", "34 - Kandiyohi", "35 - Kittson", "36 - Koochiching", "37 - Lac Qui Parle", "38 - Lake", "39 - Lake of the Woods", "40 - LeSueur", "41 - Lincoln", "42 - Lyon", "43 - Mcleod", "44 - Mahnomen", "45 - Marshall", "46 - Martin", "47 - Meeker", "48 - Mille Lacs", "49 - Morrison", "50 - Mower", "51 - Murray", "52 - Nicollet", "53 - Nobles", "54 - Norman", "55 - Olmsted", "56 - Otter Tail", "57 - Pennington", "58 - Pine", "59 - Pipestone", "60 - Polk", "61 - Pope", "62 - Ramsey", "63 - Red Lake", "64 - Redwood", "65 - Renville", "66 - Rice", "67 - Rock", "68 - Roseau", "69 - St. Louis", "70 - Scott", "71 - Sherburne", "72 - Sibley", "73 - Stearns", "74 - Steele", "75 - Stevens", "76 - Swift", "77 - Todd", "78 - Traverse", "79 - Wabasha", "80 - Wadena", "81 - Waseca", "82 - Washington", "83 - Watonwan", "84 - Wilkin", "85 - Winona", "86 - Wright", "87 - Yellow Medicine"})
-        Me.county_selection.Location = New System.Drawing.Point(66, 19)
+        Me.county_selection.Location = New System.Drawing.Point(66, 16)
         Me.county_selection.Name = "county_selection"
         Me.county_selection.Size = New System.Drawing.Size(215, 21)
         Me.county_selection.TabIndex = 0
@@ -111,44 +113,33 @@ Partial Class scripts_config_form
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(17, 22)
+        Me.Label1.Location = New System.Drawing.Point(17, 19)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(46, 13)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Agency:"
         '
-        'access_DB_check
-        '
-        Me.access_DB_check.AutoSize = True
-        Me.access_DB_check.Enabled = False
-        Me.access_DB_check.Location = New System.Drawing.Point(3, 109)
-        Me.access_DB_check.Name = "access_DB_check"
-        Me.access_DB_check.Size = New System.Drawing.Size(303, 17)
-        Me.access_DB_check.TabIndex = 1
-        Me.access_DB_check.Text = "Check here to collect statistics using an Access Database."
-        Me.access_DB_check.UseVisualStyleBackColor = True
-        '
         'EDMS_check
         '
         Me.EDMS_check.AutoSize = True
-        Me.EDMS_check.Location = New System.Drawing.Point(3, 132)
+        Me.EDMS_check.Location = New System.Drawing.Point(11, 137)
         Me.EDMS_check.Name = "EDMS_check"
         Me.EDMS_check.Size = New System.Drawing.Size(298, 17)
-        Me.EDMS_check.TabIndex = 2
+        Me.EDMS_check.TabIndex = 1
         Me.EDMS_check.Text = "Check here if you use an EDMS, and enter its name here:"
         Me.EDMS_check.UseVisualStyleBackColor = True
         '
         'EDMS_choice
         '
-        Me.EDMS_choice.Location = New System.Drawing.Point(307, 130)
+        Me.EDMS_choice.Location = New System.Drawing.Point(315, 135)
         Me.EDMS_choice.Name = "EDMS_choice"
         Me.EDMS_choice.Size = New System.Drawing.Size(156, 20)
-        Me.EDMS_choice.TabIndex = 3
+        Me.EDMS_choice.TabIndex = 2
         Me.EDMS_choice.Text = "ex: Compass Forms"
         '
         'county_address_line_01
         '
-        Me.county_address_line_01.Location = New System.Drawing.Point(134, 46)
+        Me.county_address_line_01.Location = New System.Drawing.Point(134, 43)
         Me.county_address_line_01.Name = "county_address_line_01"
         Me.county_address_line_01.Size = New System.Drawing.Size(199, 20)
         Me.county_address_line_01.TabIndex = 1
@@ -156,7 +147,7 @@ Partial Class scripts_config_form
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(17, 49)
+        Me.Label2.Location = New System.Drawing.Point(17, 46)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(114, 13)
         Me.Label2.TabIndex = 7
@@ -165,7 +156,7 @@ Partial Class scripts_config_form
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(17, 75)
+        Me.Label3.Location = New System.Drawing.Point(17, 72)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(114, 13)
         Me.Label3.TabIndex = 9
@@ -173,42 +164,27 @@ Partial Class scripts_config_form
         '
         'county_address_line_02
         '
-        Me.county_address_line_02.Location = New System.Drawing.Point(134, 72)
+        Me.county_address_line_02.Location = New System.Drawing.Point(134, 69)
         Me.county_address_line_02.Name = "county_address_line_02"
         Me.county_address_line_02.Size = New System.Drawing.Size(199, 20)
         Me.county_address_line_02.TabIndex = 2
         '
         'Label4
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(8, 35)
+        Me.Label4.Location = New System.Drawing.Point(6, 5)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(72, 13)
+        Me.Label4.Size = New System.Drawing.Size(492, 31)
         Me.Label4.TabIndex = 13
-        Me.Label4.Text = "New file path:"
+        Me.Label4.Text = "In this field, you can specify a customized file path, which replaces the default" & _
+    " that was selected in the ""basic settings"" tab. Useful for staging areas, or unm" & _
+    "apped network drives."
         '
-        'new_file_path
+        'custom_file_path
         '
-        Me.new_file_path.Location = New System.Drawing.Point(86, 32)
-        Me.new_file_path.Name = "new_file_path"
-        Me.new_file_path.Size = New System.Drawing.Size(409, 20)
-        Me.new_file_path.TabIndex = 1
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(8, 9)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(135, 13)
-        Me.Label5.TabIndex = 11
-        Me.Label5.Text = "Old file path (script default):"
-        '
-        'old_file_path
-        '
-        Me.old_file_path.Location = New System.Drawing.Point(149, 6)
-        Me.old_file_path.Name = "old_file_path"
-        Me.old_file_path.Size = New System.Drawing.Size(346, 20)
-        Me.old_file_path.TabIndex = 0
+        Me.custom_file_path.Location = New System.Drawing.Point(86, 39)
+        Me.custom_file_path.Name = "custom_file_path"
+        Me.custom_file_path.Size = New System.Drawing.Size(409, 20)
+        Me.custom_file_path.TabIndex = 1
         '
         'GroupBox2
         '
@@ -218,19 +194,19 @@ Partial Class scripts_config_form
         Me.GroupBox2.Controls.Add(Me.county_address_line_01)
         Me.GroupBox2.Controls.Add(Me.county_address_line_02)
         Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox2.Location = New System.Drawing.Point(11, 28)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(346, 100)
+        Me.GroupBox2.Size = New System.Drawing.Size(346, 101)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Agency information"
         '
         'run_configuration_button
         '
-        Me.run_configuration_button.Location = New System.Drawing.Point(402, 218)
+        Me.run_configuration_button.Location = New System.Drawing.Point(402, 220)
         Me.run_configuration_button.Name = "run_configuration_button"
         Me.run_configuration_button.Size = New System.Drawing.Size(109, 30)
-        Me.run_configuration_button.TabIndex = 6
+        Me.run_configuration_button.TabIndex = 0
         Me.run_configuration_button.Text = "Run Configuration"
         Me.run_configuration_button.UseVisualStyleBackColor = True
         '
@@ -255,26 +231,54 @@ Partial Class scripts_config_form
         Me.Tab_Control_Main_Form.Location = New System.Drawing.Point(6, 27)
         Me.Tab_Control_Main_Form.Name = "Tab_Control_Main_Form"
         Me.Tab_Control_Main_Form.SelectedIndex = 0
-        Me.Tab_Control_Main_Form.Size = New System.Drawing.Size(509, 185)
+        Me.Tab_Control_Main_Form.Size = New System.Drawing.Size(509, 188)
         Me.Tab_Control_Main_Form.TabIndex = 8
         '
         'basic_settings_tab
         '
+        Me.basic_settings_tab.Controls.Add(Me.Button2)
+        Me.basic_settings_tab.Controls.Add(Me.Label6)
+        Me.basic_settings_tab.Controls.Add(Me.location_to_save_script_files)
         Me.basic_settings_tab.Controls.Add(Me.Button1)
         Me.basic_settings_tab.Controls.Add(Me.GroupBox2)
-        Me.basic_settings_tab.Controls.Add(Me.access_DB_check)
         Me.basic_settings_tab.Controls.Add(Me.EDMS_check)
         Me.basic_settings_tab.Controls.Add(Me.EDMS_choice)
         Me.basic_settings_tab.Location = New System.Drawing.Point(4, 22)
         Me.basic_settings_tab.Name = "basic_settings_tab"
-        Me.basic_settings_tab.Size = New System.Drawing.Size(501, 159)
+        Me.basic_settings_tab.Size = New System.Drawing.Size(501, 162)
         Me.basic_settings_tab.TabIndex = 2
         Me.basic_settings_tab.Text = "Basic settings"
         Me.basic_settings_tab.UseVisualStyleBackColor = True
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(437, 3)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(61, 23)
+        Me.Button2.TabIndex = 3
+        Me.Button2.Text = "Browse"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(11, 6)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(150, 13)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Where are we saving scripts?:"
+        '
+        'location_to_save_script_files
+        '
+        Me.location_to_save_script_files.Location = New System.Drawing.Point(167, 3)
+        Me.location_to_save_script_files.Name = "location_to_save_script_files"
+        Me.location_to_save_script_files.Size = New System.Drawing.Size(264, 20)
+        Me.location_to_save_script_files.TabIndex = 0
+        '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(366, 22)
+        Me.Button1.Enabled = False
+        Me.Button1.Location = New System.Drawing.Point(366, 47)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(120, 23)
         Me.Button1.TabIndex = 4
@@ -288,7 +292,7 @@ Partial Class scripts_config_form
         Me.advanced_script_mods_tab.Location = New System.Drawing.Point(4, 22)
         Me.advanced_script_mods_tab.Name = "advanced_script_mods_tab"
         Me.advanced_script_mods_tab.Padding = New System.Windows.Forms.Padding(3)
-        Me.advanced_script_mods_tab.Size = New System.Drawing.Size(501, 159)
+        Me.advanced_script_mods_tab.Size = New System.Drawing.Size(501, 162)
         Me.advanced_script_mods_tab.TabIndex = 0
         Me.advanced_script_mods_tab.Text = "Advanced script mods"
         Me.advanced_script_mods_tab.UseVisualStyleBackColor = True
@@ -305,14 +309,13 @@ Partial Class scripts_config_form
         '
         'advanced_file_path_mods_tab
         '
-        Me.advanced_file_path_mods_tab.Controls.Add(Me.Label4)
-        Me.advanced_file_path_mods_tab.Controls.Add(Me.old_file_path)
-        Me.advanced_file_path_mods_tab.Controls.Add(Me.new_file_path)
         Me.advanced_file_path_mods_tab.Controls.Add(Me.Label5)
+        Me.advanced_file_path_mods_tab.Controls.Add(Me.Label4)
+        Me.advanced_file_path_mods_tab.Controls.Add(Me.custom_file_path)
         Me.advanced_file_path_mods_tab.Location = New System.Drawing.Point(4, 22)
         Me.advanced_file_path_mods_tab.Name = "advanced_file_path_mods_tab"
         Me.advanced_file_path_mods_tab.Padding = New System.Windows.Forms.Padding(3)
-        Me.advanced_file_path_mods_tab.Size = New System.Drawing.Size(501, 159)
+        Me.advanced_file_path_mods_tab.Size = New System.Drawing.Size(501, 162)
         Me.advanced_file_path_mods_tab.TabIndex = 1
         Me.advanced_file_path_mods_tab.Text = "Advanced file path mods"
         Me.advanced_file_path_mods_tab.UseVisualStyleBackColor = True
@@ -320,12 +323,24 @@ Partial Class scripts_config_form
         'Update_Files_Label
         '
         Me.Update_Files_Label.AutoSize = True
-        Me.Update_Files_Label.Location = New System.Drawing.Point(254, 227)
+        Me.Update_Files_Label.Location = New System.Drawing.Point(254, 229)
         Me.Update_Files_Label.Name = "Update_Files_Label"
         Me.Update_Files_Label.Size = New System.Drawing.Size(142, 13)
         Me.Update_Files_Label.TabIndex = 9
         Me.Update_Files_Label.Text = "Updating files, please wait! :)"
         Me.Update_Files_Label.Visible = False
+        '
+        'FolderBrowserDialog1
+        '
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(11, 42)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(69, 13)
+        Me.Label5.TabIndex = 14
+        Me.Label5.Text = "Custom path:"
         '
         'scripts_config_form
         '
@@ -362,7 +377,6 @@ Partial Class scripts_config_form
     Friend WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents county_selection As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents access_DB_check As System.Windows.Forms.CheckBox
     Friend WithEvents EDMS_check As System.Windows.Forms.CheckBox
     Friend WithEvents EDMS_choice As System.Windows.Forms.TextBox
     Friend WithEvents county_address_line_01 As System.Windows.Forms.TextBox
@@ -370,9 +384,7 @@ Partial Class scripts_config_form
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents county_address_line_02 As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents new_file_path As System.Windows.Forms.TextBox
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents old_file_path As System.Windows.Forms.TextBox
+    Friend WithEvents custom_file_path As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents run_configuration_button As System.Windows.Forms.Button
     Friend WithEvents intake_dates_check As System.Windows.Forms.CheckBox
@@ -383,5 +395,10 @@ Partial Class scripts_config_form
     Friend WithEvents move_verifs_needed_check As System.Windows.Forms.CheckBox
     Friend WithEvents Update_Files_Label As System.Windows.Forms.Label
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents location_to_save_script_files As System.Windows.Forms.TextBox
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
+    Friend WithEvents Label5 As System.Windows.Forms.Label
 
 End Class
