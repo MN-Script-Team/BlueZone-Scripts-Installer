@@ -1,7 +1,7 @@
 ﻿Imports System
 Imports System.IO
-Imports System.IO.Compression
 Imports System.Collections
+Imports System.Text
 
 Public Class scripts_config_form
 
@@ -82,6 +82,9 @@ Public Class scripts_config_form
         Return file_name
     End Function
 
+    
+
+
     Sub downloading_files_from_GitHub()
         Dim agency_is_beta As Boolean
 
@@ -144,9 +147,36 @@ Public Class scripts_config_form
 
         objXMLHTTP = Nothing
         '------------------------------------------------------------------------------------
+        'Now, because the ZipFile.ExtractToDirectory method appears to not work with folks running .net 4.0, the
+        'app will create a VBS version of the file extractor, and save it to disk.
 
-        'Extract the zip to the temp folder
-        ZipFile.ExtractToDirectory(local_copy_of_zip_file, temp_folder)
+        'Creating the file and writing each line
+        Dim new_zip_file As StreamWriter = File.CreateText(temp_folder & "\unzip.vbs")
+        new_zip_file.WriteLine("current_directory = " & Chr(34) & temp_folder & Chr(34))                                                        'Sets current directory to match temp folder
+        new_zip_file.WriteLine("set objShell = CreateObject(" & Chr(34) & "Shell.Application" & Chr(34) & ") ")                                 'Creates a shell.application object to execute extraction
+        new_zip_file.WriteLine("set FilesInZip = objShell.NameSpace(current_directory & " & Chr(34) & "\master.zip" & Chr(34) & ").items")      'Points to the master.zip file
+        new_zip_file.WriteLine("objShell.NameSpace(current_directory).CopyHere FilesInZip, 16 ")                                                'Copies the files out to the temp directory
+        new_zip_file.WriteLine("set objShell = Nothing")                                                                                        'Nulls variable like a good little code
+        new_zip_file.Flush()
+        new_zip_file.Close()
+
+
+        'Running the zip file
+        Process.Start(temp_folder & "\unzip.vbs")
+
+        'Now, because we have an independent script running, we need to check to see if wscript.exe is running. So, we set a variable to be our boolean "are we there yet"?
+        Dim moving_on As Boolean
+
+        'Now it loops checking to see if wscript.exe is running. If it STOPS running, moving_on is set to true, and we continue on our merry way.
+        Do
+            Dim processes() As Process
+            processes = Process.GetProcessesByName("wscript")
+            If processes.Count > 0 Then
+                moving_on = False
+            Else
+                moving_on = True
+            End If
+        Loop Until moving_on = True
 
         'There should only be one folder in the download, but the directory checker creates an array. We need to join the array before we can mess with it.
         Dim dirs As List(Of String) = New List(Of String)(Directory.EnumerateDirectories(temp_folder))
