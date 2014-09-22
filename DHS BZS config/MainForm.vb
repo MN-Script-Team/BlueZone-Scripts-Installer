@@ -3,10 +3,14 @@ Imports System.IO
 Imports System.Collections
 Imports System.Text
 
+
+
 Public Class scripts_config_form
 
     Const read_only = 1
     Const read_write = 2
+
+    Private Property list_of_addresses As String
 
     Private Property fso As Object
 
@@ -39,7 +43,7 @@ Public Class scripts_config_form
     Private Property old_file_path As Object
 
     'This is the function that actually modifies the files
-    Function update_files(file_name)
+    Function update_files(file_name, address_array)
 
         Dim text_file() As String = System.IO.File.ReadAllLines(file_name)
         Dim text_line As String
@@ -56,8 +60,9 @@ Public Class scripts_config_form
                 If InStr(text_line, "worker_county_code = ") Then text_line = "worker_county_code = " & Chr(34) & "x1" & Strings.Left(county_selection.Text, 2) & Chr(34)
                 If InStr(text_line, "EDMS_choice = ") Then text_line = "EDMS_choice = " & Chr(34) & EDMS_choice.Text & Chr(34)
                 If InStr(text_line, "county_name = ") Then text_line = "county_name = " & Chr(34) & Strings.Replace(county_selection.Text, Strings.Left(county_selection.Text, 5), "") & Chr(34)
-                If InStr(text_line, "county_address_line_01 = ") Then text_line = "county_address_line_01 = " & Chr(34) & county_address_line_01.Text & Chr(34)
-                If InStr(text_line, "county_address_line_02 = ") Then text_line = "county_address_line_02 = " & Chr(34) & county_address_line_02.Text & Chr(34)
+                'If InStr(text_line, "county_address_line_01 = ") Then text_line = "county_address_line_01 = " & Chr(34) & county_address_line_01.Text & Chr(34)
+                If InStr(text_line, "county_office_array = split(") Then text_line = "county_office_array = split(" & Chr(34) & address_array & Chr(34) & ", " & Chr(34) & "~" & Chr(34) & ")"
+                'If InStr(text_line, "county_address_line_02 = ") Then text_line = "county_address_line_02 = " & Chr(34) & county_address_line_02.Text & Chr(34)
                 If InStr(text_line, "case_noting_intake_dates = ") Then
                     If intake_dates_check.Checked = True Then
                         text_line = "case_noting_intake_dates = True"
@@ -203,11 +208,26 @@ Public Class scripts_config_form
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles run_configuration_button.Click
+        'Dims the address array as nothing
+        Dim list_of_addresses = Nothing
+
+        'Takes each line of the address array and splits it with a "|", and each address with a "~". FUNCTIONS FILE will take it from here and split it.
+        If address_entry_form.addr_01_line_01.Text <> "" And address_entry_form.addr_01_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_01_line_01.Text & "|" & address_entry_form.addr_01_line_02.Text & "~"
+        If address_entry_form.addr_02_line_01.Text <> "" And address_entry_form.addr_02_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_02_line_01.Text & "|" & address_entry_form.addr_02_line_02.Text & "~"
+        If address_entry_form.addr_03_line_01.Text <> "" And address_entry_form.addr_03_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_03_line_01.Text & "|" & address_entry_form.addr_03_line_02.Text & "~"
+        If address_entry_form.addr_04_line_01.Text <> "" And address_entry_form.addr_04_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_04_line_01.Text & "|" & address_entry_form.addr_04_line_02.Text & "~"
+        If address_entry_form.addr_05_line_01.Text <> "" And address_entry_form.addr_05_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_05_line_01.Text & "|" & address_entry_form.addr_05_line_02.Text & "~"
+        If address_entry_form.addr_06_line_01.Text <> "" And address_entry_form.addr_06_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_06_line_01.Text & "|" & address_entry_form.addr_06_line_02.Text & "~"
+        If address_entry_form.addr_07_line_01.Text <> "" And address_entry_form.addr_07_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_07_line_01.Text & "|" & address_entry_form.addr_07_line_02.Text & "~"
+
         'Warning if a county or file path is not selected
-        If county_selection.Text = "" Or county_address_line_01.Text = "" Or county_address_line_02.Text = "" Or location_to_save_script_files.Text = "" Then
+        If county_selection.Text = "" Or list_of_addresses = Nothing Or location_to_save_script_files.Text = "" Then
             MsgBox("You must select a county, and enter a complete county address, as well as enter a file location.")
             Exit Sub
         End If
+
+        'Removing the last tilde as it is stupid and not required.
+        list_of_addresses = list_of_addresses.Remove(list_of_addresses.Length - 1)
 
         'Warns user that they can back out
         warning = MsgBox("The following utility will download all of the scripts to the selected directory, and replace the DHS file path with " & _
@@ -247,7 +267,7 @@ Public Class scripts_config_form
 
         'Running the update_files sub on each VBS file
         For Each file_in_array In list_of_files_array
-            If UCase(Strings.Right(file_in_array, 4)) = ".VBS" Then update_files(file_in_array)
+            If UCase(Strings.Right(file_in_array, 4)) = ".VBS" Then update_files(file_in_array, list_of_addresses)
         Next
 
         Update_Files_Label.Visible = False
@@ -265,7 +285,9 @@ Public Class scripts_config_form
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        multiaddressform.ShowDialog(Me)
+
+        address_entry_form.ShowDialog(Me)
+
     End Sub
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click

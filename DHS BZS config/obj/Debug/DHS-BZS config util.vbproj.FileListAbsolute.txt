@@ -47,3 +47,4 @@ C:\BlueZone-Scripts-Installer\DHS BZS config\obj\Debug\DHS_BZS_config.Resources.
 C:\BlueZone-Scripts-Installer\DHS BZS config\obj\Debug\DHS-BZS config util.vbproj.GenerateResource.Cache
 C:\BlueZone-Scripts-Installer\DHS BZS config\obj\Debug\DHS-BZS config util.exe.manifest
 C:\BlueZone-Scripts-Installer\DHS BZS config\obj\Debug\DHS-BZS config util.application
+C:\BlueZone-Scripts-Installer\DHS BZS config\obj\Debug\DHS_BZS_config.address_entry_form.resources

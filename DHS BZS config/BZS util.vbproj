@@ -105,6 +105,12 @@
     <Compile Include="AboutBox.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="address_entry_form.designer.vb">
+      <DependentUpon>address_entry_form.vb</DependentUpon>
+    </Compile>
+    <Compile Include="address_entry_form.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="multiaddressform.Designer.vb">
       <DependentUpon>multiaddressform.vb</DependentUpon>
     </Compile>
@@ -137,6 +143,9 @@
   <ItemGroup>
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="address_entry_form.resx">
+      <DependentUpon>address_entry_form.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="multiaddressform.resx">
       <DependentUpon>multiaddressform.vb</DependentUpon>
