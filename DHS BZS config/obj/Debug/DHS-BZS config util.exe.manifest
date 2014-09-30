@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DHS-BZS config util.exe" size="93696">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DHS-BZS config util.exe" size="95232">
       <assemblyIdentity name="DHS-BZS config util" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Z10we3qE50xuSd7mgFrnktQishZ54nQqoUOv9ZC4JTQ=</dsig:DigestValue>
+        <dsig:DigestValue>bWfmgnaV2GWNSHhi5bT+9dSG9Xb+RBbvBB//KmyKI7c=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
