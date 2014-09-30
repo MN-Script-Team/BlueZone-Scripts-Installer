@@ -34,6 +34,7 @@ Partial Class scripts_config_form
         Me.Label4 = New System.Windows.Forms.Label()
         Me.custom_file_path = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.run_configuration_button = New System.Windows.Forms.Button()
         Me.intake_dates_check = New System.Windows.Forms.CheckBox()
         Me.Tab_Control_Main_Form = New System.Windows.Forms.TabControl()
@@ -41,7 +42,6 @@ Partial Class scripts_config_form
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.location_to_save_script_files = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.advanced_script_mods_tab = New System.Windows.Forms.TabPage()
         Me.move_verifs_needed_check = New System.Windows.Forms.CheckBox()
         Me.advanced_file_path_mods_tab = New System.Windows.Forms.TabPage()
@@ -100,7 +100,7 @@ Partial Class scripts_config_form
         '
         Me.county_selection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.county_selection.FormattingEnabled = True
-        Me.county_selection.Items.AddRange(New Object() {"01 - Aitkin", "02 - Anoka", "03 - Becker", "04 - Beltrami", "05 - Benton", "06 - Big Stone", "07 - Blue Earth", "08 - Brown", "09 - Carlton", "10 - Carver", "11 - Cass", "12 - Chippewa", "13 - Chisago", "14 - Clay", "15 - Clearwater", "16 - Cook", "17 - Cottonwood", "18 - Crow Wing", "19 - Dakota", "20 - Dodge", "21 - Douglas", "22 - Faribault", "23 - Fillmore", "24 - Freeborn", "25 - Goodhue", "26 - Grant", "27 - Hennepin", "28 - Houston", "29 - Hubbard", "30 - Isanti", "31 - Itasca", "32 - Jackson", "33 - Kanabec", "34 - Kandiyohi", "35 - Kittson", "36 - Koochiching", "37 - Lac Qui Parle", "38 - Lake", "39 - Lake of the Woods", "40 - LeSueur", "41 - Lincoln", "42 - Lyon", "43 - Mcleod", "44 - Mahnomen", "45 - Marshall", "46 - Martin", "47 - Meeker", "48 - Mille Lacs", "49 - Morrison", "50 - Mower", "51 - Murray", "52 - Nicollet", "53 - Nobles", "54 - Norman", "55 - Olmsted", "56 - Otter Tail", "57 - Pennington", "58 - Pine", "59 - Pipestone", "60 - Polk", "61 - Pope", "62 - Ramsey", "63 - Red Lake", "64 - Redwood", "65 - Renville", "66 - Rice", "67 - Rock", "68 - Roseau", "69 - St. Louis", "70 - Scott", "71 - Sherburne", "72 - Sibley", "73 - Stearns", "74 - Steele", "75 - Stevens", "76 - Swift", "77 - Todd", "78 - Traverse", "79 - Wabasha", "80 - Wadena", "81 - Waseca", "82 - Washington", "83 - Watonwan", "84 - Wilkin", "85 - Winona", "86 - Wright", "87 - Yellow Medicine"})
+        Me.county_selection.Items.AddRange(New Object() {"01 - Aitkin", "02 - Anoka", "03 - Becker", "04 - Beltrami", "05 - Benton", "06 - Big Stone", "07 - Blue Earth", "08 - Brown", "09 - Carlton", "10 - Carver", "11 - Cass", "12 - Chippewa", "13 - Chisago", "14 - Clay", "15 - Clearwater", "16 - Cook", "17 - Cottonwood", "18 - Crow Wing", "19 - Dakota", "20 - Dodge", "21 - Douglas", "22 - Faribault", "23 - Fillmore", "24 - Freeborn", "25 - Goodhue", "26 - Grant", "27 - Hennepin", "28 - Houston", "29 - Hubbard", "30 - Isanti", "31 - Itasca", "32 - Jackson", "33 - Kanabec", "34 - Kandiyohi", "35 - Kittson", "36 - Koochiching", "37 - Lac Qui Parle", "38 - Lake", "39 - Lake of the Woods", "40 - LeSueur", "41 - Lincoln", "42 - Lyon", "43 - Mcleod", "44 - Mahnomen", "45 - Marshall", "46 - Martin", "47 - Meeker", "48 - Mille Lacs", "49 - Morrison", "50 - Mower", "51 - Murray", "52 - Nicollet", "53 - Nobles", "54 - Norman", "55 - Olmsted", "56 - Otter Tail", "57 - Pennington", "58 - Pine", "59 - Pipestone", "60 - Polk", "61 - Pope", "62 - Ramsey", "63 - Red Lake", "64 - Redwood", "65 - Renville", "66 - Rice", "67 - Rock", "68 - Roseau", "69 - St. Louis", "70 - Scott", "71 - Sherburne", "72 - Sibley", "73 - Stearns", "74 - Steele", "75 - Stevens", "76 - Swift", "77 - Todd", "78 - Traverse", "79 - Wabasha", "80 - Wadena", "81 - Waseca", "82 - Washington", "83 - Watonwan", "84 - Wilkin", "85 - Winona", "86 - Wright", "87 - Yellow Medicine", "88 - Mille Lacs Band", "92 - White Earth Nation", "93 - Leech Lake Band", "94 - Red Lake Nation", "DM - Des Moines Valley HHS", "SW - Southwest HHS", "DHS"})
         Me.county_selection.Location = New System.Drawing.Point(66, 16)
         Me.county_selection.Name = "county_selection"
         Me.county_selection.Size = New System.Drawing.Size(215, 21)
@@ -161,6 +161,15 @@ Partial Class scripts_config_form
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Agency information"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(307, 14)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(174, 23)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Add office addresses..."
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'run_configuration_button
         '
@@ -235,15 +244,6 @@ Partial Class scripts_config_form
         Me.location_to_save_script_files.Size = New System.Drawing.Size(264, 20)
         Me.location_to_save_script_files.TabIndex = 0
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(307, 14)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(174, 23)
-        Me.Button1.TabIndex = 4
-        Me.Button1.Text = "Add office addresses..."
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'advanced_script_mods_tab
         '
         Me.advanced_script_mods_tab.Controls.Add(Me.move_verifs_needed_check)
@@ -251,7 +251,7 @@ Partial Class scripts_config_form
         Me.advanced_script_mods_tab.Location = New System.Drawing.Point(4, 22)
         Me.advanced_script_mods_tab.Name = "advanced_script_mods_tab"
         Me.advanced_script_mods_tab.Padding = New System.Windows.Forms.Padding(3)
-        Me.advanced_script_mods_tab.Size = New System.Drawing.Size(501, 162)
+        Me.advanced_script_mods_tab.Size = New System.Drawing.Size(501, 110)
         Me.advanced_script_mods_tab.TabIndex = 0
         Me.advanced_script_mods_tab.Text = "Advanced script mods"
         Me.advanced_script_mods_tab.UseVisualStyleBackColor = True
@@ -274,7 +274,7 @@ Partial Class scripts_config_form
         Me.advanced_file_path_mods_tab.Location = New System.Drawing.Point(4, 22)
         Me.advanced_file_path_mods_tab.Name = "advanced_file_path_mods_tab"
         Me.advanced_file_path_mods_tab.Padding = New System.Windows.Forms.Padding(3)
-        Me.advanced_file_path_mods_tab.Size = New System.Drawing.Size(501, 162)
+        Me.advanced_file_path_mods_tab.Size = New System.Drawing.Size(501, 110)
         Me.advanced_file_path_mods_tab.TabIndex = 1
         Me.advanced_file_path_mods_tab.Text = "Advanced file path mods"
         Me.advanced_file_path_mods_tab.UseVisualStyleBackColor = True

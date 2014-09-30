@@ -57,12 +57,16 @@ Public Class scripts_config_form
                 text_line = Replace(text_line, old_file_path, custom_file_path.Text & "\")
             End If
             If InStr(file_name, "FUNCTIONS FILE") <> 0 Then   'Shouldn't do this part for any scripts other than the functions file.
-                If InStr(text_line, "worker_county_code = ") Then text_line = "worker_county_code = " & Chr(34) & "x1" & Strings.Left(county_selection.Text, 2) & Chr(34)
+                If InStr(text_line, "worker_county_code = ") Then
+                    If IsNumeric(Strings.Left(county_selection.Text, 2)) = True Then
+                        text_line = "worker_county_code = " & Chr(34) & "x1" & Strings.Left(county_selection.Text, 2) & Chr(34)
+                    Else
+                        text_line = "worker_county_code = " & Chr(34) & "MULTICOUNTY" & Chr(34)
+                    End If
+                End If
                 If InStr(text_line, "EDMS_choice = ") Then text_line = "EDMS_choice = " & Chr(34) & EDMS_choice.Text & Chr(34)
                 If InStr(text_line, "county_name = ") Then text_line = "county_name = " & Chr(34) & Strings.Replace(county_selection.Text, Strings.Left(county_selection.Text, 5), "") & Chr(34)
-                'If InStr(text_line, "county_address_line_01 = ") Then text_line = "county_address_line_01 = " & Chr(34) & county_address_line_01.Text & Chr(34)
                 If InStr(text_line, "county_office_array = split(") Then text_line = "county_office_array = split(" & Chr(34) & address_array & Chr(34) & ", " & Chr(34) & "~" & Chr(34) & ")"
-                'If InStr(text_line, "county_address_line_02 = ") Then text_line = "county_address_line_02 = " & Chr(34) & county_address_line_02.Text & Chr(34)
                 If InStr(text_line, "case_noting_intake_dates = ") Then
                     If intake_dates_check.Checked = True Then
                         text_line = "case_noting_intake_dates = True"
@@ -303,4 +307,7 @@ Public Class scripts_config_form
         location_to_save_script_files.Text = FolderBrowserDialog1.SelectedPath
     End Sub
 
+    Private Sub county_selection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles county_selection.SelectedIndexChanged
+
+    End Sub
 End Class

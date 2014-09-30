@@ -65,7 +65,24 @@
     End Sub
 
     Private Sub Addr_form_OK_button_Click(sender As Object, e As EventArgs) Handles Addr_form_OK_button.Click
-        'Closes this dialog
-        Me.Close()
+        If addr_01_line_02.Text <> Nothing And InStr(addr_01_line_02.Text, ",") = 0 Then MsgBox("Comma not found on first address (line 02). You need a comma between the city and state!")
+        If addr_02_line_02.Text <> Nothing And InStr(addr_02_line_02.Text, ",") = 0 Then MsgBox("Comma not found on second address (line 02). You need a comma between the city and state!")
+        If addr_03_line_02.Text <> Nothing And InStr(addr_03_line_02.Text, ",") = 0 Then MsgBox("Comma not found on third address (line 02). You need a comma between the city and state!")
+        If addr_04_line_02.Text <> Nothing And InStr(addr_04_line_02.Text, ",") = 0 Then MsgBox("Comma not found on fourth address (line 02). You need a comma between the city and state!")
+        If addr_05_line_02.Text <> Nothing And InStr(addr_05_line_02.Text, ",") = 0 Then MsgBox("Comma not found on fifth address (line 02). You need a comma between the city and state!")
+        If addr_06_line_02.Text <> Nothing And InStr(addr_06_line_02.Text, ",") = 0 Then MsgBox("Comma not found on sixth address (line 02). You need a comma between the city and state!")
+        If addr_07_line_02.Text <> Nothing And InStr(addr_07_line_02.Text, ",") = 0 Then MsgBox("Comma not found on seventh address (line 02). You need a comma between the city and state!")
+
+        If (addr_01_line_02.Text = Nothing Or InStr(addr_01_line_02.Text, ",") <> 0) And _
+        (addr_02_line_02.Text = Nothing Or InStr(addr_02_line_02.Text, ",") <> 0) And _
+        (addr_03_line_02.Text = Nothing Or InStr(addr_03_line_02.Text, ",") <> 0) And _
+        (addr_04_line_02.Text = Nothing Or InStr(addr_04_line_02.Text, ",") <> 0) And _
+        (addr_05_line_02.Text = Nothing Or InStr(addr_05_line_02.Text, ",") <> 0) And _
+        (addr_06_line_02.Text = Nothing Or InStr(addr_06_line_02.Text, ",") <> 0) And _
+        (addr_07_line_02.Text = Nothing Or InStr(addr_07_line_02.Text, ",") <> 0) Then Me.Close()
+    End Sub
+
+    Private Sub addr_01_line_02_TextChanged(sender As Object, e As EventArgs) Handles addr_01_line_02.TextChanged
+
     End Sub
 End Class
