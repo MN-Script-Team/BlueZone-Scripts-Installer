@@ -120,9 +120,9 @@ Public Class scripts_config_form
 
         'If the agency is a beta agency, they'll have the beta version of the scripts instead of the main one.
         If agency_is_beta = True Then
-            GitHub_current_zip_archive = "https://github.com/MN-DHS-BZS-County-Programmers/MAXIS-BZ-Scripts-County-Beta/archive/master.zip"
+            GitHub_current_zip_archive = "https://github.com/MN-DHS-BZS-County-Programmers/MAXIS-BZ-Scripts-County-Beta/archive/beta.zip"
         Else
-            GitHub_current_zip_archive = "https://github.com/MN-DHS-BZS-Official/MAXIS-BZ-Scripts/archive/master.zip"
+            GitHub_current_zip_archive = "https://github.com/MN-DHS-BZS-County-Programmers/MAXIS-BZ-Scripts-County-Beta/archive/Release.zip"
         End If
 
         'First, we create a temp directory for all this madness.
