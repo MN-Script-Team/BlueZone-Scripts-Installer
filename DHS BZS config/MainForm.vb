@@ -99,11 +99,16 @@ Public Class scripts_config_form
 
         'Only some agencies get the option to install beta scripts, based mainly on their status as contributing agencies (they write scripts).
         'As a result, we have an if/then list. It will need to be updated frequently as agencies join/leave the beta program.
-        If county_selection.Text = "02 - Anoka" Or _
-            county_selection.Text = "55 - Olmsted" Or _
-            county_selection.Text = "57 - Pennington" Or _
-            county_selection.Text = "69 - St. Louis" Or _
-            county_selection.Text = "79 - Wabasha" Then
+        If county_selection.Text = "02 - Anoka County" Or _
+            county_selection.Text = "05 - Benton County" Or _
+            county_selection.Text = "19 - Dakota County" Or _
+            county_selection.Text = "20 - Dodge County" Or _ 
+            county_selection.Text = "55 - Olmsted County" Or _
+            county_selection.Text = "57 - Pennington County" Or _
+            county_selection.Text = "69 - St. Louis County" Or _
+            county_selection.Text = "73 - Stearns County" Or _
+            county_selection.Text = "74 - Steele County" Or _
+            county_selection.Text = "79 - Wabasha County" Then
 
             Dim beta_msgbox As String
             beta_msgbox = MsgBox("Your agency is listed as a beta agency. Install beta versions of scripts?", MsgBoxStyle.YesNoCancel)
