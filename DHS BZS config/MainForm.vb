@@ -81,6 +81,7 @@ Public Class scripts_config_form
                         text_line = "move_verifs_needed = False"
                     End If
                 End If
+                If InStr(text_line, "code_from_installer = ") Then text_line = "code_from_installer = " & Chr(34) & county_selection.Text & Chr(34)
             End If
             'INSERT COLLECTING STATS FIXES HERE WHEN ACCESS GOES LIVE
             new_text_file = new_text_file & text_line & Chr(10)
@@ -308,11 +309,92 @@ Public Class scripts_config_form
             FolderBrowserDialog1.SelectedPath = Strings.Left(FolderBrowserDialog1.SelectedPath, FolderBrowserDialog1.SelectedPath.Length - 13)
         End If
 
+        'If there's script files in the folder, this will find them and ask if we want to try and autofill the dialog.
+        If File.Exists(FolderBrowserDialog1.SelectedPath & "/Script Files/FUNCTIONS FILE.vbs") = True Then
+            Dim files_found_messagebox = MsgBox("This folder contains script files! Would you like the installer to try and read the address(es) and agency for you?", MsgBoxStyle.YesNo)
+            If files_found_messagebox = MsgBoxResult.Yes Then
+                Dim FUNCTIONS_FILE_text() As String = File.ReadAllLines(FolderBrowserDialog1.SelectedPath & "/Script Files/FUNCTIONS FILE.vbs")
+                For Each FUNCTIONS_FILE_line In FUNCTIONS_FILE_text
+                    If InStr(FUNCTIONS_FILE_line, "code_from_installer") Then
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, "code_from_installer = ", "")
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, Chr(34), "")
+                        county_selection.Text = FUNCTIONS_FILE_line
+
+                    End If
+                    If InStr(FUNCTIONS_FILE_line, "EDMS_choice = ") Then
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, "EDMS_choice = ", "")
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, Chr(34), "")
+                        EDMS_choice.Text = FUNCTIONS_FILE_line
+                        If EDMS_choice.Text <> "DHS eDocs" Then EDMS_check.Checked = True
+                    End If
+                    If InStr(FUNCTIONS_FILE_line, "case_noting_intake_dates = False") Then
+                        intake_dates_check.Checked = False
+                    ElseIf InStr(FUNCTIONS_FILE_line, "case_noting_intake_dates = True") Then
+                        intake_dates_check.Checked = True
+                    End If
+                    If InStr(FUNCTIONS_FILE_line, "move_verifs_needed = True") Then
+                        move_verifs_needed_check.Checked = True
+                    ElseIf InStr(FUNCTIONS_FILE_line, "move_verifs_needed = False") Then
+                        move_verifs_needed_check.Checked = False
+                    End If
+                    If InStr(FUNCTIONS_FILE_line, "'Set fso_command = run_another_script_fso.OpenTextFile(") Then
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, "'Set fso_command = run_another_script_fso.OpenTextFile(", "")
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, "\Script Files\FUNCTIONS FILE.vbs", "")
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, ")", "")
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, Chr(34), "")
+                        If FUNCTIONS_FILE_line <> FolderBrowserDialog1.SelectedPath Then
+                            custom_file_path.Text = FUNCTIONS_FILE_line
+                        End If
+                    End If
+                    If InStr(FUNCTIONS_FILE_line, "county_office_array = split(") Then
+                        Dim reading_address_info As Array
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, "county_office_array = split(" & Chr(34), "")
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, Chr(34) & ", " & Chr(34) & "~" & Chr(34) & ")", "")
+                        reading_address_info = Split(FUNCTIONS_FILE_line, "~")
+                        For array_number = 0 To UBound(reading_address_info)
+                            If array_number = 0 Then
+                                Dim line_to_add = Split(reading_address_info(0), "|")
+                                address_entry_form.addr_01_line_01.Text = line_to_add(0)
+                                address_entry_form.addr_01_line_02.Text = line_to_add(1)
+                            End If
+                            If array_number = 1 Then
+                                Dim line_to_add = Split(reading_address_info(1), "|")
+                                address_entry_form.addr_02_line_01.Text = line_to_add(0)
+                                address_entry_form.addr_02_line_02.Text = line_to_add(1)
+                            End If
+                            If array_number = 2 Then
+                                Dim line_to_add = Split(reading_address_info(2), "|")
+                                address_entry_form.addr_03_line_01.Text = line_to_add(0)
+                                address_entry_form.addr_03_line_02.Text = line_to_add(1)
+                            End If
+                            If array_number = 3 Then
+                                Dim line_to_add = Split(reading_address_info(3), "|")
+                                address_entry_form.addr_04_line_01.Text = line_to_add(0)
+                                address_entry_form.addr_04_line_02.Text = line_to_add(1)
+                            End If
+                            If array_number = 4 Then
+                                Dim line_to_add = Split(reading_address_info(4), "|")
+                                address_entry_form.addr_05_line_01.Text = line_to_add(0)
+                                address_entry_form.addr_05_line_02.Text = line_to_add(1)
+                            End If
+                            If array_number = 5 Then
+                                Dim line_to_add = Split(reading_address_info(5), "|")
+                                address_entry_form.addr_06_line_01.Text = line_to_add(0)
+                                address_entry_form.addr_06_line_02.Text = line_to_add(1)
+                            End If
+                            If array_number = 6 Then
+                                Dim line_to_add = Split(reading_address_info(6), "|")
+                                address_entry_form.addr_07_line_01.Text = line_to_add(0)
+                                address_entry_form.addr_07_line_02.Text = line_to_add(1)
+                            End If
+                        Next
+                    End If
+                Next
+            End If
+        End If
+
         'Now it updates the text for the file save location.
         location_to_save_script_files.Text = FolderBrowserDialog1.SelectedPath
     End Sub
 
-    Private Sub county_selection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles county_selection.SelectedIndexChanged
-
-    End Sub
 End Class
