@@ -133,10 +133,11 @@ Public Class scripts_config_form
 
         'First, we create a temp directory for all this madness.
         fso = CreateObject("Scripting.FileSystemObject")
+        If fso.folderexists(temp_folder) = True Then fso.deletefolder(temp_folder) 'Clears the temp folder if it exists.
         fso.CreateFolder(temp_folder)
 
         '---------------------------------------------------------------------------------------
-        'Now it downloads the zip file from Github. It was copied from https://gist.github.com/udawtr/2053179 on 09/13/2014, and modified for our purposes.
+        'Now it downloads the zip file from Github. This code was copied from https://gist.github.com/udawtr/2053179 on 09/13/2014, and modified for our purposes.
 
         'Creating a server object
         objXMLHTTP = CreateObject("MSXML2.ServerXMLHTTP")
@@ -175,9 +176,12 @@ Public Class scripts_config_form
         new_zip_file.Flush()
         new_zip_file.Close()
 
+        new_zip_file = Nothing  'clears variable
 
-        'Running the zip file
-        Process.Start(temp_folder & "\unzip.vbs")
+
+        'Running the zip file. Calls wscript, as a surprising number of folks have somehow modified their default program for scripts to be notepad.
+        'Apparently people want to hack scripts to do their own bidding. Who'd have thought?
+        Process.Start("wscript", Chr(34) & temp_folder & "\unzip.vbs" & Chr(34))
 
         'Now, because we have an independent script running, we need to check to see if wscript.exe is running. So, we set a variable to be our boolean "are we there yet"?
         Dim moving_on As Boolean
