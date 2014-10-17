@@ -82,6 +82,8 @@ Public Class scripts_config_form
                     End If
                 End If
                 If InStr(text_line, "code_from_installer = ") Then text_line = "code_from_installer = " & Chr(34) & county_selection.Text & Chr(34)
+                If InStr(text_line, "county_bndx_variance_threshold = ") Then text_line = "county_bndx_variance_threshold = " & Chr(34) & bndx_threshold.Text & Chr(34)
+                If InStr(text_line, "emer_percent_rule_amt = ") Then text_line = "emer_percent_rule_amt = " & Chr(34) & emer_percent_rule_number.Text & Chr(34)
             End If
             'INSERT COLLECTING STATS FIXES HERE WHEN ACCESS GOES LIVE
             new_text_file = new_text_file & text_line & Chr(10)
@@ -123,12 +125,11 @@ Public Class scripts_config_form
         Dim local_copy_of_zip_file = location_to_save_script_files.Text & "\temp\master.zip"
         Dim temp_folder = location_to_save_script_files.Text & "\temp"
 
-
         'If the agency is a beta agency, they'll have the beta version of the scripts instead of the main one.
         If agency_is_beta = True Then
-            GitHub_current_zip_archive = "https://github.com/MN-DHS-BZS-County-Programmers/MAXIS-BZ-Scripts-County-Beta/archive/beta.zip"
+            GitHub_current_zip_archive = "https://github.com/MN-Script-Team/DHS-MAXIS-Scripts/archive/beta.zip"
         Else
-            GitHub_current_zip_archive = "https://github.com/MN-DHS-BZS-County-Programmers/MAXIS-BZ-Scripts-County-Beta/archive/Release.zip"
+            GitHub_current_zip_archive = "https://github.com/MN-Script-Team/DHS-MAXIS-Scripts/archive/Release.zip"
         End If
 
         'First, we create a temp directory for all this madness.
@@ -323,7 +324,16 @@ Public Class scripts_config_form
                         FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, "code_from_installer = ", "")
                         FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, Chr(34), "")
                         county_selection.Text = FUNCTIONS_FILE_line
-
+                    End If
+                    If InStr(FUNCTIONS_FILE_line, "county_bndx_variance_threshold") Then
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, "county_bndx_variance_threshold = ", "")
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, Chr(34), "")
+                        bndx_threshold.Text = FUNCTIONS_FILE_line
+                    End If
+                    If InStr(FUNCTIONS_FILE_line, "emer_percent_rule_amt") Then
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, "emer_percent_rule_amt = ", "")
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, Chr(34), "")
+                        emer_percent_rule_number.Text = FUNCTIONS_FILE_line
                     End If
                     If InStr(FUNCTIONS_FILE_line, "EDMS_choice = ") Then
                         FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, "EDMS_choice = ", "")
@@ -401,4 +411,34 @@ Public Class scripts_config_form
         location_to_save_script_files.Text = FolderBrowserDialog1.SelectedPath
     End Sub
 
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub custom_file_path_TextChanged(sender As Object, e As EventArgs) Handles custom_file_path.Leave
+        'Removing the entry if the user puts a slash as the last character.
+        If InStrRev(custom_file_path.Text, "\") = Len(custom_file_path.Text) Then
+            MsgBox("You cannot enter a slash as the last character. Your entry will now be cleared.")
+            custom_file_path.Text = ""
+        End If
+    End Sub
+
+    
+    
+    Private Sub bndx_threshold_Leave(sender As Object, e As EventArgs) Handles bndx_threshold.Leave
+        bndx_threshold.Text = Strings.Replace(bndx_threshold.Text, "$", "")
+        If IsNumeric(bndx_threshold.Text) = False Then
+            MsgBox("You must enter a numeric amount for the BNDX threshold. It will now revert to 0.")
+            bndx_threshold.Text = 0
+        End If
+    End Sub
+
+    Private Sub emer_percent_rule_number_Leave(sender As Object, e As EventArgs) Handles emer_percent_rule_number.Leave
+        emer_percent_rule_number.Text = Strings.Replace(emer_percent_rule_number.Text, "$", "")
+        emer_percent_rule_number.Text = Strings.Replace(emer_percent_rule_number.Text, "%", "")
+        If IsNumeric(emer_percent_rule_number.Text) = False Then
+            MsgBox("You must enter a numeric amount for the EMER percent rule. It will now revert to 30.")
+            emer_percent_rule_number.Text = 30
+        End If
+    End Sub
 End Class

@@ -43,6 +43,10 @@ Partial Class scripts_config_form
         Me.Label6 = New System.Windows.Forms.Label()
         Me.location_to_save_script_files = New System.Windows.Forms.TextBox()
         Me.advanced_script_mods_tab = New System.Windows.Forms.TabPage()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.emer_percent_rule_number = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.bndx_threshold = New System.Windows.Forms.TextBox()
         Me.move_verifs_needed_check = New System.Windows.Forms.CheckBox()
         Me.advanced_file_path_mods_tab = New System.Windows.Forms.TabPage()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -246,6 +250,10 @@ Partial Class scripts_config_form
         '
         'advanced_script_mods_tab
         '
+        Me.advanced_script_mods_tab.Controls.Add(Me.Label3)
+        Me.advanced_script_mods_tab.Controls.Add(Me.emer_percent_rule_number)
+        Me.advanced_script_mods_tab.Controls.Add(Me.Label2)
+        Me.advanced_script_mods_tab.Controls.Add(Me.bndx_threshold)
         Me.advanced_script_mods_tab.Controls.Add(Me.move_verifs_needed_check)
         Me.advanced_script_mods_tab.Controls.Add(Me.intake_dates_check)
         Me.advanced_script_mods_tab.Location = New System.Drawing.Point(4, 22)
@@ -255,6 +263,40 @@ Partial Class scripts_config_form
         Me.advanced_script_mods_tab.TabIndex = 0
         Me.advanced_script_mods_tab.Text = "Advanced script mods"
         Me.advanced_script_mods_tab.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(3, 81)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(396, 13)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "Emergency note: manual selection of agency ""percent rule"" number (default: 30%):"
+        '
+        'emer_percent_rule_number
+        '
+        Me.emer_percent_rule_number.Location = New System.Drawing.Point(405, 78)
+        Me.emer_percent_rule_number.Name = "emer_percent_rule_number"
+        Me.emer_percent_rule_number.Size = New System.Drawing.Size(36, 20)
+        Me.emer_percent_rule_number.TabIndex = 8
+        Me.emer_percent_rule_number.Text = "30"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(3, 55)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(374, 13)
+        Me.Label2.TabIndex = 7
+        Me.Label2.Text = "DAIL scrubber: BNDX threshold to notify worker to change panel (default: $0):"
+        '
+        'bndx_threshold
+        '
+        Me.bndx_threshold.Location = New System.Drawing.Point(383, 52)
+        Me.bndx_threshold.Name = "bndx_threshold"
+        Me.bndx_threshold.Size = New System.Drawing.Size(36, 20)
+        Me.bndx_threshold.TabIndex = 6
+        Me.bndx_threshold.Text = "0"
         '
         'move_verifs_needed_check
         '
@@ -352,5 +394,9 @@ Partial Class scripts_config_form
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents emer_percent_rule_number As System.Windows.Forms.TextBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents bndx_threshold As System.Windows.Forms.TextBox
 
 End Class
