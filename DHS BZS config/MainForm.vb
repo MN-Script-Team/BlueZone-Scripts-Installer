@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Collections
 Imports System.Text
+Imports Microsoft.Win32
 
 
 
@@ -9,6 +10,27 @@ Public Class scripts_config_form
 
     Const read_only = 1
     Const read_write = 2
+
+
+
+    Private Shared Sub Get45or451FromRegistry(dot_net_from_registry)
+
+    End Sub
+
+    Private Shared Function CheckFor45DotVersion(releaseKey As Integer) As String
+        If (releaseKey >= 379893) Then
+            Return "4.5.2 or later"
+        End If
+        If (releaseKey >= 378675) Then
+            Return "4.5.1 or later"
+        End If
+        If (releaseKey >= 378389) Then
+            Return "4.5 or later"
+        End If
+        ' This line should never execute. A non-null release key should mean 
+        ' that 4.5 or later is installed. 
+        Return "No 4.5 or later version detected"
+    End Function
 
     Private Property list_of_addresses As String
 
@@ -244,13 +266,24 @@ Public Class scripts_config_form
         'Removing the last tilde as it is stupid and not required.
         list_of_addresses = list_of_addresses.Remove(list_of_addresses.Length - 1)
 
-        'Warns user that they can back out
-        warning = MsgBox("The following utility will download all of the scripts to the selected directory, and replace the DHS file path with " & _
-        "the current file path. If you choose to move your script directory, you'll have to use this tool again. Are you sure you want to do this?", 1)
-        If warning = 2 Then Exit Sub
+        'Gives warning about downloads for instances where we're downloading, and gives different warning about manual extraction for instances where we have the folder.
+        If location_of_manual_zip_file.Text = "" Then
+            'Warns user that they can back out
+            warning = MsgBox("The following utility will download all of the scripts to the selected directory, and replace the DHS file path with " & _
+            "the specified file path. If you choose to move your script directory, you'll have to use this tool again. Are you sure you want to do this?", 1)
+            If warning = 2 Then Exit Sub
 
-        'Uses a custom sub to download files from GitHub
-        downloading_files_from_GitHub()
+            'Uses a custom sub to download files from GitHub
+            downloading_files_from_GitHub()
+        Else
+            'Warns user that they can back out
+            warning = MsgBox("The following utility will extract all of the scripts to the selected directory, and replace the DHS file path with " & _
+            "the specified file path. If you choose to move your script directory, you'll have to use this tool again. Are you sure you want to do this?", 1)
+            If warning = 2 Then Exit Sub
+
+            'Copies directory. Replaces the "FUNCTIONS FILE.vbs" part of the location_of_manual_zip_file.Text string with a blank, so as to capture the folder easier.
+            My.Computer.FileSystem.CopyDirectory(Replace(location_of_manual_zip_file.Text, "FUNCTIONS FILE.vbs", ""), location_to_save_script_files.Text & "\Script Files", True)
+        End If
 
         'Disabling features/enabling others (more of a pretty GUI setup, might rewrite to be even prettier)
         Update_Files_Label.Visible = True
@@ -305,6 +338,9 @@ Public Class scripts_config_form
 
     End Sub
 
+
+    'This sub finds the current directory, and then offers to copy the existing values from FUNCTIONS FILE. It triggers when the user
+    'selects "browse" from the "where are we saving scripts" part of the main tab.
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
         FolderBrowserDialog1.ShowDialog()
 
@@ -411,10 +447,6 @@ Public Class scripts_config_form
         location_to_save_script_files.Text = FolderBrowserDialog1.SelectedPath
     End Sub
 
-    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
-
-    End Sub
-
     Private Sub custom_file_path_TextChanged(sender As Object, e As EventArgs) Handles custom_file_path.Leave
         'Removing the entry if the user puts a slash as the last character.
         If InStrRev(custom_file_path.Text, "\") = Len(custom_file_path.Text) Then
@@ -440,5 +472,43 @@ Public Class scripts_config_form
             MsgBox("You must enter a numeric amount for the EMER percent rule. It will now revert to 30.")
             emer_percent_rule_number.Text = 30
         End If
+    End Sub
+
+    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+
+
+        Dim max_dot_net_version As String
+        Using ndpKey As RegistryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
+                    RegistryView.Registry32).OpenSubKey("SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\")
+
+            If ndpKey IsNot Nothing AndAlso ndpKey.GetValue("Release") IsNot Nothing Then
+                max_dot_net_version = ("Version: " & CheckFor45DotVersion(CInt(ndpKey.GetValue("Release"))))
+            Else
+                max_dot_net_version = ("Version 4.5 or later is not detected.")
+            End If
+        End Using
+
+        MsgBox(".NET version currently used: " & Environment.Version.ToString() & vbCr & _
+               ".NET 4.5 version installed: " & max_dot_net_version)
+
+    End Sub
+
+    'Loads a file dialog and looks for FUNCTIONS FILE, defaults to Desktop (instructions inform users to save to desktop).
+    Private Sub zip_file_button_Click(sender As Object, e As EventArgs) Handles zip_file_button.Click
+        Dim myStream As Stream = Nothing
+        Dim openFileDialog1 As New OpenFileDialog()
+
+        openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        openFileDialog1.Filter = "BlueZone Scripts FUNCTIONS FILE (FUNCTIONS FILE.vbs)|FUNCTIONS FILE.vbs"
+        openFileDialog1.FilterIndex = 2
+        openFileDialog1.RestoreDirectory = True
+
+        openFileDialog1.ShowDialog()
+
+        location_of_manual_zip_file.Text = openFileDialog1.FileName
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+
     End Sub
 End Class

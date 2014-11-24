@@ -22,9 +22,12 @@ Partial Class scripts_config_form
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(scripts_config_form))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.county_selection = New System.Windows.Forms.ComboBox()
@@ -50,6 +53,11 @@ Partial Class scripts_config_form
         Me.move_verifs_needed_check = New System.Windows.Forms.CheckBox()
         Me.advanced_file_path_mods_tab = New System.Windows.Forms.TabPage()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.zip_file_button = New System.Windows.Forms.Button()
+        Me.location_of_manual_zip_file = New System.Windows.Forms.TextBox()
         Me.Update_Files_Label = New System.Windows.Forms.Label()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.MenuStrip1.SuspendLayout()
@@ -58,6 +66,7 @@ Partial Class scripts_config_form
         Me.basic_settings_tab.SuspendLayout()
         Me.advanced_script_mods_tab.SuspendLayout()
         Me.advanced_file_path_mods_tab.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -65,7 +74,7 @@ Partial Class scripts_config_form
         Me.MenuStrip1.AccessibleDescription = "Menubar"
         Me.MenuStrip1.AccessibleName = "Menubar"
         Me.MenuStrip1.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolStripMenuItem1, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.MenuStrip1.Location = New System.Drawing.Point(2, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
@@ -86,6 +95,19 @@ Partial Class scripts_config_form
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(92, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2})
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(54, 20)
+        Me.ToolStripMenuItem1.Text = "Debug"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(284, 22)
+        Me.ToolStripMenuItem2.Text = "Display .NET version executing program"
         '
         'HelpToolStripMenuItem
         '
@@ -202,7 +224,9 @@ Partial Class scripts_config_form
         Me.Tab_Control_Main_Form.Controls.Add(Me.basic_settings_tab)
         Me.Tab_Control_Main_Form.Controls.Add(Me.advanced_script_mods_tab)
         Me.Tab_Control_Main_Form.Controls.Add(Me.advanced_file_path_mods_tab)
+        Me.Tab_Control_Main_Form.Controls.Add(Me.TabPage1)
         Me.Tab_Control_Main_Form.Location = New System.Drawing.Point(6, 27)
+        Me.Tab_Control_Main_Form.Multiline = True
         Me.Tab_Control_Main_Form.Name = "Tab_Control_Main_Form"
         Me.Tab_Control_Main_Form.SelectedIndex = 0
         Me.Tab_Control_Main_Form.Size = New System.Drawing.Size(509, 136)
@@ -330,6 +354,52 @@ Partial Class scripts_config_form
         Me.Label5.TabIndex = 14
         Me.Label5.Text = "Custom path:"
         '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.Label8)
+        Me.TabPage1.Controls.Add(Me.Label7)
+        Me.TabPage1.Controls.Add(Me.zip_file_button)
+        Me.TabPage1.Controls.Add(Me.location_of_manual_zip_file)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(501, 110)
+        Me.TabPage1.TabIndex = 3
+        Me.TabPage1.Text = "Zip/download bypass options"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Label8
+        '
+        Me.Label8.Location = New System.Drawing.Point(3, 3)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(492, 41)
+        Me.Label8.TabIndex = 14
+        Me.Label8.Text = resources.GetString("Label8.Text")
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(6, 3)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(0, 13)
+        Me.Label7.TabIndex = 6
+        '
+        'zip_file_button
+        '
+        Me.zip_file_button.Location = New System.Drawing.Point(434, 47)
+        Me.zip_file_button.Name = "zip_file_button"
+        Me.zip_file_button.Size = New System.Drawing.Size(61, 23)
+        Me.zip_file_button.TabIndex = 5
+        Me.zip_file_button.Text = "Browse"
+        Me.zip_file_button.UseVisualStyleBackColor = True
+        '
+        'location_of_manual_zip_file
+        '
+        Me.location_of_manual_zip_file.Location = New System.Drawing.Point(6, 49)
+        Me.location_of_manual_zip_file.Name = "location_of_manual_zip_file"
+        Me.location_of_manual_zip_file.Size = New System.Drawing.Size(422, 20)
+        Me.location_of_manual_zip_file.TabIndex = 4
+        '
         'Update_Files_Label
         '
         Me.Update_Files_Label.AutoSize = True
@@ -364,6 +434,8 @@ Partial Class scripts_config_form
         Me.advanced_script_mods_tab.PerformLayout()
         Me.advanced_file_path_mods_tab.ResumeLayout(False)
         Me.advanced_file_path_mods_tab.PerformLayout()
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -398,5 +470,12 @@ Partial Class scripts_config_form
     Friend WithEvents emer_percent_rule_number As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents bndx_threshold As System.Windows.Forms.TextBox
+    Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents zip_file_button As System.Windows.Forms.Button
+    Friend WithEvents location_of_manual_zip_file As System.Windows.Forms.TextBox
+    Friend WithEvents Label8 As System.Windows.Forms.Label
 
 End Class
