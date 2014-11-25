@@ -46,6 +46,10 @@ Partial Class scripts_config_form
         Me.Label6 = New System.Windows.Forms.Label()
         Me.location_to_save_script_files = New System.Windows.Forms.TextBox()
         Me.advanced_script_mods_tab = New System.Windows.Forms.TabPage()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.emer_number_of_income_days = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.X1_for_CLS = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.emer_percent_rule_number = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -106,8 +110,8 @@ Partial Class scripts_config_form
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(284, 22)
-        Me.ToolStripMenuItem2.Text = "Display .NET version executing program"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(249, 22)
+        Me.ToolStripMenuItem2.Text = ".NET info for sending to Veronica"
         '
         'HelpToolStripMenuItem
         '
@@ -199,7 +203,7 @@ Partial Class scripts_config_form
         '
         'run_configuration_button
         '
-        Me.run_configuration_button.Location = New System.Drawing.Point(407, 169)
+        Me.run_configuration_button.Location = New System.Drawing.Point(407, 214)
         Me.run_configuration_button.Name = "run_configuration_button"
         Me.run_configuration_button.Size = New System.Drawing.Size(109, 30)
         Me.run_configuration_button.TabIndex = 0
@@ -214,7 +218,7 @@ Partial Class scripts_config_form
         Me.intake_dates_check.Location = New System.Drawing.Point(6, 6)
         Me.intake_dates_check.Name = "intake_dates_check"
         Me.intake_dates_check.Size = New System.Drawing.Size(488, 17)
-        Me.intake_dates_check.TabIndex = 4
+        Me.intake_dates_check.TabIndex = 0
         Me.intake_dates_check.Text = "Check here to have the ""closed progs"" and ""denied progs"" scripts case note info o" & _
     "n intake dates."
         Me.intake_dates_check.UseVisualStyleBackColor = True
@@ -229,7 +233,7 @@ Partial Class scripts_config_form
         Me.Tab_Control_Main_Form.Multiline = True
         Me.Tab_Control_Main_Form.Name = "Tab_Control_Main_Form"
         Me.Tab_Control_Main_Form.SelectedIndex = 0
-        Me.Tab_Control_Main_Form.Size = New System.Drawing.Size(509, 136)
+        Me.Tab_Control_Main_Form.Size = New System.Drawing.Size(509, 185)
         Me.Tab_Control_Main_Form.TabIndex = 8
         '
         'basic_settings_tab
@@ -242,7 +246,7 @@ Partial Class scripts_config_form
         Me.basic_settings_tab.Controls.Add(Me.EDMS_choice)
         Me.basic_settings_tab.Location = New System.Drawing.Point(4, 22)
         Me.basic_settings_tab.Name = "basic_settings_tab"
-        Me.basic_settings_tab.Size = New System.Drawing.Size(501, 110)
+        Me.basic_settings_tab.Size = New System.Drawing.Size(501, 159)
         Me.basic_settings_tab.TabIndex = 2
         Me.basic_settings_tab.Text = "Basic settings"
         Me.basic_settings_tab.UseVisualStyleBackColor = True
@@ -274,6 +278,10 @@ Partial Class scripts_config_form
         '
         'advanced_script_mods_tab
         '
+        Me.advanced_script_mods_tab.Controls.Add(Me.Label10)
+        Me.advanced_script_mods_tab.Controls.Add(Me.emer_number_of_income_days)
+        Me.advanced_script_mods_tab.Controls.Add(Me.Label9)
+        Me.advanced_script_mods_tab.Controls.Add(Me.X1_for_CLS)
         Me.advanced_script_mods_tab.Controls.Add(Me.Label3)
         Me.advanced_script_mods_tab.Controls.Add(Me.emer_percent_rule_number)
         Me.advanced_script_mods_tab.Controls.Add(Me.Label2)
@@ -283,10 +291,44 @@ Partial Class scripts_config_form
         Me.advanced_script_mods_tab.Location = New System.Drawing.Point(4, 22)
         Me.advanced_script_mods_tab.Name = "advanced_script_mods_tab"
         Me.advanced_script_mods_tab.Padding = New System.Windows.Forms.Padding(3)
-        Me.advanced_script_mods_tab.Size = New System.Drawing.Size(501, 110)
+        Me.advanced_script_mods_tab.Size = New System.Drawing.Size(501, 159)
         Me.advanced_script_mods_tab.TabIndex = 0
         Me.advanced_script_mods_tab.Text = "Advanced script mods"
         Me.advanced_script_mods_tab.UseVisualStyleBackColor = True
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(3, 107)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(405, 13)
+        Me.Label10.TabIndex = 8
+        Me.Label10.Text = "Emergency note: manual selection of agency ""days of income to verify"" (default: 3" & _
+    "0):"
+        '
+        'emer_number_of_income_days
+        '
+        Me.emer_number_of_income_days.Location = New System.Drawing.Point(414, 104)
+        Me.emer_number_of_income_days.Name = "emer_number_of_income_days"
+        Me.emer_number_of_income_days.Size = New System.Drawing.Size(36, 20)
+        Me.emer_number_of_income_days.TabIndex = 4
+        Me.emer_number_of_income_days.Text = "30"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(3, 133)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(333, 13)
+        Me.Label9.TabIndex = 9
+        Me.Label9.Text = "INAC scrubber: X1/PW number to send closed cases (ex: X100CLS):"
+        '
+        'X1_for_CLS
+        '
+        Me.X1_for_CLS.Location = New System.Drawing.Point(342, 130)
+        Me.X1_for_CLS.Name = "X1_for_CLS"
+        Me.X1_for_CLS.Size = New System.Drawing.Size(100, 20)
+        Me.X1_for_CLS.TabIndex = 5
         '
         'Label3
         '
@@ -294,7 +336,7 @@ Partial Class scripts_config_form
         Me.Label3.Location = New System.Drawing.Point(3, 81)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(396, 13)
-        Me.Label3.TabIndex = 9
+        Me.Label3.TabIndex = 7
         Me.Label3.Text = "Emergency note: manual selection of agency ""percent rule"" number (default: 30%):"
         '
         'emer_percent_rule_number
@@ -302,7 +344,7 @@ Partial Class scripts_config_form
         Me.emer_percent_rule_number.Location = New System.Drawing.Point(405, 78)
         Me.emer_percent_rule_number.Name = "emer_percent_rule_number"
         Me.emer_percent_rule_number.Size = New System.Drawing.Size(36, 20)
-        Me.emer_percent_rule_number.TabIndex = 8
+        Me.emer_percent_rule_number.TabIndex = 3
         Me.emer_percent_rule_number.Text = "30"
         '
         'Label2
@@ -311,7 +353,7 @@ Partial Class scripts_config_form
         Me.Label2.Location = New System.Drawing.Point(3, 55)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(374, 13)
-        Me.Label2.TabIndex = 7
+        Me.Label2.TabIndex = 6
         Me.Label2.Text = "DAIL scrubber: BNDX threshold to notify worker to change panel (default: $0):"
         '
         'bndx_threshold
@@ -319,7 +361,7 @@ Partial Class scripts_config_form
         Me.bndx_threshold.Location = New System.Drawing.Point(383, 52)
         Me.bndx_threshold.Name = "bndx_threshold"
         Me.bndx_threshold.Size = New System.Drawing.Size(36, 20)
-        Me.bndx_threshold.TabIndex = 6
+        Me.bndx_threshold.TabIndex = 2
         Me.bndx_threshold.Text = "0"
         '
         'move_verifs_needed_check
@@ -328,7 +370,7 @@ Partial Class scripts_config_form
         Me.move_verifs_needed_check.Location = New System.Drawing.Point(6, 29)
         Me.move_verifs_needed_check.Name = "move_verifs_needed_check"
         Me.move_verifs_needed_check.Size = New System.Drawing.Size(408, 17)
-        Me.move_verifs_needed_check.TabIndex = 5
+        Me.move_verifs_needed_check.TabIndex = 1
         Me.move_verifs_needed_check.Text = "Check here to move the ""verifs needed"" section to the top of the CAF case note."
         Me.move_verifs_needed_check.UseVisualStyleBackColor = True
         '
@@ -340,7 +382,7 @@ Partial Class scripts_config_form
         Me.advanced_file_path_mods_tab.Location = New System.Drawing.Point(4, 22)
         Me.advanced_file_path_mods_tab.Name = "advanced_file_path_mods_tab"
         Me.advanced_file_path_mods_tab.Padding = New System.Windows.Forms.Padding(3)
-        Me.advanced_file_path_mods_tab.Size = New System.Drawing.Size(501, 110)
+        Me.advanced_file_path_mods_tab.Size = New System.Drawing.Size(501, 159)
         Me.advanced_file_path_mods_tab.TabIndex = 1
         Me.advanced_file_path_mods_tab.Text = "Advanced file path mods"
         Me.advanced_file_path_mods_tab.UseVisualStyleBackColor = True
@@ -363,14 +405,14 @@ Partial Class scripts_config_form
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(501, 110)
+        Me.TabPage1.Size = New System.Drawing.Size(501, 159)
         Me.TabPage1.TabIndex = 3
         Me.TabPage1.Text = "Zip/download bypass options"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'Label8
         '
-        Me.Label8.Location = New System.Drawing.Point(3, 3)
+        Me.Label8.Location = New System.Drawing.Point(3, 5)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(492, 41)
         Me.Label8.TabIndex = 14
@@ -386,7 +428,7 @@ Partial Class scripts_config_form
         '
         'zip_file_button
         '
-        Me.zip_file_button.Location = New System.Drawing.Point(434, 47)
+        Me.zip_file_button.Location = New System.Drawing.Point(434, 49)
         Me.zip_file_button.Name = "zip_file_button"
         Me.zip_file_button.Size = New System.Drawing.Size(61, 23)
         Me.zip_file_button.TabIndex = 5
@@ -395,7 +437,7 @@ Partial Class scripts_config_form
         '
         'location_of_manual_zip_file
         '
-        Me.location_of_manual_zip_file.Location = New System.Drawing.Point(6, 49)
+        Me.location_of_manual_zip_file.Location = New System.Drawing.Point(6, 51)
         Me.location_of_manual_zip_file.Name = "location_of_manual_zip_file"
         Me.location_of_manual_zip_file.Size = New System.Drawing.Size(422, 20)
         Me.location_of_manual_zip_file.TabIndex = 4
@@ -403,7 +445,7 @@ Partial Class scripts_config_form
         'Update_Files_Label
         '
         Me.Update_Files_Label.AutoSize = True
-        Me.Update_Files_Label.Location = New System.Drawing.Point(259, 178)
+        Me.Update_Files_Label.Location = New System.Drawing.Point(259, 223)
         Me.Update_Files_Label.Name = "Update_Files_Label"
         Me.Update_Files_Label.Size = New System.Drawing.Size(142, 13)
         Me.Update_Files_Label.TabIndex = 9
@@ -414,7 +456,7 @@ Partial Class scripts_config_form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(519, 207)
+        Me.ClientSize = New System.Drawing.Size(519, 246)
         Me.Controls.Add(Me.Update_Files_Label)
         Me.Controls.Add(Me.Tab_Control_Main_Form)
         Me.Controls.Add(Me.run_configuration_button)
@@ -477,5 +519,9 @@ Partial Class scripts_config_form
     Friend WithEvents zip_file_button As System.Windows.Forms.Button
     Friend WithEvents location_of_manual_zip_file As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents X1_for_CLS As System.Windows.Forms.TextBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents emer_number_of_income_days As System.Windows.Forms.TextBox
 
 End Class

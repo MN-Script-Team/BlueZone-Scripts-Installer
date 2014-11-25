@@ -8,7 +8,7 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DHS-BZS Configuration Utility")> 
+<Assembly: AssemblyTitle("BlueZone Scripts Configuration Utility")> 
 <Assembly: AssemblyDescription("A configuration tool for the DHS-provided BlueZone Scripts.")> 
 <Assembly: AssemblyCompany("Minnesota Department of Human Services")> 
 <Assembly: AssemblyProduct("DHS-BZS Configuration Utility")> 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.1.1.0")> 
-<Assembly: AssemblyFileVersion("1.1.1.0")> 
+<Assembly: AssemblyVersion("1.2.0.0")> 
+<Assembly: AssemblyFileVersion("1.2.0.0")> 

@@ -4,8 +4,6 @@ Imports System.Collections
 Imports System.Text
 Imports Microsoft.Win32
 
-
-
 Public Class scripts_config_form
 
     Const read_only = 1
@@ -106,6 +104,8 @@ Public Class scripts_config_form
                 If InStr(text_line, "code_from_installer = ") Then text_line = "code_from_installer = " & Chr(34) & county_selection.Text & Chr(34)
                 If InStr(text_line, "county_bndx_variance_threshold = ") Then text_line = "county_bndx_variance_threshold = " & Chr(34) & bndx_threshold.Text & Chr(34)
                 If InStr(text_line, "emer_percent_rule_amt = ") Then text_line = "emer_percent_rule_amt = " & Chr(34) & emer_percent_rule_number.Text & Chr(34)
+                If InStr(text_line, "emer_number_of_income_days = ") Then text_line = "emer_number_of_income_days = " & Chr(34) & emer_number_of_income_days.Text & Chr(34)
+                If InStr(text_line, "CLS_x1_number = ") Then text_line = "CLS_x1_number = " & Chr(34) & X1_for_CLS.Text & Chr(34)
             End If
             'INSERT COLLECTING STATS FIXES HERE WHEN ACCESS GOES LIVE
             new_text_file = new_text_file & text_line & Chr(10)
@@ -116,7 +116,7 @@ Public Class scripts_config_form
         Return file_name
     End Function
 
-    
+
 
 
     Sub downloading_files_from_GitHub()
@@ -127,7 +127,7 @@ Public Class scripts_config_form
         If county_selection.Text = "02 - Anoka County" Or _
             county_selection.Text = "05 - Benton County" Or _
             county_selection.Text = "19 - Dakota County" Or _
-            county_selection.Text = "20 - Dodge County" Or _ 
+            county_selection.Text = "20 - Dodge County" Or _
             county_selection.Text = "55 - Olmsted County" Or _
             county_selection.Text = "57 - Pennington County" Or _
             county_selection.Text = "69 - St. Louis County" Or _
@@ -371,6 +371,16 @@ Public Class scripts_config_form
                         FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, Chr(34), "")
                         emer_percent_rule_number.Text = FUNCTIONS_FILE_line
                     End If
+                    If InStr(FUNCTIONS_FILE_line, "emer_number_of_income_days") Then
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, "emer_number_of_income_days = ", "")
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, Chr(34), "")
+                        emer_number_of_income_days.Text = FUNCTIONS_FILE_line
+                    End If
+                    If InStr(FUNCTIONS_FILE_line, "CLS_x1_number") Then
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, "CLS_x1_number = ", "")
+                        FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, Chr(34), "")
+                        X1_for_CLS.Text = FUNCTIONS_FILE_line
+                    End If
                     If InStr(FUNCTIONS_FILE_line, "EDMS_choice = ") Then
                         FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, "EDMS_choice = ", "")
                         FUNCTIONS_FILE_line = Replace(FUNCTIONS_FILE_line, Chr(34), "")
@@ -455,8 +465,8 @@ Public Class scripts_config_form
         End If
     End Sub
 
-    
-    
+
+
     Private Sub bndx_threshold_Leave(sender As Object, e As EventArgs) Handles bndx_threshold.Leave
         bndx_threshold.Text = Strings.Replace(bndx_threshold.Text, "$", "")
         If IsNumeric(bndx_threshold.Text) = False Then
@@ -508,7 +518,17 @@ Public Class scripts_config_form
         location_of_manual_zip_file.Text = openFileDialog1.FileName
     End Sub
 
-    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+    Private Sub emer_number_of_income_days_Leave(sender As Object, e As EventArgs) Handles emer_number_of_income_days.Leave
+        If IsNumeric(emer_number_of_income_days.Text) = False Then
+            MsgBox("You must enter a numeric amount for the EMER number of intake days. It will now revert to 30.")
+            emer_number_of_income_days.Text = 30
+        End If
+    End Sub
 
+    Private Sub X1_for_CLS_Leave(sender As Object, e As EventArgs) Handles X1_for_CLS.Leave
+        If Len(X1_for_CLS.Text) <> 7 And X1_for_CLS.Text <> "" Then
+            MsgBox("You must enter a seven digit worker ID. It will now clear what you've typed.")
+            X1_for_CLS.Text = ""
+        End If
     End Sub
 End Class
