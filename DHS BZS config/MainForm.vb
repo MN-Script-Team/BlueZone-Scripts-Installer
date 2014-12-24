@@ -1,6 +1,5 @@
 ﻿Imports System
 Imports System.IO
-Imports System.Collections
 Imports System.Text
 Imports Microsoft.Win32
 
@@ -40,10 +39,6 @@ Public Class scripts_config_form
 
     Private Property objFile As Object
 
-    Private Property function_file_lines As Object
-
-    Private Property line_to_look_for_in_functions_file As String
-
     Private Property warning As MsgBoxResult
 
     Private Property list_of_files_array As String()
@@ -59,177 +54,6 @@ Public Class scripts_config_form
     Private Property objADOStream As Object
 
     Private Property objShell As Object
-
-    Private Property old_file_path As Object
-
-    'This is the function that actually modifies the files
-    Function update_files(file_name, address_array)
-
-        Dim text_file() As String = System.IO.File.ReadAllLines(file_name)
-        Dim text_line As String
-
-        new_text_file = Nothing 'clears the variable
-
-        For Each text_line In text_file
-            If custom_file_path.Text = Nothing Then
-                text_line = Replace(text_line, old_file_path, location_to_save_script_files.Text & "\")
-            Else
-                text_line = Replace(text_line, old_file_path, custom_file_path.Text & "\")
-            End If
-            If InStr(file_name, "FUNCTIONS FILE") <> 0 Then   'Shouldn't do this part for any scripts other than the functions file.
-                If InStr(text_line, "worker_county_code = ") Then
-                    If IsNumeric(Strings.Left(county_selection.Text, 2)) = True Then
-                        text_line = "worker_county_code = " & Chr(34) & "x1" & Strings.Left(county_selection.Text, 2) & Chr(34)
-                    Else
-                        text_line = "worker_county_code = " & Chr(34) & "MULTICOUNTY" & Chr(34)
-                    End If
-                End If
-                If InStr(text_line, "EDMS_choice = ") Then text_line = "EDMS_choice = " & Chr(34) & EDMS_choice.Text & Chr(34)
-                If InStr(text_line, "county_name = ") Then text_line = "county_name = " & Chr(34) & Strings.Replace(county_selection.Text, Strings.Left(county_selection.Text, 5), "") & Chr(34)
-                If InStr(text_line, "county_office_array = split(") Then text_line = "county_office_array = split(" & Chr(34) & address_array & Chr(34) & ", " & Chr(34) & "~" & Chr(34) & ")"
-                If InStr(text_line, "case_noting_intake_dates = ") Then
-                    If intake_dates_check.Checked = True Then
-                        text_line = "case_noting_intake_dates = True"
-                    Else
-                        text_line = "case_noting_intake_dates = False"
-                    End If
-                End If
-                If InStr(text_line, "move_verifs_needed = ") Then
-                    If move_verifs_needed_check.Checked = True Then
-                        text_line = "move_verifs_needed = True"
-                    Else
-                        text_line = "move_verifs_needed = False"
-                    End If
-                End If
-                If InStr(text_line, "code_from_installer = ") Then text_line = "code_from_installer = " & Chr(34) & county_selection.Text & Chr(34)
-                If InStr(text_line, "county_bndx_variance_threshold = ") Then text_line = "county_bndx_variance_threshold = " & Chr(34) & bndx_threshold.Text & Chr(34)
-                If InStr(text_line, "emer_percent_rule_amt = ") Then text_line = "emer_percent_rule_amt = " & Chr(34) & emer_percent_rule_number.Text & Chr(34)
-                If InStr(text_line, "emer_number_of_income_days = ") Then text_line = "emer_number_of_income_days = " & Chr(34) & emer_number_of_income_days.Text & Chr(34)
-                If InStr(text_line, "CLS_x1_number = ") Then text_line = "CLS_x1_number = " & Chr(34) & X1_for_CLS.Text & Chr(34)
-            End If
-            'INSERT COLLECTING STATS FIXES HERE WHEN ACCESS GOES LIVE
-            new_text_file = new_text_file & text_line & Chr(10)
-        Next
-
-        new_text_file = Split(new_text_file, Chr(10))
-        System.IO.File.WriteAllLines(file_name, new_text_file)
-        Return file_name
-    End Function
-
-
-
-
-    '    Sub downloading_files_from_GitHub()
-    '        Dim agency_is_beta As Boolean
-    '
-    '        'Only some agencies get the option to install beta scripts, based mainly on their status as contributing agencies (they write scripts).
-    '        'As a result, we have an if/then list. It will need to be updated frequently as agencies join/leave the beta program.
-    '        If county_selection.Text = "02 - Anoka County" Or _
-    '            county_selection.Text = "05 - Benton County" Or _
-    '            county_selection.Text = "19 - Dakota County" Or _
-    '            county_selection.Text = "20 - Dodge County" Or _
-    '            county_selection.Text = "55 - Olmsted County" Or _
-    '            county_selection.Text = "57 - Pennington County" Or _
-    '            county_selection.Text = "69 - St. Louis County" Or _
-    '            county_selection.Text = "73 - Stearns County" Or _
-    '            county_selection.Text = "74 - Steele County" Or _
-    '            county_selection.Text = "79 - Wabasha County" Then
-    '
-    '            Dim beta_msgbox As String
-    '            beta_msgbox = MsgBox("Your agency is listed as a beta agency. Install beta versions of scripts?", MsgBoxStyle.YesNoCancel)
-    '            If beta_msgbox = 2 Then Exit Sub
-    '            If beta_msgbox = 6 Then agency_is_beta = True
-    '            If beta_msgbox = 7 Then agency_is_beta = False
-    '
-    '        End If
-    '
-    '        'Variables for local_copy_of_zip_file and temp_folder are used by this sub. These variables are temporary.
-    '        Dim local_copy_of_zip_file = location_to_save_script_files.Text & "\temp\master.zip"
-    '        Dim temp_folder = location_to_save_script_files.Text & "\temp"
-    '
-    '        'If the agency is a beta agency, they'll have the beta version of the scripts instead of the main one.
-    '        If agency_is_beta = True Then
-    '            GitHub_current_zip_archive = "https://github.com/MN-Script-Team/DHS-MAXIS-Scripts/archive/beta.zip"
-    '        Else
-    '            GitHub_current_zip_archive = "https://github.com/MN-Script-Team/DHS-MAXIS-Scripts/archive/Release.zip"
-    '        End If
-    '
-    '        'First, we create a temp directory for all this madness.
-    '        fso = CreateObject("Scripting.FileSystemObject")
-    '        If fso.folderexists(temp_folder) = True Then fso.deletefolder(temp_folder) 'Clears the temp folder if it exists.
-    '        fso.CreateFolder(temp_folder)
-    '
-    '        '---------------------------------------------------------------------------------------
-    '        'Now it downloads the zip file from Github. This code was copied from https://gist.github.com/udawtr/2053179 on 09/13/2014, and modified for our purposes.
-    '
-    '        'Creating a server object
-    '        objXMLHTTP = CreateObject("MSXML2.ServerXMLHTTP")
-    '
-    '        'Opening the file
-    '        objXMLHTTP.open("GET", GitHub_current_zip_archive, False)
-    '        objXMLHTTP.send()
-    '        If objXMLHTTP.Status = 200 Then     'Guessing this means "found" but admittedly I'm not sure. -VKC, 09/13/2014
-    '            objADOStream = CreateObject("ADODB.Stream")
-    '            objADOStream.Open()
-    '            objADOStream.Type = 1 'adTypeBinary
-    '            objADOStream.Write(objXMLHTTP.ResponseBody)
-    '            objADOStream.Position = 0    'Set the stream position to the start
-    '
-    '            'Writing the file to the hard disk
-    '            ObjFSO = CreateObject("Scripting.FileSystemObject")
-    '            If ObjFSO.Fileexists(local_copy_of_zip_file) Then ObjFSO.DeleteFile(local_copy_of_zip_file)
-    '            ObjFSO = Nothing
-    '            objADOStream.SaveToFile(local_copy_of_zip_file)
-    '            objADOStream.Close()
-    '            objADOStream = Nothing
-    '        End If
-    '
-    '        objXMLHTTP = Nothing
-    '        '------------------------------------------------------------------------------------
-    '        'Now, because the ZipFile.ExtractToDirectory method appears to not work with folks running .net 4.0, the
-    '        'app will create a VBS version of the file extractor, and save it to disk.
-    '
-    '        'Creating the file and writing each line
-    '        Dim new_zip_file As StreamWriter = File.CreateText(temp_folder & "\unzip.vbs")
-    '        new_zip_file.WriteLine("current_directory = " & Chr(34) & temp_folder & Chr(34))                                                        'Sets current directory to match temp folder
-    '        new_zip_file.WriteLine("set objShell = CreateObject(" & Chr(34) & "Shell.Application" & Chr(34) & ") ")                                 'Creates a shell.application object to execute extraction
-    '        new_zip_file.WriteLine("set FilesInZip = objShell.NameSpace(current_directory & " & Chr(34) & "\master.zip" & Chr(34) & ").items")      'Points to the master.zip file
-    '        new_zip_file.WriteLine("objShell.NameSpace(current_directory).CopyHere FilesInZip, 16 ")                                                'Copies the files out to the temp directory
-    '        new_zip_file.WriteLine("set objShell = Nothing")                                                                                        'Nulls variable like a good little code
-    '        new_zip_file.Flush()
-    '        new_zip_file.Close()
-    '
-    '        new_zip_file = Nothing  'clears variable
-    '
-    '
-    '        'Running the zip file. Calls wscript, as a surprising number of folks have somehow modified their default program for scripts to be notepad.
-    '        'Apparently people want to hack scripts to do their own bidding. Who'd have thought?
-    '        Process.Start("wscript", Chr(34) & temp_folder & "\unzip.vbs" & Chr(34))
-    '
-    '        'Now, because we have an independent script running, we need to check to see if wscript.exe is running. So, we set a variable to be our boolean "are we there yet"?
-    '        Dim moving_on As Boolean
-    '
-    '        'Now it loops checking to see if wscript.exe is running. If it STOPS running, moving_on is set to true, and we continue on our merry way.
-    '        Do
-    '            Dim processes() As Process
-    '            processes = Process.GetProcessesByName("wscript")
-    '            If processes.Count > 0 Then
-    '                moving_on = False
-    '            Else
-    '                moving_on = True
-    '            End If
-    '        Loop Until moving_on = True
-    '
-    '        'There should only be one folder in the download, but the directory checker creates an array. We need to join the array before we can mess with it.
-    '        Dim dirs As List(Of String) = New List(Of String)(Directory.EnumerateDirectories(temp_folder))
-    '        Dim github_folder As String = String.Join(",", dirs)
-    '
-    '        'Now we move the folder to its new home.
-    '        fso.CopyFolder(github_folder & "\Script Files", location_to_save_script_files.Text & "\Script Files", True)
-    '
-    '        'Now we delete the temp directory.
-    '        fso.DeleteFolder(temp_folder)
-    '    End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Application.Exit()
@@ -296,7 +120,7 @@ Public Class scripts_config_form
         End If
 
         'Asks user if we're installing beta scripts
-        If InStr(beta_county_list, county_selection.Text) = True Then
+        If InStr(beta_county_list, county_selection.Text) Then
             Dim beta_msgbox As String
             beta_msgbox = MsgBox("Your agency is listed as a beta agency. Install beta versions of scripts?", MsgBoxStyle.YesNoCancel)
             If beta_msgbox = vbCancel Then Exit Sub
@@ -315,26 +139,9 @@ Public Class scripts_config_form
         'WARNS USER ABOUT WHAT'S GOING TO HAPPEN--------------------------------------------------------------------------------
 
         'Gives warning about downloads for instances where we're downloading, and gives different warning about manual extraction for instances where we have the folder.
-        'If location_of_manual_zip_file.Text = "" Then
-        'Warns user that they can back out
         warning = MsgBox("The following utility will download all of the scripts to the selected directory, and replace the DHS file path with " & _
-        "the specified file path. If you choose to move your script directory, you'll have to use this tool again. Are you sure you want to do this?", 1)
-        If warning = 2 Then Exit Sub
-
-        ''Uses a custom sub to download files from GitHub
-        'downloading_files_from_GitHub()
-        'End If
-
-        'NOTE: leaving this here in case I need it (thinking of counties who can't download that ZIP for some reason).
-        'Else
-        '    'Warns user that they can back out
-        '    warning = MsgBox("The following utility will extract all of the scripts to the selected directory, and replace the DHS file path with " & _
-        '    "the specified file path. If you choose to move your script directory, you'll have to use this tool again. Are you sure you want to do this?", 1)
-        '    If warning = 2 Then Exit Sub
-        '
-        '    'Copies directory. Replaces the "FUNCTIONS FILE.vbs" part of the location_of_manual_zip_file.Text string with a blank, so as to capture the folder easier.
-        '    My.Computer.FileSystem.CopyDirectory(Replace(location_of_manual_zip_file.Text, "FUNCTIONS FILE.vbs", ""), location_to_save_script_files.Text & "\Script Files", True)
-        'End If
+        "the specified file path. If you choose to move your script directory, you'll have to use this tool again. Are you sure you want to do this?", vbYesNo)
+        If warning = vbNo Then Exit Sub
 
         'Disabling features/enabling others (more of a pretty GUI setup, might rewrite to be even prettier)
         Update_Files_Label.Visible = True
@@ -350,9 +157,15 @@ Public Class scripts_config_form
         'LOADING TEXT FILE OF SCRIPTS TO MAKE FROM GITHUB-----------------------------------------------------------------------
 
         Dim redirect_list   'We'll need this in a bit
-        Dim url = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/master/Script%20Files/LIST%20OF%20SCRIPTS.txt"
+        Dim list_of_scripts_URL 'We'll also need this in a bit
+        If agency_is_beta = True Then
+            list_of_scripts_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/BETA/Script%20Files/LIST%20OF%20SCRIPTS.txt"
+        Else
+            list_of_scripts_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/RELEASE/Script%20Files/LIST%20OF%20SCRIPTS.txt"
+        End If
+
         Dim req = CreateObject("Msxml2.XMLHttp.6.0")            'Creates an object to get a URL
-        req.open("GET", url, False)                             'Attempts to open the URL
+        req.open("GET", list_of_scripts_URL, False)             'Attempts to open the URL
         req.send()                                              'Sends request
         If req.Status = 200 Then                                '200 means great success
             fso = CreateObject("Scripting.FileSystemObject")    'Creates an FSO
@@ -397,7 +210,7 @@ Public Class scripts_config_form
                 script_directory = location_to_save_script_files.Text & "\Script Files\"
             Else
                 'If the path is an unmapped network drive, those slashes are usually reversed. This accounts for that. (Hennepin!!!)
-                If InStr(custom_file_path.Text, "/") = True Then
+                If InStr(custom_file_path.Text, "/") Then
                     script_directory = custom_file_path.Text & "/Script Files/"
                 Else
                     script_directory = custom_file_path.Text & "\Script Files\"
@@ -515,22 +328,6 @@ Public Class scripts_config_form
         'Opening file read-only, to know what path to overwrite from the GitHub repo.
         ObjFSO = CreateObject("Scripting.FileSystemObject")
         objFile = ObjFSO.OpenTextFile(script_directory & "SETTINGS - GLOBAL VARIABLES.vbs", read_only)
-
-        ''Dim-ing variables needed for the following do...loop
-        'Dim global_variables_lines
-        'Dim line_to_look_for_in_global_variables
-        '
-        ''Reading each line, seeking the old path name from the GitHub repo.
-        'Do Until objFile.AtEndOfStream
-        '    global_variables_lines = objFile.ReadLine
-        '    line_to_look_for_in_global_variables = "'Set fso_command = run_another_script_fso.OpenTextFile("
-        '    If InStr(global_variables_lines, line_to_look_for_in_global_variables) Then
-        '        old_file_path = Replace(Replace(Replace(global_variables_lines, line_to_look_for_in_global_variables, ""), Chr(34), ""), "Script Files\SETTINGS - GLOBAL VARIABLES.vbs)", "")
-        '    End If
-        'Loop
-        '
-        ''Closing the read-only version
-        'objFile.Close()
 
         'Reading all lines from it into a string
         Dim text_file() As String = System.IO.File.ReadAllLines(location_to_save_script_files.Text & "\Script Files\SETTINGS - GLOBAL VARIABLES.vbs")
