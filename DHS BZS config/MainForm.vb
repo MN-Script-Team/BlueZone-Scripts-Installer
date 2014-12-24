@@ -495,8 +495,16 @@ Public Class scripts_config_form
 
         'DOWNLOADING THE GLOBAL VARIABLES FILE AND CONFIGURING IT---------------------------------------------------------------
 
+        'Creating the variable for global variables URL
+        Dim global_variables_URL
+
         'URL for Global Variables (eventually this should be dynamic dependent on the beta/master/other categories, but I need to get this out soon).
-        Dim global_variables_URL = "https://raw.githubusercontent.com/Anoka-Script-Team/Anoka-PRISM-Scripts/master/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"
+        If agency_is_beta = True Then
+            global_variables_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/BETA/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"
+        Else
+            global_variables_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/RELEASE/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"
+        End If
+
 
         'Checks if the file exists. If it does, it deletes it.
         If File.Exists(script_directory & "SETTINGS - GLOBAL VARIABLES.vbs") Then File.Delete(script_directory & "SETTINGS - GLOBAL VARIABLES.vbs")
@@ -508,21 +516,21 @@ Public Class scripts_config_form
         ObjFSO = CreateObject("Scripting.FileSystemObject")
         objFile = ObjFSO.OpenTextFile(script_directory & "SETTINGS - GLOBAL VARIABLES.vbs", read_only)
 
-        'Dim-ing variables needed for the following do...loop
-        Dim global_variables_lines
-        Dim line_to_look_for_in_global_variables
-
-        'Reading each line, seeking the old path name from the GitHub repo.
-        Do Until objFile.AtEndOfStream
-            global_variables_lines = objFile.ReadLine
-            line_to_look_for_in_global_variables = "'Set fso_command = run_another_script_fso.OpenTextFile("
-            If InStr(global_variables_lines, line_to_look_for_in_global_variables) Then
-                old_file_path = Replace(Replace(Replace(global_variables_lines, line_to_look_for_in_global_variables, ""), Chr(34), ""), "Script Files\SETTINGS - GLOBAL VARIABLES.vbs)", "")
-            End If
-        Loop
-
-        'Closing the read-only version
-        objFile.Close()
+        ''Dim-ing variables needed for the following do...loop
+        'Dim global_variables_lines
+        'Dim line_to_look_for_in_global_variables
+        '
+        ''Reading each line, seeking the old path name from the GitHub repo.
+        'Do Until objFile.AtEndOfStream
+        '    global_variables_lines = objFile.ReadLine
+        '    line_to_look_for_in_global_variables = "'Set fso_command = run_another_script_fso.OpenTextFile("
+        '    If InStr(global_variables_lines, line_to_look_for_in_global_variables) Then
+        '        old_file_path = Replace(Replace(Replace(global_variables_lines, line_to_look_for_in_global_variables, ""), Chr(34), ""), "Script Files\SETTINGS - GLOBAL VARIABLES.vbs)", "")
+        '    End If
+        'Loop
+        '
+        ''Closing the read-only version
+        'objFile.Close()
 
         'Reading all lines from it into a string
         Dim text_file() As String = System.IO.File.ReadAllLines(location_to_save_script_files.Text & "\Script Files\SETTINGS - GLOBAL VARIABLES.vbs")
@@ -530,55 +538,83 @@ Public Class scripts_config_form
 
         'Replaces file path and county-specific variables
         For Each text_line In text_file
-            'If custom_file_path.Text = Nothing Then
-            '    text_line = Replace(text_line, old_file_path, location_to_save_script_files.Text & "\")
-            'Else
-            '    text_line = Replace(text_line, old_file_path, custom_file_path.Text & "\")
-            'End If
 
+            'EDMS choice
             If InStr(text_line, "EDMS_choice = ") Then text_line = "EDMS_choice = " & Chr(34) & EDMS_choice.Text & Chr(34)
+
+            'Splits the list_of_addresses into an array, using a tilde as the separating character.
             If InStr(text_line, "county_office_array = split(") Then text_line = "county_office_array = split(" & Chr(34) & list_of_addresses & Chr(34) & ", " & Chr(34) & "~" & Chr(34) & ")"
-            If InStr(text_line, "county_name = ") Then text_line = "county_name = " & Chr(34) & county_selection.Text & Chr(34)
+
+            'County name (replaces parts of the code_from_installer that aren't needed)
+            If InStr(text_line, "county_name = ") Then text_line = "county_name = " & Chr(34) & Strings.Replace(county_selection.Text, Strings.Left(county_selection.Text, 5), "") & Chr(34)
+
+            'Puts the worker county code in, using left two digits of the code_from_installer only. Sets to "MULTICOUNTY" if it's a multicounty site.
+            If InStr(text_line, "worker_county_code = ") Then
+                If IsNumeric(Strings.Left(county_selection.Text, 2)) = True Then
+                    text_line = "worker_county_code = " & Chr(34) & "x1" & Strings.Left(county_selection.Text, 2) & Chr(34)
+                Else
+                    text_line = "worker_county_code = " & Chr(34) & "MULTICOUNTY" & Chr(34)
+                End If
+            End If
+
+            'Some counties don't want to case note the intake/reapp dates. This sets that variable.
+            If InStr(text_line, "case_noting_intake_dates = ") Then
+                If intake_dates_check.Checked = True Then
+                    text_line = "case_noting_intake_dates = True"
+                Else
+                    text_line = "case_noting_intake_dates = False"
+                End If
+            End If
+
+            'Some counties want "verifs needed" at the top of the CAF case note. This sets that variable.
+            If InStr(text_line, "move_verifs_needed = ") Then
+                If move_verifs_needed_check.Checked = True Then
+                    text_line = "move_verifs_needed = True"
+                Else
+                    text_line = "move_verifs_needed = False"
+                End If
+            End If
+
+            'Storing the code from installer (used only for autofill purposes when running the installer, and is not used by any scripts).
+            If InStr(text_line, "code_from_installer = ") Then text_line = "code_from_installer = " & Chr(34) & county_selection.Text & Chr(34)
+
+            'County BNDX threshold (defaults to 0). Used by BNDX scrubber to decide the "range" of acceptable change.
+            If InStr(text_line, "county_bndx_variance_threshold = ") Then text_line = "county_bndx_variance_threshold = " & Chr(34) & bndx_threshold.Text & Chr(34)
+
+            'Emergency percent rule amount is the amount of income which needs to have been spent in certain categories. Varies county-to-county. This sets it.
+            If InStr(text_line, "emer_percent_rule_amt = ") Then text_line = "emer_percent_rule_amt = " & Chr(34) & emer_percent_rule_number.Text & Chr(34)
+
+            'Most counties use 30 days of income when determining emergency program eligibility. Some use more or less. This sets that amount.
+            If InStr(text_line, "emer_number_of_income_days = ") Then text_line = "emer_number_of_income_days = " & Chr(34) & emer_number_of_income_days.Text & Chr(34)
+
+            'Some counties use a "CLS" account to send closed cases. This sets that account ID.
+            If InStr(text_line, "CLS_x1_number = ") Then text_line = "CLS_x1_number = " & Chr(34) & X1_for_CLS.Text & Chr(34)
 
             'Modifes the directory ONLY IF it's the default_directory variable in GLOBAL VARIABLES.
             If InStr(text_line, "default_directory = ""C:\DHS-MAXIS-Scripts\Script Files\""") Then text_line = "default directory = """ & script_directory & """"
 
-            ''<<<<<<<<<<<<<HERE'S THE OLD PART ABOUT UPDATING
-            'If InStr(file_name, "FUNCTIONS FILE") <> 0 Then   'Shouldn't do this part for any scripts other than the functions file.
-            '    If InStr(text_line, "worker_county_code = ") Then
-            '        If IsNumeric(Strings.Left(county_selection.Text, 2)) = True Then
-            '            text_line = "worker_county_code = " & Chr(34) & "x1" & Strings.Left(county_selection.Text, 2) & Chr(34)
-            '        Else
-            '            text_line = "worker_county_code = " & Chr(34) & "MULTICOUNTY" & Chr(34)
-            '        End If
-            '    End If
-            '    If InStr(text_line, "EDMS_choice = ") Then text_line = "EDMS_choice = " & Chr(34) & EDMS_choice.Text & Chr(34)
-            '    If InStr(text_line, "county_name = ") Then text_line = "county_name = " & Chr(34) & Strings.Replace(county_selection.Text, Strings.Left(county_selection.Text, 5), "") & Chr(34)
-            '    If InStr(text_line, "county_office_array = split(") Then text_line = "county_office_array = split(" & Chr(34) & address_array & Chr(34) & ", " & Chr(34) & "~" & Chr(34) & ")"
-            '    If InStr(text_line, "case_noting_intake_dates = ") Then
-            '        If intake_dates_check.Checked = True Then
-            '            text_line = "case_noting_intake_dates = True"
-            '        Else
-            '            text_line = "case_noting_intake_dates = False"
-            '        End If
-            '    End If
-            '    If InStr(text_line, "move_verifs_needed = ") Then
-            '        If move_verifs_needed_check.Checked = True Then
-            '            text_line = "move_verifs_needed = True"
-            '        Else
-            '            text_line = "move_verifs_needed = False"
-            '        End If
-            '    End If
-            '    If InStr(text_line, "code_from_installer = ") Then text_line = "code_from_installer = " & Chr(34) & county_selection.Text & Chr(34)
-            '    If InStr(text_line, "county_bndx_variance_threshold = ") Then text_line = "county_bndx_variance_threshold = " & Chr(34) & bndx_threshold.Text & Chr(34)
-            '    If InStr(text_line, "emer_percent_rule_amt = ") Then text_line = "emer_percent_rule_amt = " & Chr(34) & emer_percent_rule_number.Text & Chr(34)
-            '    If InStr(text_line, "emer_number_of_income_days = ") Then text_line = "emer_number_of_income_days = " & Chr(34) & emer_number_of_income_days.Text & Chr(34)
-            '    If InStr(text_line, "CLS_x1_number = ") Then text_line = "CLS_x1_number = " & Chr(34) & X1_for_CLS.Text & Chr(34)
-            'End If
+            'Sets the all_users_select_a_worker option.
+            If InStr(text_line, "all_users_select_a_worker") Then
+                If all_users_select_a_worker_CheckBox.Checked = True Then
+                    text_line = "all_users_select_a_worker = True"
+                Else
+                    text_line = "all_users_select_a_worker = False"
+                End If
+            End If
 
+            'Sets the users who get to select a user manually. If the field was blank, it returns a blank, otherwise it converts the string commas to something working for an array.
+            If InStr(text_line, "users_using_select_a_user = array(") Then
+                If users_using_select_a_worker.Text = "" Then
+                    text_line = "users_using_select_a_user = array()"
+                Else
+                    text_line = "users_using_select_a_user = array(""" & UCase(Replace(Replace(users_using_select_a_worker.Text, " ", ""), ",", """, """) & """)")
+                End If
+            End If
 
-            'INSERT COLLECTING STATS FIXES HERE WHEN ACCESS GOES LIVE
-            new_text_file = new_text_file & text_line & Chr(10)
+                'INSERT COLLECTING STATS FIXES HERE WHEN ACCESS GOES LIVE
+
+                'Writes the file data to the variable for new_text_file, which will get written to the file a bit later.
+                new_text_file = new_text_file & text_line & Chr(10)
         Next
 
         'Splits the array created by the For...next and writes each line into the file
@@ -729,7 +765,6 @@ Public Class scripts_config_form
                     If InStr(global_variables_line, "users_using_select_a_user") Then
                         'Gets the users by taking the array from the line and replacing the function name (and the word array) and the parenthesis with blanks, and the "", "" string with a simple comma-space.
                         users_using_select_a_worker.Text = Replace(Replace(Replace(global_variables_line, "users_using_select_a_user = array(""", ""), """)", ""), """", "")
-                        'Replace(Replace(Replace(global_variables_line, ")", ""), """, """, ", "), "users_using_select_a_user = array(", "")
                     End If
                 Next
             End If
@@ -785,21 +820,6 @@ Public Class scripts_config_form
 
     End Sub
 
-    ''Loads a file dialog and looks for FUNCTIONS FILE, defaults to Desktop (instructions inform users to save to desktop).
-    'Private Sub zip_file_button_Click(sender As Object, e As EventArgs)
-    '    Dim myStream As Stream = Nothing
-    '    Dim openFileDialog1 As New OpenFileDialog()
-    '
-    '    openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-    '    openFileDialog1.Filter = "BlueZone Scripts FUNCTIONS FILE (FUNCTIONS FILE.vbs)|FUNCTIONS FILE.vbs"
-    '    openFileDialog1.FilterIndex = 2
-    '    openFileDialog1.RestoreDirectory = True
-    '
-    '    openFileDialog1.ShowDialog()
-    '
-    '    location_of_manual_zip_file.Text = openFileDialog1.FileName
-    'End Sub
-
     Private Sub emer_number_of_income_days_Leave(sender As Object, e As EventArgs) Handles emer_number_of_income_days.Leave
         If IsNumeric(emer_number_of_income_days.Text) = False Then
             MsgBox("You must enter a numeric amount for the EMER number of intake days. It will now revert to 30.")
@@ -812,17 +832,5 @@ Public Class scripts_config_form
             MsgBox("You must enter a seven digit worker ID. It will now clear what you've typed.")
             X1_for_CLS.Text = ""
         End If
-    End Sub
-
-    Private Sub county_selection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles county_selection.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles all_users_select_a_worker_CheckBox.CheckedChanged
-
-    End Sub
-
-    Private Sub Update_Files_Label_Click(sender As Object, e As EventArgs) Handles Update_Files_Label.Click
-
     End Sub
 End Class
