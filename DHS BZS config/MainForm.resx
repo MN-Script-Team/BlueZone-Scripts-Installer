@@ -120,9 +120,6 @@
   <metadata name="MenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>This section will allow you to install the script files manually, without unzipping or downloading from the Internet, if you have problems with the standard process. Enter the location you unzipped the script files here (it'll look for "FUNCTIONS FILE.vbs"), and the program will set up scripts using those files.</value>
-  </data>
   <metadata name="FolderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>

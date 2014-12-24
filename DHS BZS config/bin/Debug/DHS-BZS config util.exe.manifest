@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="DHS-BZS config util.exe" version="0.0.0.4" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="DHS-BZS config util" version="1.2.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="DHS-BZS config util" version="1.3.0.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="DHS-BZS config util.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DHS-BZS config util.exe" size="109568">
-      <assemblyIdentity name="DHS-BZS config util" version="1.2.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DHS-BZS config util.exe" size="115200">
+      <assemblyIdentity name="DHS-BZS config util" version="1.3.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>U0HCi1wTx+3VdlzP+IIrA5EB+dE=</dsig:DigestValue>
+        <dsig:DigestValue>wcYMEyBQLi8aDK7vUNI60C/Tkw0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
