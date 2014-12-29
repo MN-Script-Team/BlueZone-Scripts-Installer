@@ -251,8 +251,9 @@ Public Class scripts_config_form
                 "		StopScript" & vbCr & _
                 "END IF"
 
-            'Creates each script file one at a time
+            'Creates each script file one at a time. If the "Script Files" folder doesn't exist, it'll create it.
             create_VBS_fso = CreateObject("Scripting.FileSystemObject")
+            If create_VBS_fso.FolderExists(script_directory) = False Then create_VBS_fso.CreateFolder(script_directory)
             create_VBS_command = create_VBS_fso.CreateTextFile(script_directory & Trim(redirect_to_make), 2)
             create_VBS_command.Write(redirect_file_contents)
             create_VBS_command.Close()
