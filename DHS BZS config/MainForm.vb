@@ -432,10 +432,19 @@ Public Class scripts_config_form
                 End If
             End If
 
-                'INSERT COLLECTING STATS FIXES HERE WHEN ACCESS GOES LIVE
+            'INSERT COLLECTING STATS FIXES HERE WHEN ACCESS GOES LIVE
 
-                'Writes the file data to the variable for new_text_file, which will get written to the file a bit later.
-                new_text_file = new_text_file & text_line & Chr(10)
+            'Sets the agency as beta or otherwise
+            If InStr(text_line, "beta_agency =") Then
+                If agency_is_beta = True Then
+                    text_line = "beta_agency = True"
+                Else
+                    text_line = "beta_agency = False"
+                End If
+            End If
+
+            'Writes the file data to the variable for new_text_file, which will get written to the file a bit later.
+            new_text_file = new_text_file & text_line & Chr(10)
         Next
 
         'Splits the array created by the For...next and writes each line into the file
