@@ -434,8 +434,8 @@ Public Class scripts_config_form
 
             'INSERT COLLECTING STATS FIXES HERE WHEN ACCESS GOES LIVE
 
-            'Sets the agency as beta or otherwise
-            If InStr(text_line, "beta_agency =") Then
+            'Sets the agency as beta or otherwise. Uses "= True" because the later logic always uses a false (and this prevents you from overdoing that other line).
+            If InStr(text_line, "beta_agency = True") Then
                 If agency_is_beta = True Then
                     text_line = "beta_agency = True"
                 Else
