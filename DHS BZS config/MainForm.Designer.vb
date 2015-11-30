@@ -59,7 +59,6 @@ Partial Class scripts_config_form
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.county_selection = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.EDMS_check = New System.Windows.Forms.CheckBox()
         Me.Tab_Control_Main_Form = New System.Windows.Forms.TabControl()
         Me.MenuStrip1.SuspendLayout()
@@ -108,7 +107,7 @@ Partial Class scripts_config_form
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(249, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(248, 22)
         Me.ToolStripMenuItem2.Text = ".NET info for sending to Veronica"
         '
         'HelpToolStripMenuItem
@@ -171,8 +170,8 @@ Partial Class scripts_config_form
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(492, 31)
         Me.Label4.TabIndex = 13
-        Me.Label4.Text = "In this field, you can specify a customized file path, which replaces the default" & _
-    " that was selected in the ""basic settings"" tab. Useful for staging areas, or unm" & _
+        Me.Label4.Text = "In this field, you can specify a customized file path, which replaces the default" &
+    " that was selected in the ""basic settings"" tab. Useful for staging areas, or unm" &
     "apped network drives."
         '
         'custom_file_path
@@ -238,7 +237,7 @@ Partial Class scripts_config_form
         Me.all_users_select_a_worker_CheckBox.Name = "all_users_select_a_worker_CheckBox"
         Me.all_users_select_a_worker_CheckBox.Size = New System.Drawing.Size(483, 17)
         Me.all_users_select_a_worker_CheckBox.TabIndex = 6
-        Me.all_users_select_a_worker_CheckBox.Text = "Check here to have all users ""select a worker"" when using NAV scripts (useful for" & _
+        Me.all_users_select_a_worker_CheckBox.Text = "Check here to have all users ""select a worker"" when using NAV scripts (useful for" &
     " case banking)."
         Me.all_users_select_a_worker_CheckBox.UseVisualStyleBackColor = True
         '
@@ -249,7 +248,7 @@ Partial Class scripts_config_form
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(405, 13)
         Me.Label10.TabIndex = 8
-        Me.Label10.Text = "Emergency note: manual selection of agency ""days of income to verify"" (default: 3" & _
+        Me.Label10.Text = "Emergency note: manual selection of agency ""days of income to verify"" (default: 3" &
     "0):"
         '
         'emer_number_of_income_days
@@ -329,7 +328,7 @@ Partial Class scripts_config_form
         Me.intake_dates_check.Name = "intake_dates_check"
         Me.intake_dates_check.Size = New System.Drawing.Size(488, 17)
         Me.intake_dates_check.TabIndex = 0
-        Me.intake_dates_check.Text = "Check here to have the ""closed progs"" and ""denied progs"" scripts case note info o" & _
+        Me.intake_dates_check.Text = "Check here to have the ""closed progs"" and ""denied progs"" scripts case note info o" &
     "n intake dates."
         Me.intake_dates_check.UseVisualStyleBackColor = True
         '
@@ -385,7 +384,6 @@ Partial Class scripts_config_form
         '
         Me.GroupBox2.Controls.Add(Me.county_selection)
         Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Location = New System.Drawing.Point(11, 30)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(487, 44)
@@ -400,7 +398,7 @@ Partial Class scripts_config_form
         Me.county_selection.Items.AddRange(New Object() {"01 - Aitkin County", "02 - Anoka County", "03 - Becker County", "04 - Beltrami County", "05 - Benton County", "06 - Big Stone County", "07 - Blue Earth County", "08 - Brown County", "09 - Carlton County", "10 - Carver County", "11 - Cass County", "12 - Chippewa County", "13 - Chisago County", "14 - Clay County", "15 - Clearwater County", "16 - Cook County", "17 - Cottonwood County", "18 - Crow Wing County", "19 - Dakota County", "20 - Dodge County", "21 - Douglas County", "22 - Faribault County", "23 - Fillmore County", "24 - Freeborn County", "25 - Goodhue County", "26 - Grant County", "27 - Hennepin County", "28 - Houston County", "29 - Hubbard County", "30 - Isanti County", "31 - Itasca County", "32 - Jackson County", "33 - Kanabec County", "34 - Kandiyohi County", "35 - Kittson County", "36 - Koochiching County", "37 - Lac Qui Parle County", "38 - Lake County", "39 - Lake of the Woods County", "40 - LeSueur County", "41 - Lincoln County", "42 - Lyon County", "43 - Mcleod County", "44 - Mahnomen County", "45 - Marshall County", "46 - Martin County", "47 - Meeker County", "48 - Mille Lacs County", "49 - Morrison County", "50 - Mower County", "51 - Murray County", "52 - Nicollet County", "53 - Nobles County", "54 - Norman County", "55 - Olmsted County", "56 - Otter Tail County", "57 - Pennington County", "58 - Pine County", "59 - Pipestone County", "60 - Polk County", "61 - Pope County", "62 - Ramsey County", "63 - Red Lake County", "64 - Redwood County", "65 - Renville County", "66 - Rice County", "67 - Rock County", "68 - Roseau County", "69 - St. Louis County", "70 - Scott County", "71 - Sherburne County", "72 - Sibley County", "73 - Stearns County", "74 - Steele County", "75 - Stevens County", "76 - Swift County", "77 - Todd County", "78 - Traverse County", "79 - Wabasha County", "80 - Wadena County", "81 - Waseca County", "82 - Washington County", "83 - Watonwan County", "84 - Wilkin County", "85 - Winona County", "86 - Wright County", "87 - Yellow Medicine County", "88 - Mille Lacs Band", "92 - White Earth Nation", "93 - Leech Lake Band", "94 - Red Lake Nation", "DM - Des Moines Valley HHS", "MP - MNPrairie County Alliance", "SW - Southwest HHS", "PT - Pine Tech", "DHS"})
         Me.county_selection.Location = New System.Drawing.Point(66, 16)
         Me.county_selection.Name = "county_selection"
-        Me.county_selection.Size = New System.Drawing.Size(215, 21)
+        Me.county_selection.Size = New System.Drawing.Size(289, 21)
         Me.county_selection.TabIndex = 0
         '
         'Label1
@@ -411,15 +409,6 @@ Partial Class scripts_config_form
         Me.Label1.Size = New System.Drawing.Size(46, 13)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Agency:"
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(307, 14)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(174, 23)
-        Me.Button1.TabIndex = 4
-        Me.Button1.Text = "Add office addresses..."
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'EDMS_check
         '
@@ -507,7 +496,6 @@ Partial Class scripts_config_form
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents county_selection As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents EDMS_check As System.Windows.Forms.CheckBox
     Friend WithEvents Tab_Control_Main_Form As System.Windows.Forms.TabControl
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox

@@ -29,8 +29,6 @@ Public Class scripts_config_form
         Return "No 4.5 or later version detected"
     End Function
 
-    Private Property list_of_addresses As String
-
     Private Property fso As Object
 
     Private Property FSO_new_file_path As Object
@@ -72,27 +70,7 @@ Public Class scripts_config_form
 
 
 
-        'FIRST IT CONFIGURES THE ADDRESS----------------------------------------------------------------------------------------
-        'Dims the address array as nothing
-        Dim list_of_addresses = Nothing
 
-        'Takes each line of the address array and splits it with a "|", and each address with a "~". FUNCTIONS FILE will take it from here and split it.
-        If address_entry_form.addr_01_line_01.Text <> "" And address_entry_form.addr_01_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_01_line_01.Text & "|" & address_entry_form.addr_01_line_02.Text & "~"
-        If address_entry_form.addr_02_line_01.Text <> "" And address_entry_form.addr_02_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_02_line_01.Text & "|" & address_entry_form.addr_02_line_02.Text & "~"
-        If address_entry_form.addr_03_line_01.Text <> "" And address_entry_form.addr_03_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_03_line_01.Text & "|" & address_entry_form.addr_03_line_02.Text & "~"
-        If address_entry_form.addr_04_line_01.Text <> "" And address_entry_form.addr_04_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_04_line_01.Text & "|" & address_entry_form.addr_04_line_02.Text & "~"
-        If address_entry_form.addr_05_line_01.Text <> "" And address_entry_form.addr_05_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_05_line_01.Text & "|" & address_entry_form.addr_05_line_02.Text & "~"
-        If address_entry_form.addr_06_line_01.Text <> "" And address_entry_form.addr_06_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_06_line_01.Text & "|" & address_entry_form.addr_06_line_02.Text & "~"
-        If address_entry_form.addr_07_line_01.Text <> "" And address_entry_form.addr_07_line_02.Text <> "" Then list_of_addresses = list_of_addresses & address_entry_form.addr_07_line_01.Text & "|" & address_entry_form.addr_07_line_02.Text & "~"
-
-        'Warning if a county or file path is not selected
-        If county_selection.Text = "" Or list_of_addresses = Nothing Or location_to_save_script_files.Text = "" Then
-            MsgBox("You must select a county, and enter a complete county address, as well as enter a file location.")
-            Exit Sub
-        End If
-
-        'Removing the last tilde as it is stupid and not required.
-        list_of_addresses = list_of_addresses.Remove(list_of_addresses.Length - 1)
 
 
 
@@ -336,8 +314,8 @@ Public Class scripts_config_form
         Dim global_variables_URL
 
         'URL for Global Variables (eventually this should be dynamic dependent on the beta/master/other categories, but I need to get this out soon).
-        If agency_is_beta = True Then
-            global_variables_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/BETA/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"
+        If agency_is_beta = True Then           '<<<<This will be removed and it will always download from RELEASE soon
+            global_variables_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/master/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"
         Else
             global_variables_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/RELEASE/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"
         End If
@@ -362,9 +340,6 @@ Public Class scripts_config_form
 
             'EDMS choice
             If InStr(text_line, "EDMS_choice = ") Then text_line = "EDMS_choice = " & Chr(34) & EDMS_choice.Text & Chr(34)
-
-            'Splits the list_of_addresses into an array, using a tilde as the separating character.
-            If InStr(text_line, "county_office_array = split(") Then text_line = "county_office_array = split(" & Chr(34) & list_of_addresses & Chr(34) & ", " & Chr(34) & "~" & Chr(34) & ")"
 
             'County name (replaces parts of the code_from_installer that aren't needed)
             If InStr(text_line, "county_name = ") Then text_line = "county_name = " & Chr(34) & Strings.Replace(county_selection.Text, Strings.Left(county_selection.Text, 5), "") & Chr(34)
@@ -467,12 +442,6 @@ Public Class scripts_config_form
         Throw New NotImplementedException
     End Sub
 
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-
-        address_entry_form.ShowDialog(Me)
-
-    End Sub
-
 
     'This sub finds the current directory, and then offers to copy the existing values from FUNCTIONS FILE. It triggers when the user
     'selects "browse" from the "where are we saving scripts" part of the main tab.
@@ -487,7 +456,7 @@ Public Class scripts_config_form
 
         'If there's script files in the folder, this will find them and ask if we want to try and autofill the dialog.
         If File.Exists(FolderBrowserDialog1.SelectedPath & "/Script Files/SETTINGS - GLOBAL VARIABLES.vbs") = True Then
-            Dim files_found_messagebox = MsgBox("This folder contains script files! Would you like the installer to try and read the address(es) and agency for you?", MsgBoxStyle.YesNo)
+            Dim files_found_messagebox = MsgBox("This folder contains script files! Would you like the installer to try and read the agency for you?", MsgBoxStyle.YesNo)
             If files_found_messagebox = MsgBoxResult.Yes Then
                 Dim global_variables_text() As String = File.ReadAllLines(FolderBrowserDialog1.SelectedPath & "/Script Files/SETTINGS - GLOBAL VARIABLES.vbs")
                 For Each global_variables_line In global_variables_text
@@ -541,49 +510,7 @@ Public Class scripts_config_form
                             custom_file_path.Text = global_variables_line
                         End If
                     End If
-                    If InStr(global_variables_line, "county_office_array = split(") Then
-                        Dim reading_address_info As Array
-                        global_variables_line = Replace(global_variables_line, "county_office_array = split(" & Chr(34), "")
-                        global_variables_line = Replace(global_variables_line, Chr(34) & ", " & Chr(34) & "~" & Chr(34) & ")", "")
-                        reading_address_info = Split(global_variables_line, "~")
-                        For array_number = 0 To UBound(reading_address_info)
-                            If array_number = 0 Then
-                                Dim line_to_add = Split(reading_address_info(0), "|")
-                                address_entry_form.addr_01_line_01.Text = line_to_add(0)
-                                address_entry_form.addr_01_line_02.Text = line_to_add(1)
-                            End If
-                            If array_number = 1 Then
-                                Dim line_to_add = Split(reading_address_info(1), "|")
-                                address_entry_form.addr_02_line_01.Text = line_to_add(0)
-                                address_entry_form.addr_02_line_02.Text = line_to_add(1)
-                            End If
-                            If array_number = 2 Then
-                                Dim line_to_add = Split(reading_address_info(2), "|")
-                                address_entry_form.addr_03_line_01.Text = line_to_add(0)
-                                address_entry_form.addr_03_line_02.Text = line_to_add(1)
-                            End If
-                            If array_number = 3 Then
-                                Dim line_to_add = Split(reading_address_info(3), "|")
-                                address_entry_form.addr_04_line_01.Text = line_to_add(0)
-                                address_entry_form.addr_04_line_02.Text = line_to_add(1)
-                            End If
-                            If array_number = 4 Then
-                                Dim line_to_add = Split(reading_address_info(4), "|")
-                                address_entry_form.addr_05_line_01.Text = line_to_add(0)
-                                address_entry_form.addr_05_line_02.Text = line_to_add(1)
-                            End If
-                            If array_number = 5 Then
-                                Dim line_to_add = Split(reading_address_info(5), "|")
-                                address_entry_form.addr_06_line_01.Text = line_to_add(0)
-                                address_entry_form.addr_06_line_02.Text = line_to_add(1)
-                            End If
-                            If array_number = 6 Then
-                                Dim line_to_add = Split(reading_address_info(6), "|")
-                                address_entry_form.addr_07_line_01.Text = line_to_add(0)
-                                address_entry_form.addr_07_line_02.Text = line_to_add(1)
-                            End If
-                        Next
-                    End If
+
                     If InStr(global_variables_line, "all_users_select_a_worker") Then
                         'MsgBox(global_variables_line)
                         If global_variables_line = "all_users_select_a_worker = False" Then

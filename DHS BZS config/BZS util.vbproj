@@ -72,7 +72,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -114,12 +114,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="multiaddressform.Designer.vb">
-      <DependentUpon>multiaddressform.vb</DependentUpon>
-    </Compile>
-    <Compile Include="multiaddressform.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -149,9 +143,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="address_entry_form.resx">
       <DependentUpon>address_entry_form.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="multiaddressform.resx">
-      <DependentUpon>multiaddressform.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>

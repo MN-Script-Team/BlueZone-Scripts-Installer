@@ -6,7 +6,6 @@ C:\BlueZone-Scripts-Installer\DHS BZS config\bin\Debug\DHS-BZS config util.pdb
 C:\BlueZone-Scripts-Installer\DHS BZS config\bin\Debug\DHS-BZS config util.xml
 C:\BlueZone-Scripts-Installer\DHS BZS config\obj\Debug\DHS_BZS_config.AboutBox.resources
 C:\BlueZone-Scripts-Installer\DHS BZS config\obj\Debug\DHS_BZS_config.address_entry_form.resources
-C:\BlueZone-Scripts-Installer\DHS BZS config\obj\Debug\DHS_BZS_config.multiaddressform.resources
 C:\BlueZone-Scripts-Installer\DHS BZS config\obj\Debug\DHS_BZS_config.scripts_config_form.resources
 C:\BlueZone-Scripts-Installer\DHS BZS config\obj\Debug\DHS_BZS_config.Resources.resources
 C:\BlueZone-Scripts-Installer\DHS BZS config\obj\Debug\BZS util.vbproj.GenerateResource.Cache
