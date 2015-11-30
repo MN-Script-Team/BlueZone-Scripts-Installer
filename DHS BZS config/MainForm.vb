@@ -353,6 +353,11 @@ Public Class scripts_config_form
                 End If
             End If
 
+            'Updates the scripts_updated_date with today's date
+            If InStr(text_line, "scripts_updated_date = ") Then
+                text_line = "scripts_updated_date = " & Chr(34) & Date.Today & Chr(34)
+            End If
+
             'Some counties don't want to case note the intake/reapp dates. This sets that variable.
             If InStr(text_line, "case_noting_intake_dates = ") Then
                 If intake_dates_check.Checked = True Then
