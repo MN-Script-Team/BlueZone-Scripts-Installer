@@ -358,15 +358,6 @@ Public Class scripts_config_form
                 text_line = "scripts_updated_date = " & Chr(34) & Date.Today & Chr(34)
             End If
 
-            'Some counties don't want to case note the intake/reapp dates. This sets that variable.
-            If InStr(text_line, "case_noting_intake_dates = ") Then
-                If intake_dates_check.Checked = True Then
-                    text_line = "case_noting_intake_dates = True"
-                Else
-                    text_line = "case_noting_intake_dates = False"
-                End If
-            End If
-
             'Some counties want "verifs needed" at the top of the CAF case note. This sets that variable.
             If InStr(text_line, "move_verifs_needed = ") Then
                 If move_verifs_needed_check.Checked = True Then
@@ -495,11 +486,6 @@ Public Class scripts_config_form
                         global_variables_line = Replace(global_variables_line, Chr(34), "")
                         EDMS_choice.Text = global_variables_line
                         If EDMS_choice.Text <> "DHS eDocs" Then EDMS_check.Checked = True
-                    End If
-                    If InStr(global_variables_line, "case_noting_intake_dates = False") Then
-                        intake_dates_check.Checked = False
-                    ElseIf InStr(global_variables_line, "case_noting_intake_dates = True") Then
-                        intake_dates_check.Checked = True
                     End If
                     If InStr(global_variables_line, "move_verifs_needed = True") Then
                         move_verifs_needed_check.Checked = True

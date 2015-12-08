@@ -50,7 +50,6 @@ Partial Class scripts_config_form
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.move_verifs_needed_check = New System.Windows.Forms.CheckBox()
-        Me.intake_dates_check = New System.Windows.Forms.CheckBox()
         Me.basic_settings_tab = New System.Windows.Forms.TabPage()
         Me.browse_to_folder_button = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -125,7 +124,7 @@ Partial Class scripts_config_form
         '
         'run_configuration_button
         '
-        Me.run_configuration_button.Location = New System.Drawing.Point(402, 299)
+        Me.run_configuration_button.Location = New System.Drawing.Point(402, 279)
         Me.run_configuration_button.Name = "run_configuration_button"
         Me.run_configuration_button.Size = New System.Drawing.Size(109, 30)
         Me.run_configuration_button.TabIndex = 0
@@ -135,7 +134,7 @@ Partial Class scripts_config_form
         'Update_Files_Label
         '
         Me.Update_Files_Label.AutoSize = True
-        Me.Update_Files_Label.Location = New System.Drawing.Point(254, 308)
+        Me.Update_Files_Label.Location = New System.Drawing.Point(254, 288)
         Me.Update_Files_Label.Name = "Update_Files_Label"
         Me.Update_Files_Label.Size = New System.Drawing.Size(142, 13)
         Me.Update_Files_Label.TabIndex = 9
@@ -150,7 +149,7 @@ Partial Class scripts_config_form
         Me.advanced_file_path_mods_tab.Location = New System.Drawing.Point(4, 22)
         Me.advanced_file_path_mods_tab.Name = "advanced_file_path_mods_tab"
         Me.advanced_file_path_mods_tab.Padding = New System.Windows.Forms.Padding(3)
-        Me.advanced_file_path_mods_tab.Size = New System.Drawing.Size(501, 240)
+        Me.advanced_file_path_mods_tab.Size = New System.Drawing.Size(501, 222)
         Me.advanced_file_path_mods_tab.TabIndex = 1
         Me.advanced_file_path_mods_tab.Text = "Advanced file path mods"
         Me.advanced_file_path_mods_tab.UseVisualStyleBackColor = True
@@ -194,11 +193,10 @@ Partial Class scripts_config_form
         Me.advanced_script_mods_tab.Controls.Add(Me.Label3)
         Me.advanced_script_mods_tab.Controls.Add(Me.Label2)
         Me.advanced_script_mods_tab.Controls.Add(Me.move_verifs_needed_check)
-        Me.advanced_script_mods_tab.Controls.Add(Me.intake_dates_check)
         Me.advanced_script_mods_tab.Location = New System.Drawing.Point(4, 22)
         Me.advanced_script_mods_tab.Name = "advanced_script_mods_tab"
         Me.advanced_script_mods_tab.Padding = New System.Windows.Forms.Padding(3)
-        Me.advanced_script_mods_tab.Size = New System.Drawing.Size(501, 240)
+        Me.advanced_script_mods_tab.Size = New System.Drawing.Size(501, 222)
         Me.advanced_script_mods_tab.TabIndex = 0
         Me.advanced_script_mods_tab.Text = "Advanced script mods"
         Me.advanced_script_mods_tab.UseVisualStyleBackColor = True
@@ -207,7 +205,7 @@ Partial Class scripts_config_form
         '
         Me.GroupBox1.Controls.Add(Me.users_using_select_a_worker)
         Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 184)
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 164)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(492, 51)
         Me.GroupBox1.TabIndex = 12
@@ -216,7 +214,7 @@ Partial Class scripts_config_form
         '
         'users_using_select_a_worker
         '
-        Me.users_using_select_a_worker.Location = New System.Drawing.Point(171, 19)
+        Me.users_using_select_a_worker.Location = New System.Drawing.Point(171, 22)
         Me.users_using_select_a_worker.Name = "users_using_select_a_worker"
         Me.users_using_select_a_worker.Size = New System.Drawing.Size(315, 20)
         Me.users_using_select_a_worker.TabIndex = 0
@@ -224,7 +222,7 @@ Partial Class scripts_config_form
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 22)
+        Me.Label7.Location = New System.Drawing.Point(6, 26)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(159, 13)
         Me.Label7.TabIndex = 11
@@ -233,7 +231,7 @@ Partial Class scripts_config_form
         'all_users_select_a_worker_CheckBox
         '
         Me.all_users_select_a_worker_CheckBox.AutoSize = True
-        Me.all_users_select_a_worker_CheckBox.Location = New System.Drawing.Point(6, 161)
+        Me.all_users_select_a_worker_CheckBox.Location = New System.Drawing.Point(6, 141)
         Me.all_users_select_a_worker_CheckBox.Name = "all_users_select_a_worker_CheckBox"
         Me.all_users_select_a_worker_CheckBox.Size = New System.Drawing.Size(483, 17)
         Me.all_users_select_a_worker_CheckBox.TabIndex = 6
@@ -244,7 +242,7 @@ Partial Class scripts_config_form
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(3, 107)
+        Me.Label10.Location = New System.Drawing.Point(3, 87)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(405, 13)
         Me.Label10.TabIndex = 8
@@ -253,7 +251,7 @@ Partial Class scripts_config_form
         '
         'emer_number_of_income_days
         '
-        Me.emer_number_of_income_days.Location = New System.Drawing.Point(414, 104)
+        Me.emer_number_of_income_days.Location = New System.Drawing.Point(414, 84)
         Me.emer_number_of_income_days.Name = "emer_number_of_income_days"
         Me.emer_number_of_income_days.Size = New System.Drawing.Size(36, 20)
         Me.emer_number_of_income_days.TabIndex = 4
@@ -261,14 +259,14 @@ Partial Class scripts_config_form
         '
         'X1_for_CLS
         '
-        Me.X1_for_CLS.Location = New System.Drawing.Point(342, 130)
+        Me.X1_for_CLS.Location = New System.Drawing.Point(342, 110)
         Me.X1_for_CLS.Name = "X1_for_CLS"
         Me.X1_for_CLS.Size = New System.Drawing.Size(100, 20)
         Me.X1_for_CLS.TabIndex = 5
         '
         'emer_percent_rule_number
         '
-        Me.emer_percent_rule_number.Location = New System.Drawing.Point(405, 78)
+        Me.emer_percent_rule_number.Location = New System.Drawing.Point(405, 58)
         Me.emer_percent_rule_number.Name = "emer_percent_rule_number"
         Me.emer_percent_rule_number.Size = New System.Drawing.Size(36, 20)
         Me.emer_percent_rule_number.TabIndex = 3
@@ -276,7 +274,7 @@ Partial Class scripts_config_form
         '
         'bndx_threshold
         '
-        Me.bndx_threshold.Location = New System.Drawing.Point(383, 52)
+        Me.bndx_threshold.Location = New System.Drawing.Point(383, 32)
         Me.bndx_threshold.Name = "bndx_threshold"
         Me.bndx_threshold.Size = New System.Drawing.Size(36, 20)
         Me.bndx_threshold.TabIndex = 2
@@ -285,7 +283,7 @@ Partial Class scripts_config_form
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(3, 133)
+        Me.Label9.Location = New System.Drawing.Point(3, 113)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(333, 13)
         Me.Label9.TabIndex = 9
@@ -294,7 +292,7 @@ Partial Class scripts_config_form
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(3, 81)
+        Me.Label3.Location = New System.Drawing.Point(3, 61)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(396, 13)
         Me.Label3.TabIndex = 7
@@ -303,7 +301,7 @@ Partial Class scripts_config_form
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(3, 55)
+        Me.Label2.Location = New System.Drawing.Point(3, 35)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(374, 13)
         Me.Label2.TabIndex = 6
@@ -312,25 +310,12 @@ Partial Class scripts_config_form
         'move_verifs_needed_check
         '
         Me.move_verifs_needed_check.AutoSize = True
-        Me.move_verifs_needed_check.Location = New System.Drawing.Point(6, 29)
+        Me.move_verifs_needed_check.Location = New System.Drawing.Point(6, 9)
         Me.move_verifs_needed_check.Name = "move_verifs_needed_check"
         Me.move_verifs_needed_check.Size = New System.Drawing.Size(408, 17)
         Me.move_verifs_needed_check.TabIndex = 1
         Me.move_verifs_needed_check.Text = "Check here to move the ""verifs needed"" section to the top of the CAF case note."
         Me.move_verifs_needed_check.UseVisualStyleBackColor = True
-        '
-        'intake_dates_check
-        '
-        Me.intake_dates_check.AutoSize = True
-        Me.intake_dates_check.Checked = True
-        Me.intake_dates_check.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.intake_dates_check.Location = New System.Drawing.Point(6, 6)
-        Me.intake_dates_check.Name = "intake_dates_check"
-        Me.intake_dates_check.Size = New System.Drawing.Size(488, 17)
-        Me.intake_dates_check.TabIndex = 0
-        Me.intake_dates_check.Text = "Check here to have the ""closed progs"" and ""denied progs"" scripts case note info o" &
-    "n intake dates."
-        Me.intake_dates_check.UseVisualStyleBackColor = True
         '
         'basic_settings_tab
         '
@@ -342,7 +327,7 @@ Partial Class scripts_config_form
         Me.basic_settings_tab.Controls.Add(Me.EDMS_check)
         Me.basic_settings_tab.Location = New System.Drawing.Point(4, 22)
         Me.basic_settings_tab.Name = "basic_settings_tab"
-        Me.basic_settings_tab.Size = New System.Drawing.Size(501, 240)
+        Me.basic_settings_tab.Size = New System.Drawing.Size(501, 222)
         Me.basic_settings_tab.TabIndex = 2
         Me.basic_settings_tab.Text = "Basic settings"
         Me.basic_settings_tab.UseVisualStyleBackColor = True
@@ -429,14 +414,14 @@ Partial Class scripts_config_form
         Me.Tab_Control_Main_Form.Multiline = True
         Me.Tab_Control_Main_Form.Name = "Tab_Control_Main_Form"
         Me.Tab_Control_Main_Form.SelectedIndex = 0
-        Me.Tab_Control_Main_Form.Size = New System.Drawing.Size(509, 266)
+        Me.Tab_Control_Main_Form.Size = New System.Drawing.Size(509, 248)
         Me.Tab_Control_Main_Form.TabIndex = 8
         '
         'scripts_config_form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(519, 335)
+        Me.ClientSize = New System.Drawing.Size(519, 315)
         Me.Controls.Add(Me.Update_Files_Label)
         Me.Controls.Add(Me.Tab_Control_Main_Form)
         Me.Controls.Add(Me.run_configuration_button)
@@ -487,7 +472,6 @@ Partial Class scripts_config_form
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents move_verifs_needed_check As System.Windows.Forms.CheckBox
-    Friend WithEvents intake_dates_check As System.Windows.Forms.CheckBox
     Friend WithEvents basic_settings_tab As System.Windows.Forms.TabPage
     Friend WithEvents browse_to_folder_button As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
