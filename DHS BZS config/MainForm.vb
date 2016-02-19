@@ -354,6 +354,10 @@ Public Class scripts_config_form
                 End If
             End If
 
+            'Needs to set run_locally and use_master_branch to "false" in all instances. Scriptwriters can manually set this to true if desired.
+            If InStr(text_line, "run_locally = true") Then text_line = "run_locally = false"                    'Because "true" is lower case, the run_locally = TRUE at the end (which decides the repo) shouldn't be affected
+            If InStr(text_line, "use_master_branch = true") Then text_line = "use_master_branch = false"        'Because "true" is lower case, the use_master_branch = TRUE at the end (which decides the repo) shouldn't be affected
+
             '<<<<<INSERT COLLECTING STATS FIXES HERE WHEN ACCESS GOES LIVE
 
             'Writes the file data to the variable for new_text_file, which will get written to the file a bit later.
