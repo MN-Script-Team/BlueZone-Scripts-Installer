@@ -127,12 +127,12 @@ Public Class scripts_config_form
                 redirect_path = "BULK/BULK - MAIN MENU.vbs"
             ElseIf InStr(redirect_to_make, "REDIRECT - DAIL SCRUBBER") Then
                 redirect_path = "DAIL/DAIL - DAIL SCRUBBER.vbs"
-            ElseIf InStr(redirect_to_make, "REDIRECT - MEMOS") Then
-                redirect_path = "MEMOS/MEMOS - MAIN MENU.vbs"
-            ElseIf InStr(redirect_to_make, "REDIRECT - NOTES - 0-G") Then
-                redirect_path = "NOTES/NOTES - MAIN MENU - 0-G.vbs"
-            ElseIf InStr(redirect_to_make, "REDIRECT - NOTES - H-Z") Then
-                redirect_path = "NOTES/NOTES - MAIN MENU - H-Z.vbs"
+            ElseIf InStr(redirect_to_make, "REDIRECT - NOTICES") Then
+                redirect_path = "NOTICES/NOTICES - MAIN MENU.vbs"
+            ElseIf InStr(redirect_to_make, "REDIRECT - NOTES") Then
+                redirect_path = "NOTES/NOTES - MAIN MENU.vbs"
+            ElseIf InStr(redirect_to_make, "REDIRECT - UTILITIES") Then
+                redirect_path = "UTILITIES/UTILITIES - MAIN MENU.vbs"
             ElseIf InStr(redirect_to_make, "REDIRECT - NAV") Then
                 redirect_path = "NAV/" & Replace(redirect_to_make, "REDIRECT - ", "")
             ElseIf InStr(redirect_to_make, "REDIRECT - OTHER NAV") Then
@@ -190,29 +190,32 @@ Public Class scripts_config_form
             'Creates each script file one at a time. If the "Script Files" folder doesn't exist, it'll create it.
             create_VBS_fso = CreateObject("Scripting.FileSystemObject")
             If create_VBS_fso.FolderExists(script_directory) = False Then create_VBS_fso.CreateFolder(script_directory)
-            create_VBS_command = create_VBS_fso.CreateTextFile(script_directory & Trim(redirect_to_make), True)
-            create_VBS_command.Write(redirect_file_contents)
-            create_VBS_command.Close()
-            create_VBS_fso = Nothing
 
-            'If the agency customized script is the one we're doing, it'll create the agency customized folder if it doesn't exist yet.
-            If InStr(redirect_to_make, "REDIRECT - AGENCY CUSTOMIZED.vbs") Then
-                create_VBS_fso = CreateObject("Scripting.FileSystemObject")
-                If create_VBS_fso.FolderExists(script_directory & "AGENCY CUSTOMIZED") = False Then create_VBS_fso.CreateFolder(script_directory & "AGENCY CUSTOMIZED")
-                create_VBS_command = create_VBS_fso.CreateTextFile(script_directory & "AGENCY CUSTOMIZED\How to use this folder and script.vbs", True)
-                create_VBS_command.Write("MsgBox (""This script (and folder) is designed to store any scripts that your county/agency made that are """"customized"""" for your agency (meaning they aren't available statewide for some reason)."" & vbCr & _" & vbCr & _
-                                            vbTab & "vbCr & _" & vbCr & _
-                                            vbTab & """If your agency has made customized scripts, simply insert them into the folder located at "" & objStartFolder & ""."" & vbCr & _" & vbCr & _
-                                            vbTab & "vbCr & _" & vbCr & _
-                                            vbTab & """Once you place a script there, this script will """"find"""" it, and run it when selected."" & vbCr & _" & vbCr & _
-                                            vbTab & "vbCr & _" & vbCr & _
-                                            vbTab & """If you have any questions about how to use this button or folder, please have your alpha user contact Veronica Cary. Thank you!"")")
+            'If the script list isn't empty (i.e. the last line), then make a new redirect file
+            If redirect_to_make <> "" Then
+                create_VBS_command = create_VBS_fso.CreateTextFile(script_directory & Trim(redirect_to_make), True)
+                create_VBS_command.Write(redirect_file_contents)
                 create_VBS_command.Close()
                 create_VBS_fso = Nothing
 
-                redirect_path = "AGENCY CUSTOMIZED/SOURCE/AGENCY CUSTOMIZED.vbs"
-            End If
+                'If the agency customized script is the one we're doing, it'll create the agency customized folder if it doesn't exist yet.
+                If InStr(redirect_to_make, "REDIRECT - AGENCY CUSTOMIZED.vbs") Then
+                    create_VBS_fso = CreateObject("Scripting.FileSystemObject")
+                    If create_VBS_fso.FolderExists(script_directory & "AGENCY CUSTOMIZED") = False Then create_VBS_fso.CreateFolder(script_directory & "AGENCY CUSTOMIZED")
+                    create_VBS_command = create_VBS_fso.CreateTextFile(script_directory & "AGENCY CUSTOMIZED\How to use this folder and script.vbs", True)
+                    create_VBS_command.Write("MsgBox (""This script (and folder) is designed to store any scripts that your county/agency made that are """"customized"""" for your agency (meaning they aren't available statewide for some reason)."" & vbCr & _" & vbCr &
+                                                vbTab & "vbCr & _" & vbCr &
+                                                vbTab & """If your agency has made customized scripts, simply insert them into the folder located at "" & objStartFolder & ""."" & vbCr & _" & vbCr &
+                                                vbTab & "vbCr & _" & vbCr &
+                                                vbTab & """Once you place a script there, this script will """"find"""" it, and run it when selected."" & vbCr & _" & vbCr &
+                                                vbTab & "vbCr & _" & vbCr &
+                                                vbTab & """If you have any questions about how to use this button or folder, please have your alpha user contact Veronica Cary. Thank you!"")")
+                    create_VBS_command.Close()
+                    create_VBS_fso = Nothing
 
+                    redirect_path = "AGENCY CUSTOMIZED/SOURCE/AGENCY CUSTOMIZED.vbs"
+                End If
+            End If
         Next
 
 
