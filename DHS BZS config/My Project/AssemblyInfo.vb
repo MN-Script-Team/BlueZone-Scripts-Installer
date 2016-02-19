@@ -11,14 +11,14 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("BlueZone Scripts Configuration Utility")> 
 <Assembly: AssemblyDescription("A configuration tool for the DHS-provided BlueZone Scripts.")> 
 <Assembly: AssemblyCompany("Minnesota Department of Human Services")> 
-<Assembly: AssemblyProduct("DHS-BZS Configuration Utility")> 
-<Assembly: AssemblyCopyright("Copyright ©  2015 VKC, on behalf of MN-DHS")> 
+<Assembly: AssemblyProduct("DHS-BZS Configuration Utility")>
+<Assembly: AssemblyCopyright("Copyright © 2016 VKC, on behalf of MN-DHS")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(True)> 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("c1b5b1be-52f5-40a4-8620-23d1ad1e1ba6")> 
+<Assembly: Guid("c1b5b1be-52f5-40a4-8620-23d1ad1e1ba6")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.3.0.0")> 
-<Assembly: AssemblyFileVersion("1.3.0.0")> 
+<Assembly: AssemblyVersion("1.4.0.0")>
+<Assembly: AssemblyFileVersion("1.4.0.0")>
