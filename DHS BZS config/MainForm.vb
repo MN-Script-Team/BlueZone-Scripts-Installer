@@ -71,49 +71,6 @@ Public Class scripts_config_form
 
 
 
-
-
-
-
-        'ASKS IF YOU ARE A BETA COUNTY, AND WANT TO INSTALL BETA SCRIPTS--------------------------------------------------------
-        '   Only some agencies get the option to install beta scripts, based mainly on their status as contributing agencies (they write scripts).
-        '   As a result, we have an if/then list. It will need to be updated frequently as agencies join/leave the beta program.
-
-        'Here's where the beta list is kept. Just looks at master branch (shouldn't be different between branches).
-        Dim beta_county_list_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/master/Script%20Files/LIST%20OF%20BETA%20COUNTIES.txt"
-
-        'We need this for the list of counties
-        Dim beta_county_list
-
-        'We need this for the MsgBox
-        Dim agency_is_beta
-
-        'Loads the list from GitHub
-        Dim beta_county_req = CreateObject("Msxml2.XMLHttp.6.0")            'Creates an object to get a URL
-        beta_county_req.open("GET", beta_county_list_URL, False)            'Attempts to open the URL
-        beta_county_req.send()                                              'Sends request
-        If beta_county_req.Status = 200 Then                                '200 means great success
-            fso = CreateObject("Scripting.FileSystemObject")                'Creates an FSO
-            beta_county_list = beta_county_req.responseText                 'Loads the list of scripts
-        End If
-
-        'Asks user if we're installing beta scripts
-        If InStr(beta_county_list, county_selection.Text) Then
-            Dim beta_msgbox As String
-            beta_msgbox = MsgBox("Your agency is listed as a beta agency. Install beta versions of scripts?", MsgBoxStyle.YesNoCancel)
-            If beta_msgbox = vbCancel Then Exit Sub
-            If beta_msgbox = vbYes Then
-                agency_is_beta = True
-            Else
-                agency_is_beta = False
-            End If
-        Else
-            agency_is_beta = False
-        End If
-
-
-
-
         'WARNS USER ABOUT WHAT'S GOING TO HAPPEN--------------------------------------------------------------------------------
 
         'Gives warning about downloads for instances where we're downloading, and gives different warning about manual extraction for instances where we have the folder.
@@ -136,11 +93,8 @@ Public Class scripts_config_form
 
         Dim redirect_list   'We'll need this in a bit
         Dim list_of_scripts_URL 'We'll also need this in a bit
-        If agency_is_beta = True Then
-            list_of_scripts_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/BETA/Script%20Files/LIST%20OF%20SCRIPTS.txt"
-        Else
-            list_of_scripts_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/RELEASE/Script%20Files/LIST%20OF%20SCRIPTS.txt"
-        End If
+        'list_of_scripts_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/RELEASE/Script%20Files/LIST%20OF%20SCRIPTS.txt"
+        list_of_scripts_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/master/Script%20Files/LIST%20OF%20SCRIPTS.txt"       '<<<<SWITCH THIS TO "RELEASE" FOR GO-LIVE
 
         Dim req = CreateObject("Msxml2.XMLHttp.6.0")            'Creates an object to get a URL
         req.open("GET", list_of_scripts_URL, False)             'Attempts to open the URL
@@ -270,11 +224,8 @@ Public Class scripts_config_form
         Dim pad_URL
 
         'URL for Power Pad (depends on if user is beta or not)
-        If agency_is_beta = True Then
-            pad_URL = "https://github.com/MN-Script-Team/DHS-MAXIS-Scripts/blob/BETA/Script%20Files/PAD%20-%20DHS%20SUPPORTED.pad?raw=true"
-        Else
-            pad_URL = "https://github.com/MN-Script-Team/DHS-MAXIS-Scripts/blob/RELEASE/Script%20Files/PAD%20-%20DHS%20SUPPORTED.pad?raw=true"
-        End If
+        'pad_URL = "https://github.com/MN-Script-Team/DHS-MAXIS-Scripts/blob/RELEASE/Script%20Files/PAD%20-%20DHS%20SUPPORTED.pad?raw=true"
+        pad_URL = "https://github.com/MN-Script-Team/DHS-MAXIS-Scripts/blob/master/Script%20Files/PAD%20-%20DHS%20SUPPORTED.pad?raw=true"       '<<<CHANGE THIS TOO
 
         'Downloads file
         'Now it downloads the pad file from Github. This code was copied from https://gist.github.com/udawtr/2053179 on 09/13/2014, and modified for our purposes.
@@ -314,12 +265,9 @@ Public Class scripts_config_form
         Dim global_variables_URL
 
         'URL for Global Variables (eventually this should be dynamic dependent on the beta/master/other categories, but I need to get this out soon).
-        If agency_is_beta = True Then           '<<<<This will be removed and it will always download from RELEASE soon
-            global_variables_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/master/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"
-        Else
-            global_variables_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/RELEASE/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"
-        End If
 
+        global_variables_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/master/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"     '<<<THIS ONE TOO
+        'global_variables_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/RELEASE/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"
 
         'Checks if the file exists. If it does, it deletes it.
         If File.Exists(script_directory & "SETTINGS - GLOBAL VARIABLES.vbs") Then File.Delete(script_directory & "SETTINGS - GLOBAL VARIABLES.vbs")
@@ -403,16 +351,7 @@ Public Class scripts_config_form
                 End If
             End If
 
-            'INSERT COLLECTING STATS FIXES HERE WHEN ACCESS GOES LIVE
-
-            'Sets the agency as beta or otherwise. Uses "= True" because the later logic always uses a false (and this prevents you from overdoing that other line).
-            If InStr(text_line, "beta_agency = True") Then
-                If agency_is_beta = True Then
-                    text_line = "beta_agency = True"
-                Else
-                    text_line = "beta_agency = False"
-                End If
-            End If
+            '<<<<<INSERT COLLECTING STATS FIXES HERE WHEN ACCESS GOES LIVE
 
             'Writes the file data to the variable for new_text_file, which will get written to the file a bit later.
             new_text_file = new_text_file & text_line & Chr(10)
