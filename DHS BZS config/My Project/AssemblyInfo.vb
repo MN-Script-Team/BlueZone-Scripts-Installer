@@ -8,7 +8,7 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("BlueZone Scripts Configuration Utility (v1.4.rc1)")>
+<Assembly: AssemblyTitle("BlueZone Scripts Configuration Utility")>
 <Assembly: AssemblyDescription("A configuration tool for the DHS-provided BlueZone Scripts.")> 
 <Assembly: AssemblyCompany("Minnesota Department of Human Services")> 
 <Assembly: AssemblyProduct("DHS-BZS Configuration Utility")>

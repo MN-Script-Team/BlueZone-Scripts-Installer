@@ -93,8 +93,7 @@ Public Class scripts_config_form
 
         Dim redirect_list   'We'll need this in a bit
         Dim list_of_scripts_URL 'We'll also need this in a bit
-        'list_of_scripts_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/RELEASE/Script%20Files/LIST%20OF%20SCRIPTS.txt"
-        list_of_scripts_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/master/Script%20Files/LIST%20OF%20SCRIPTS.txt"       '<<<<SWITCH THIS TO "RELEASE" FOR GO-LIVE
+        list_of_scripts_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/RELEASE/Script%20Files/LIST%20OF%20SCRIPTS.txt"
 
         Dim req = CreateObject("Msxml2.XMLHttp.6.0")            'Creates an object to get a URL
         req.open("GET", list_of_scripts_URL, False)             'Attempts to open the URL
@@ -227,8 +226,8 @@ Public Class scripts_config_form
         Dim pad_URL
 
         'URL for Power Pad (depends on if user is beta or not)
-        'pad_URL = "https://github.com/MN-Script-Team/DHS-MAXIS-Scripts/blob/RELEASE/Script%20Files/PAD%20-%20DHS%20SUPPORTED.pad?raw=true"
-        pad_URL = "https://github.com/MN-Script-Team/DHS-MAXIS-Scripts/blob/master/Script%20Files/PAD%20-%20DHS%20SUPPORTED.pad?raw=true"       '<<<CHANGE THIS TOO
+        pad_URL = "https://github.com/MN-Script-Team/DHS-MAXIS-Scripts/blob/RELEASE/Script%20Files/PAD%20-%20DHS%20SUPPORTED.pad?raw=true"
+
 
         'Downloads file
         'Now it downloads the pad file from Github. This code was copied from https://gist.github.com/udawtr/2053179 on 09/13/2014, and modified for our purposes.
@@ -269,8 +268,8 @@ Public Class scripts_config_form
 
         'URL for Global Variables (eventually this should be dynamic dependent on the beta/master/other categories, but I need to get this out soon).
 
-        global_variables_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/master/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"     '<<<THIS ONE TOO
-        'global_variables_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/RELEASE/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"
+
+        global_variables_URL = "https://raw.githubusercontent.com/MN-Script-Team/DHS-MAXIS-Scripts/RELEASE/Script%20Files/SETTINGS%20-%20GLOBAL%20VARIABLES.vbs"
 
         'Checks if the file exists. If it does, it deletes it.
         If File.Exists(script_directory & "SETTINGS - GLOBAL VARIABLES.vbs") Then File.Delete(script_directory & "SETTINGS - GLOBAL VARIABLES.vbs")
