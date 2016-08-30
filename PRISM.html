@@ -11,9 +11,13 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+    <!-- JSZip library -->
+    <script src="js/jszip.min.js"></script>
+    <script src="js/FileSaver.min.js"></script>
 
 
-    <title>BlueZone Scripts setup utility</title>
+    <title>PRISM Scripts Setup</title>
 
     <link rel="shortcut icon" type="image/png" href="img/BlueZoneScripts.png"/>
     <script>
@@ -52,8 +56,24 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-    Coming soon
+    <div class="col-xs-12">
+        Coming soon    
+    </div>
+    
+<script>
+var zip = new JSZip();
+zip.file("README.txt", "Welcome to the jungle\n");
 
+zip.file("Script Files/test.vbs", "MsgBox Hello\n");
+
+
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    // see FileSaver.js
+    saveAs(content, "PRISM scripts.zip");
+});
+
+</script>
 
 
 
