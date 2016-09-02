@@ -14,9 +14,16 @@
 
     <!-- JSZip library -->
     <script src="js/jszip.min.js"></script>
-    <script src="js/jszip-utils.min.js"></script>
-    <script src="js/FileSaver.min.js"></script>
 
+    <script type="text/javascript" src="js/jszip-utils.js"></script>
+    <!--
+    Mandatory in IE 6, 7, 8 and 9.
+    -->
+    <!--[if IE]>
+    <script type="text/javascript" src="js/jszip-utils-ie.js"></script>
+    <![endif]-->
+
+    <script src="js/FileSaver.min.js"></script>
 
     <title>PRISM Scripts Setup</title>
 
@@ -24,6 +31,7 @@
     <script>
 
     function scriptsSetupPRISM() {
+
         var zip = new JSZip();
         zip.file("README.txt", "Welcome to the jungle\n");
 
@@ -89,22 +97,31 @@
         zip.file("Script Files/REDIRECT - UTILITIES.vbs",                           redirectFile("/UTILITIES/UTILITIES - MAIN MENU.vbs"));
 
         //Getting the Power Pad
-//        JSZipUtils.getBinaryContent("pads/PAD%20-%20CS.pad", function (err, data) {
+//        JSZipUtils.getBinaryContent("file:///C:/BlueZone-Scripts-Installer/pads/PAD - CS.pad", function (err, data) {
 //            if(err) {
-//                throw err; // or handle the error
+//                alert(err); // or handle the error
 //            }
-//            var zip = new JSZip();
+//
 //            zip.file("PAD - CS.pad", data, {binary:true});
 //        };
 
 
+        //<<<<<GOING TO TRY THIS. IT MIGHT NOT WORK BECAUSE I DO NOT HAVE AN HTTP SERVER AT DHS. WILL TRY ONLINE AND IF IT DOESN'T WORK, WILL DEBUG AT HOME. VKC, 09/02/2016.
+        // loading a file and add it in a zip file
+        JSZipUtils.getBinaryContent("pads/PAD - CS.pad", function (err, data) {
+           if(err) {
+              throw(err); // or handle the error
+           }
+
+           zip.file("Script Files/PAD - CS.pad", data, {binary:true});
+        });
 
         zip.generateAsync({type:"blob"})
         .then(function(content) {
             // see FileSaver.js
             saveAs(content, "PRISM scripts.zip");
         });
-
+//
     }
 
     </script>
