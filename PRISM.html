@@ -110,6 +110,7 @@
         // loading a file and add it in a zip file
         JSZipUtils.getBinaryContent("https://raw.githubusercontent.com/MN-Script-Team/DHS-PRISM-Scripts/master/Script%20Files/PAD%20-%20CS.pad", function (err, data) {
            if(err) {
+              alert(err);       //<<<<<TELL ME THE ERROR
               throw(err); // or handle the error
            }
 
