@@ -108,7 +108,7 @@
 
         //<<<<<GOING TO TRY THIS. IT MIGHT NOT WORK BECAUSE I DO NOT HAVE AN HTTP SERVER AT DHS. WILL TRY ONLINE AND IF IT DOESN'T WORK, WILL DEBUG AT HOME. VKC, 09/02/2016.
         // loading a file and add it in a zip file
-        JSZipUtils.getBinaryContent("https://raw.githubusercontent.com/MN-Script-Team/DHS-PRISM-Scripts/master/Script%20Files/PAD%20-%20CS.pad", function (err, data) {
+        JSZipUtils.getBinaryContent("pads/PAD%20-%20CS.pad", function (err, data) {
            if(err) {
               alert(err);       //<<<<<TELL ME THE ERROR
               throw(err); // or handle the error
