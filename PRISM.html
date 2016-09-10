@@ -24,106 +24,99 @@
     <![endif]-->
 
     <script src="js/FileSaver.min.js"></script>
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <title>PRISM Scripts Setup</title>
 
     <link rel="shortcut icon" type="image/png" href="img/BlueZoneScripts.png"/>
     <script>
+    
+    //This function creates strings containing the required content of redirect files
+    function redirectFile(scriptToRedirectTo) {
+        return "'LOADING GLOBAL VARIABLES--------------------------------------------------------------------"                                                                                  + "\n" +
+            "Set run_another_script_fso = CreateObject(\"Scripting.FileSystemObject\")"                                                                                                         + "\n" +
+            "Set fso_command = run_another_script_fso.OpenTextFile(\"C:\\DHS-PRISM-Scripts\\Script Files\\SETTINGS - GLOBAL VARIABLES.vbs\")"                                                   + "\n" +
+            "text_from_the_other_script = fso_command.ReadAll"                                                                                                                                  + "\n" +
+            "fso_command.Close"                                                                                                                                                                 + "\n" +
+            "Execute text_from_the_other_script"                                                                                                                                                + "\n" +
+            ""                                                                                                                                                                                  + "\n" +
+            "'LOADING SCRIPT"                                                                                                                                                                   + "\n" +
+            "script_URL = script_repository & \"" + scriptToRedirectTo +  "\""                                                                                                                  + "\n" +
+            "IF run_locally = False THEN"                                                                                                                                                       + "\n" +
+            "   SET req = CreateObject(\"Msxml2.XMLHttp.6.0\")				'Creates an object to get a URL"                                                                                    + "\n" +
+            "   req.open \"GET\", script_URL, FALSE							'Attempts to open the URL"                                                                                          + "\n" +
+            "   req.send													'Sends request"                                                                                                     + "\n" +
+            "   IF req.Status = 200 THEN									'200 means great success"                                                                                           + "\n" +
+            "       Set fso = CreateObject(\"Scripting.FileSystemObject\")	'Creates an FSO"                                                                                                    + "\n" +
+            "       Execute req.responseText								'Executes the script code"                                                                                          + "\n" +
+            "   ELSE														'Error message, tells user to try to reach github.com, otherwise instructs to contact someone/stops script"         + "\n" +
+            "       critical_error_msgbox = MsgBox (\"Something has gone wrong. The code stored on GitHub was not able to be reached.\" & vbNewLine & vbNewLine &_"                             + "\n" +
+            "                                \"Script URL: \" & script_URL & vbNewLine & vbNewLine &_"                                                                                          + "\n" +
+            "                                \"The script has stopped. Please check your Internet connection. Consult a scripts administrator with any questions.\", _"                         + "\n" +
+            "                                vbOKonly + vbCritical, \"BlueZone Scripts Critical Error\")"                                                                                       + "\n" +
+            "                                StopScript"                                                                                                                                        + "\n" +
+            "   END IF"                                                                                                                                                                         + "\n" +
+            "ELSE"                                                                                                                                                                              + "\n" +
+            "   Set run_another_script_fso = CreateObject(\"Scripting.FileSystemObject\")"                                                                                                      + "\n" +
+            "   Set fso_command = run_another_script_fso.OpenTextFile(script_URL)"                                                                                                              + "\n" +
+            "   text_from_the_other_script = fso_command.ReadAll"                                                                                                                               + "\n" +
+            "   fso_command.Close"                                                                                                                                                              + "\n" +
+            "   Execute text_from_the_other_script"                                                                                                                                             + "\n" +
+            "END IF"                                                                                                                                                                            + "\n";
 
-    function scriptsSetupPRISM() {
-
-        var zip = new JSZip();
-        zip.file("README.txt", "Welcome to the jungle\n");
-
-
-        function redirectFile(scriptToRedirectTo) {
-            return "'LOADING GLOBAL VARIABLES--------------------------------------------------------------------"                                                                                  + "\n" +
-                "Set run_another_script_fso = CreateObject(\"Scripting.FileSystemObject\")"                                                                                                         + "\n" +
-                "Set fso_command = run_another_script_fso.OpenTextFile(\"C:\\DHS-PRISM-Scripts\\Script Files\\SETTINGS - GLOBAL VARIABLES.vbs\")"                                                   + "\n" +
-                "text_from_the_other_script = fso_command.ReadAll"                                                                                                                                  + "\n" +
-                "fso_command.Close"                                                                                                                                                                 + "\n" +
-                "Execute text_from_the_other_script"                                                                                                                                                + "\n" +
-                ""                                                                                                                                                                                  + "\n" +
-                "'LOADING SCRIPT"                                                                                                                                                                   + "\n" +
-                "script_URL = script_repository & \"" + scriptToRedirectTo +  "\""                                                                                                                  + "\n" +
-                "IF run_locally = False THEN"                                                                                                                                                       + "\n" +
-                "   SET req = CreateObject(\"Msxml2.XMLHttp.6.0\")				'Creates an object to get a URL"                                                                                    + "\n" +
-                "   req.open \"GET\", script_URL, FALSE							'Attempts to open the URL"                                                                                          + "\n" +
-                "   req.send													'Sends request"                                                                                                     + "\n" +
-                "   IF req.Status = 200 THEN									'200 means great success"                                                                                           + "\n" +
-                "       Set fso = CreateObject(\"Scripting.FileSystemObject\")	'Creates an FSO"                                                                                                    + "\n" +
-                "       Execute req.responseText								'Executes the script code"                                                                                          + "\n" +
-                "   ELSE														'Error message, tells user to try to reach github.com, otherwise instructs to contact someone/stops script"         + "\n" +
-                "       critical_error_msgbox = MsgBox (\"Something has gone wrong. The code stored on GitHub was not able to be reached.\" & vbNewLine & vbNewLine &_"                             + "\n" +
-                "                                \"Script URL: \" & script_URL & vbNewLine & vbNewLine &_"                                                                                          + "\n" +
-                "                                \"The script has stopped. Please check your Internet connection. Consult a scripts administrator with any questions.\", _"                         + "\n" +
-                "                                vbOKonly + vbCritical, \"BlueZone Scripts Critical Error\")"                                                                                       + "\n" +
-                "                                StopScript"                                                                                                                                        + "\n" +
-                "   END IF"                                                                                                                                                                         + "\n" +
-                "ELSE"                                                                                                                                                                              + "\n" +
-                "   Set run_another_script_fso = CreateObject(\"Scripting.FileSystemObject\")"                                                                                                      + "\n" +
-                "   Set fso_command = run_another_script_fso.OpenTextFile(script_URL)"                                                                                                              + "\n" +
-                "   text_from_the_other_script = fso_command.ReadAll"                                                                                                                               + "\n" +
-                "   fso_command.Close"                                                                                                                                                              + "\n" +
-                "   Execute text_from_the_other_script"                                                                                                                                             + "\n" +
-                "END IF"                                                                                                                                                                            + "\n";
-
-        }
-
-
-
-
-        zip.file("Script Files/REDIRECT - ACTIONS.vbs",                             redirectFile("/ACTIONS/ACTIONS - MAIN MENU.vbs"));
-        zip.file("Script Files/REDIRECT - AGENCY CUSTOMIZED.vbs",                   redirectFile("/AGENCY CUSTOMIZED/SOURCE/AGENCY CUSTOMIZED.vbs"));
-        zip.file("Script Files/REDIRECT - BULK.vbs",                                redirectFile("/BULK/BULK - MAIN MENU.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - CAAD.vbs",                          redirectFile("/NAV/NAV - CAAD.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - CAFS.vbs",                          redirectFile("/NAV/NAV - CAFS.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - CAPS.vbs",                          redirectFile("/NAV/NAV - CAPS.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - CAST.vbs",                          redirectFile("/NAV/NAV - CAST.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - CAWT.vbs",                          redirectFile("/NAV/NAV - CAWT.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - CPDD.vbs",                          redirectFile("/NAV/NAV - CPDD.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - ENFL.vbs",                          redirectFile("/NAV/NAV - ENFL.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - FIND THAT SCREEN IN PRISM.vbs",     redirectFile("/NAV/NAV - FIND THAT SCREEN IN PRISM.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - MAXIS SCREEN FINDER.vbs",           redirectFile("/NAV/NAV - MAXIS SCREEN FINDER.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - NCDD.vbs",                          redirectFile("/NAV/NAV - NCDD.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - NCID.vbs",                          redirectFile("/NAV/NAV - NCID.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - PALC.vbs",                          redirectFile("/NAV/NAV - PALC.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - PAPL.vbs",                          redirectFile("/NAV/NAV - PAPL.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - PESE.vbs",                          redirectFile("/NAV/NAV - PESE.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - SUCW.vbs",                          redirectFile("/NAV/NAV - SUCW.vbs"));
-        zip.file("Script Files/REDIRECT - NAV - USWD.vbs",                          redirectFile("/NAV/NAV - USWD.vbs"));
-        zip.file("Script Files/REDIRECT - NOTES.vbs",                               redirectFile("/NOTES/NOTES - MAIN MENU.vbs"));
-        zip.file("Script Files/REDIRECT - NOTES - QUICK CAAD.vbs",                  redirectFile("/NOTES/NOTES - QUICK CAAD.vbs"));
-        zip.file("Script Files/REDIRECT - UTILITIES.vbs",                           redirectFile("/UTILITIES/UTILITIES - MAIN MENU.vbs"));
-
-        //Getting the Power Pad
-//        JSZipUtils.getBinaryContent("file:///C:/BlueZone-Scripts-Installer/pads/PAD - CS.pad", function (err, data) {
-//            if(err) {
-//                alert(err); // or handle the error
-//            }
-//
-//            zip.file("PAD - CS.pad", data, {binary:true});
-//        };
-
-
-        //<<<<<GOING TO TRY THIS. IT MIGHT NOT WORK BECAUSE I DO NOT HAVE AN HTTP SERVER AT DHS. WILL TRY ONLINE AND IF IT DOESN'T WORK, WILL DEBUG AT HOME. VKC, 09/02/2016.
-        // loading a file and add it in a zip file
-        JSZipUtils.getBinaryContent("pads/PAD%20-%20CS.pad", function (err, data) {
-           if(err) {
-              alert(err);       //<<<<<TELL ME THE ERROR
-              throw(err); // or handle the error
-           }
-
-           zip.file("Script Files/PAD - CS.pad", data, {binary:true});
-        });
-
-        zip.generateAsync({type:"blob"})
-        .then(function(content) {
-            // see FileSaver.js
-            saveAs(content, "PRISM scripts.zip");
-        });
-//
     }
+
+    //This actually sets up and creates the zip file, complete with redirects
+    function scriptsSetupPRISM() {
+    
+    
+        JSZipUtils.getBinaryContent('https://raw.githubusercontent.com/MN-Script-Team/DHS-PRISM-Scripts/master/Script%20Files/PAD%20-%20CS.pad', function(err, data) {
+            if(err) {
+                alert(err); //Provide a warning if there's an error
+            } else {
+                
+                var zip = new JSZip();                                                      //Create a new JSZip object
+                
+                zip.file("Script Files/PAD - CS.pad",                                       data);                                                                      //Add the Power Pad which was grabbed using the .getBinaryContent function
+                zip.file("Script Files/REDIRECT - ACTIONS.vbs",                             redirectFile("/ACTIONS/ACTIONS - MAIN MENU.vbs"));                          //Add each redirect needed for PRISM scripts
+                zip.file("Script Files/REDIRECT - AGENCY CUSTOMIZED.vbs",                   redirectFile("/AGENCY CUSTOMIZED/SOURCE/AGENCY CUSTOMIZED.vbs"));
+                zip.file("Script Files/REDIRECT - BULK.vbs",                                redirectFile("/BULK/BULK - MAIN MENU.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - CAAD.vbs",                          redirectFile("/NAV/NAV - CAAD.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - CAFS.vbs",                          redirectFile("/NAV/NAV - CAFS.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - CAPS.vbs",                          redirectFile("/NAV/NAV - CAPS.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - CAST.vbs",                          redirectFile("/NAV/NAV - CAST.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - CAWT.vbs",                          redirectFile("/NAV/NAV - CAWT.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - CPDD.vbs",                          redirectFile("/NAV/NAV - CPDD.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - ENFL.vbs",                          redirectFile("/NAV/NAV - ENFL.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - FIND THAT SCREEN IN PRISM.vbs",     redirectFile("/NAV/NAV - FIND THAT SCREEN IN PRISM.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - MAXIS SCREEN FINDER.vbs",           redirectFile("/NAV/NAV - MAXIS SCREEN FINDER.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - NCDD.vbs",                          redirectFile("/NAV/NAV - NCDD.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - NCID.vbs",                          redirectFile("/NAV/NAV - NCID.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - PALC.vbs",                          redirectFile("/NAV/NAV - PALC.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - PAPL.vbs",                          redirectFile("/NAV/NAV - PAPL.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - PESE.vbs",                          redirectFile("/NAV/NAV - PESE.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - SUCW.vbs",                          redirectFile("/NAV/NAV - SUCW.vbs"));
+                zip.file("Script Files/REDIRECT - NAV - USWD.vbs",                          redirectFile("/NAV/NAV - USWD.vbs"));
+                zip.file("Script Files/REDIRECT - NOTES.vbs",                               redirectFile("/NOTES/NOTES - MAIN MENU.vbs"));
+                zip.file("Script Files/REDIRECT - NOTES - QUICK CAAD.vbs",                  redirectFile("/NOTES/NOTES - QUICK CAAD.vbs"));
+                zip.file("Script Files/REDIRECT - UTILITIES.vbs",                           redirectFile("/UTILITIES/UTILITIES - MAIN MENU.vbs"));
+                zip.file("README.txt",                                                      "This is your BlueZone Scripts directory\n");        //README
+
+                //Save the zip file
+                zip.generateAsync({type:"blob"})
+                .then(function(content) {
+                    saveAs(content, "PRISM scripts.zip");           // using FileSaver.js
+                });
+                
+            }
+
+        });
+
+
+    }   
+
 
     </script>
 
