@@ -9,24 +9,6 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-    <!-- JSZip library -->
-    <script src="js/jszip.min.js"></script>
-
-    <script type="text/javascript" src="js/jszip-utils.js"></script>
-    <!--
-    Mandatory in IE 6, 7, 8 and 9.
-    -->
-    <!--[if IE]>
-    <script type="text/javascript" src="js/jszip-utils-ie.js"></script>
-    <![endif]-->
-
-    <script src="js/FileSaver.min.js"></script>
-    
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <title>PRISM Scripts Setup</title>
 
@@ -118,7 +100,7 @@
     }   
 
 
-    </script>
+</script>
 
 </head>
 <body>
@@ -152,11 +134,61 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-    <div class="col-xs-12">
-        Coming soon
 
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+            Step one: pick a place for your scripts to go</a>
+          </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse in">
+          <div class="panel-body">
+              Your scripts need a place to go on your computer or shared drive. The file path you indicate here will be added to each script to ensure a proper connection all around.
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+            Step two: tell us some details about your county</a>
+          </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse">
+          <div class="panel-body">Your county has attorneys, judges, and more. The information you select here will be added to pertinent scripts.</div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+            Step three: select where you'll keep script-related Word documents</a>
+          </h4>
+        </div>
+        <div id="collapse3" class="panel-collapse collapse">
+          <div class="panel-body">Scripts fill out some Word documents. You need to pick a place for these documents to go! Once the documents are added to your drive, you can feel free to modify the contents by adding anything your attorneys or management wants. Just make sure you leave the editable fields intact.</div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+            Step four: advanced (optional) options</a>
+          </h4>
+        </div>
+        <div id="collapse4" class="panel-collapse collapse">
+          <div class="panel-body">Some counties are collecting usage statistics or assigning "beta users" for testing purposes. If you don't know what any of that means, skip this part.</div>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-12">
+
+
+    <div class="col-xs-12 text-center">
+        <p>
+            <strong>You should be all set! This will create a *.zip file containing all of your scripts, redirects, and a Power Pad. Download the file and extract it to the directory specified in the first step. Good luck!</strong>
+        </p>
         <button onclick="scriptsSetupPRISM()" class="btn btn-primary btn-sm" type="button">Download</button>
     </div>
 
@@ -166,7 +198,28 @@
 
 
 
+
     </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- JSZip library -->
+    <script src="js/jszip.min.js"></script>
+
+    <script type="text/javascript" src="js/jszip-utils.js"></script>
+    <!--
+    Mandatory in IE 6, 7, 8 and 9.
+    -->
+    <!--[if IE]>
+    <script type="text/javascript" src="js/jszip-utils-ie.js"></script>
+    <![endif]-->
+
+    <script src="js/FileSaver.min.js"></script>
+    
+    
+    
 
 
 
