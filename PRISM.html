@@ -14,12 +14,15 @@
 
     <link rel="shortcut icon" type="image/png" href="img/BlueZoneScripts.png"/>
     <script>
-    
+
     //This function creates strings containing the required content of redirect files
     function redirectFile(scriptToRedirectTo) {
+
+        var filePath = document.getElementById("filepath").value;
+
         return "'LOADING GLOBAL VARIABLES--------------------------------------------------------------------"                                                                                  + "\n" +
             "Set run_another_script_fso = CreateObject(\"Scripting.FileSystemObject\")"                                                                                                         + "\n" +
-            "Set fso_command = run_another_script_fso.OpenTextFile(\"C:\\DHS-PRISM-Scripts\\Script Files\\SETTINGS - GLOBAL VARIABLES.vbs\")"                                                   + "\n" +
+            "Set fso_command = run_another_script_fso.OpenTextFile(\"" + filePath + "\\SETTINGS - GLOBAL VARIABLES.vbs\")"                                                                      + "\n" +
             "text_from_the_other_script = fso_command.ReadAll"                                                                                                                                  + "\n" +
             "fso_command.Close"                                                                                                                                                                 + "\n" +
             "Execute text_from_the_other_script"                                                                                                                                                + "\n" +
@@ -52,15 +55,18 @@
 
     //This actually sets up and creates the zip file, complete with redirects
     function scriptsSetupPRISM() {
-    
-    
+
+
+
+
+
         JSZipUtils.getBinaryContent('https://raw.githubusercontent.com/MN-Script-Team/DHS-PRISM-Scripts/master/Script%20Files/PAD%20-%20CS.pad', function(err, data) {
             if(err) {
                 alert(err); //Provide a warning if there's an error
             } else {
-                
+
                 var zip = new JSZip();                                                      //Create a new JSZip object
-                
+
                 zip.file("Script Files/PAD - CS.pad",                                       data);                                                                      //Add the Power Pad which was grabbed using the .getBinaryContent function
                 zip.file("Script Files/REDIRECT - ACTIONS.vbs",                             redirectFile("/ACTIONS/ACTIONS - MAIN MENU.vbs"));                          //Add each redirect needed for PRISM scripts
                 zip.file("Script Files/REDIRECT - AGENCY CUSTOMIZED.vbs",                   redirectFile("/AGENCY CUSTOMIZED/SOURCE/AGENCY CUSTOMIZED.vbs"));
@@ -84,6 +90,7 @@
                 zip.file("Script Files/REDIRECT - NOTES.vbs",                               redirectFile("/NOTES/NOTES - MAIN MENU.vbs"));
                 zip.file("Script Files/REDIRECT - NOTES - QUICK CAAD.vbs",                  redirectFile("/NOTES/NOTES - QUICK CAAD.vbs"));
                 zip.file("Script Files/REDIRECT - UTILITIES.vbs",                           redirectFile("/UTILITIES/UTILITIES - MAIN MENU.vbs"));
+                zip.file("Script Files/REDIRECT - UTILITIES - EMAIL SCRIPTS SUPPORT.vbs",   redirectFile("/UTILITIES/UTILITIES - EMAIL SCRIPTS SUPPORT.vbs"));
                 zip.file("README.txt",                                                      "This is your BlueZone Scripts directory\n");        //README
 
                 //Save the zip file
@@ -91,13 +98,13 @@
                 .then(function(content) {
                     saveAs(content, "PRISM scripts.zip");           // using FileSaver.js
                 });
-                
+
             }
 
         });
 
 
-    }   
+    }
 
 
 </script>
@@ -145,7 +152,13 @@
         </div>
         <div id="collapse1" class="panel-collapse collapse in">
           <div class="panel-body">
-              Your scripts need a place to go on your computer or shared drive. The file path you indicate here will be added to each script to ensure a proper connection all around.
+              <p>
+                  Your scripts need a place to go on your computer or shared drive. The file path you indicate here will be added to each script to ensure a proper connection all around.
+              </p>
+              <div class="form-group">
+                  <label for="filepath">Enter your file path (ex: Z:\BlueZone Scripts\):</label>
+                  <input type="text" class="form-control" id="filepath" placeholder="C:\DHS-PRISM-Scripts\Script Files\"/>
+              </div>
           </div>
         </div>
       </div>
@@ -217,9 +230,9 @@
     <![endif]-->
 
     <script src="js/FileSaver.min.js"></script>
-    
-    
-    
+
+
+
 
 
 
