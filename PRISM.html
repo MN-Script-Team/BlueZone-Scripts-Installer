@@ -83,8 +83,6 @@
 
 
               <div class="row">
-
-
                   <div class="form-group col-xs-12 col-md-4">
                       <label for="countyCALIcode">Enter your county's 3-digit CALI code:</label>
                       <input type="text" class="form-control" id="countyCALIcode" />
@@ -99,6 +97,23 @@
                       <label for="supportemail">Local support email:</label>
                       <input type="email" class="form-control" id="supportemail" placeholder="someone@example.com"/>
                       <span class="help-block">This is a local email address (someone in your county) who is designated to receive emails regarding scripts. It can be a single individual, or a distribution list (uses the "mailto:" command).</span>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-12 col-md-8">
+                      <label for="addattorneyfield">Add a county attorney:</label>
+                      <div class="input-group">
+                          <input class="form-control" type="text" id="addattorneyfield" placeholder="Attorney name">
+                          <span class="input-group-btn">
+          	                   <button class="btn btn-success btn-add" type="button" id="addattorney" onclick="addAttorneys()"><span class="glyphicon glyphicon-plus"></span></button>
+                          </span>
+                      </div>
+                      <span class="help-block">For example: Bob Loblaw</span>
+                  </div>
+                  <div class="col-cs-12 col-md-4">
+                      <label for="countyattorneylist">County attorneys entered:</label>
+                      <ul id="countyattorneylist">
+                      </ul>
                   </div>
               </div>
           </div>
