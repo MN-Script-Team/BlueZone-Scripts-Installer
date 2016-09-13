@@ -13,94 +13,6 @@
     <title>PRISM Scripts Setup</title>
 
     <link rel="shortcut icon" type="image/png" href="img/BlueZoneScripts.png"/>
-    <script>
-    
-    //This function creates strings containing the required content of redirect files
-    function redirectFile(scriptToRedirectTo) {
-        return "'LOADING GLOBAL VARIABLES--------------------------------------------------------------------"                                                                                  + "\n" +
-            "Set run_another_script_fso = CreateObject(\"Scripting.FileSystemObject\")"                                                                                                         + "\n" +
-            "Set fso_command = run_another_script_fso.OpenTextFile(\"C:\\DHS-PRISM-Scripts\\Script Files\\SETTINGS - GLOBAL VARIABLES.vbs\")"                                                   + "\n" +
-            "text_from_the_other_script = fso_command.ReadAll"                                                                                                                                  + "\n" +
-            "fso_command.Close"                                                                                                                                                                 + "\n" +
-            "Execute text_from_the_other_script"                                                                                                                                                + "\n" +
-            ""                                                                                                                                                                                  + "\n" +
-            "'LOADING SCRIPT"                                                                                                                                                                   + "\n" +
-            "script_URL = script_repository & \"" + scriptToRedirectTo +  "\""                                                                                                                  + "\n" +
-            "IF run_locally = False THEN"                                                                                                                                                       + "\n" +
-            "   SET req = CreateObject(\"Msxml2.XMLHttp.6.0\")				'Creates an object to get a URL"                                                                                    + "\n" +
-            "   req.open \"GET\", script_URL, FALSE							'Attempts to open the URL"                                                                                          + "\n" +
-            "   req.send													'Sends request"                                                                                                     + "\n" +
-            "   IF req.Status = 200 THEN									'200 means great success"                                                                                           + "\n" +
-            "       Set fso = CreateObject(\"Scripting.FileSystemObject\")	'Creates an FSO"                                                                                                    + "\n" +
-            "       Execute req.responseText								'Executes the script code"                                                                                          + "\n" +
-            "   ELSE														'Error message, tells user to try to reach github.com, otherwise instructs to contact someone/stops script"         + "\n" +
-            "       critical_error_msgbox = MsgBox (\"Something has gone wrong. The code stored on GitHub was not able to be reached.\" & vbNewLine & vbNewLine &_"                             + "\n" +
-            "                                \"Script URL: \" & script_URL & vbNewLine & vbNewLine &_"                                                                                          + "\n" +
-            "                                \"The script has stopped. Please check your Internet connection. Consult a scripts administrator with any questions.\", _"                         + "\n" +
-            "                                vbOKonly + vbCritical, \"BlueZone Scripts Critical Error\")"                                                                                       + "\n" +
-            "                                StopScript"                                                                                                                                        + "\n" +
-            "   END IF"                                                                                                                                                                         + "\n" +
-            "ELSE"                                                                                                                                                                              + "\n" +
-            "   Set run_another_script_fso = CreateObject(\"Scripting.FileSystemObject\")"                                                                                                      + "\n" +
-            "   Set fso_command = run_another_script_fso.OpenTextFile(script_URL)"                                                                                                              + "\n" +
-            "   text_from_the_other_script = fso_command.ReadAll"                                                                                                                               + "\n" +
-            "   fso_command.Close"                                                                                                                                                              + "\n" +
-            "   Execute text_from_the_other_script"                                                                                                                                             + "\n" +
-            "END IF"                                                                                                                                                                            + "\n";
-
-    }
-
-    //This actually sets up and creates the zip file, complete with redirects
-    function scriptsSetupPRISM() {
-    
-    
-        JSZipUtils.getBinaryContent('https://raw.githubusercontent.com/MN-Script-Team/DHS-PRISM-Scripts/master/Script%20Files/PAD%20-%20CS.pad', function(err, data) {
-            if(err) {
-                alert(err); //Provide a warning if there's an error
-            } else {
-                
-                var zip = new JSZip();                                                      //Create a new JSZip object
-                
-                zip.file("Script Files/PAD - CS.pad",                                       data);                                                                      //Add the Power Pad which was grabbed using the .getBinaryContent function
-                zip.file("Script Files/REDIRECT - ACTIONS.vbs",                             redirectFile("/ACTIONS/ACTIONS - MAIN MENU.vbs"));                          //Add each redirect needed for PRISM scripts
-                zip.file("Script Files/REDIRECT - AGENCY CUSTOMIZED.vbs",                   redirectFile("/AGENCY CUSTOMIZED/SOURCE/AGENCY CUSTOMIZED.vbs"));
-                zip.file("Script Files/REDIRECT - BULK.vbs",                                redirectFile("/BULK/BULK - MAIN MENU.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - CAAD.vbs",                          redirectFile("/NAV/NAV - CAAD.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - CAFS.vbs",                          redirectFile("/NAV/NAV - CAFS.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - CAPS.vbs",                          redirectFile("/NAV/NAV - CAPS.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - CAST.vbs",                          redirectFile("/NAV/NAV - CAST.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - CAWT.vbs",                          redirectFile("/NAV/NAV - CAWT.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - CPDD.vbs",                          redirectFile("/NAV/NAV - CPDD.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - ENFL.vbs",                          redirectFile("/NAV/NAV - ENFL.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - FIND THAT SCREEN IN PRISM.vbs",     redirectFile("/NAV/NAV - FIND THAT SCREEN IN PRISM.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - MAXIS SCREEN FINDER.vbs",           redirectFile("/NAV/NAV - MAXIS SCREEN FINDER.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - NCDD.vbs",                          redirectFile("/NAV/NAV - NCDD.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - NCID.vbs",                          redirectFile("/NAV/NAV - NCID.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - PALC.vbs",                          redirectFile("/NAV/NAV - PALC.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - PAPL.vbs",                          redirectFile("/NAV/NAV - PAPL.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - PESE.vbs",                          redirectFile("/NAV/NAV - PESE.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - SUCW.vbs",                          redirectFile("/NAV/NAV - SUCW.vbs"));
-                zip.file("Script Files/REDIRECT - NAV - USWD.vbs",                          redirectFile("/NAV/NAV - USWD.vbs"));
-                zip.file("Script Files/REDIRECT - NOTES.vbs",                               redirectFile("/NOTES/NOTES - MAIN MENU.vbs"));
-                zip.file("Script Files/REDIRECT - NOTES - QUICK CAAD.vbs",                  redirectFile("/NOTES/NOTES - QUICK CAAD.vbs"));
-                zip.file("Script Files/REDIRECT - UTILITIES.vbs",                           redirectFile("/UTILITIES/UTILITIES - MAIN MENU.vbs"));
-                zip.file("README.txt",                                                      "This is your BlueZone Scripts directory\n");        //README
-
-                //Save the zip file
-                zip.generateAsync({type:"blob"})
-                .then(function(content) {
-                    saveAs(content, "PRISM scripts.zip");           // using FileSaver.js
-                });
-                
-            }
-
-        });
-
-
-    }   
-
-
-</script>
 
 </head>
 <body>
@@ -145,7 +57,14 @@
         </div>
         <div id="collapse1" class="panel-collapse collapse in">
           <div class="panel-body">
-              Your scripts need a place to go on your computer or shared drive. The file path you indicate here will be added to each script to ensure a proper connection all around.
+              <p>
+                  Your scripts need a place to go on your computer or shared drive. The file path you indicate here will be added to each script to ensure a proper connection all around.
+              </p>
+              <div class="form-group">
+                  <label for="filepath">Enter your file path:</label>
+                  <input type="text" class="form-control" id="filepath" />
+                  <span class="help-block">For example: Z:\BlueZone Scripts\</span>
+              </div>
           </div>
         </div>
       </div>
@@ -157,7 +76,47 @@
           </h4>
         </div>
         <div id="collapse2" class="panel-collapse collapse">
-          <div class="panel-body">Your county has attorneys, judges, and more. The information you select here will be added to pertinent scripts.</div>
+          <div class="panel-body">
+              <p>
+                  Your county has attorneys, judges, and more. The information you select here will be added to pertinent scripts.
+              </p>
+
+
+              <div class="row">
+                  <div class="form-group col-xs-12 col-md-4">
+                      <label for="countyCALIcode">Enter your county's 3-digit CALI code:</label>
+                      <input type="text" class="form-control" id="countyCALIcode" />
+                      <span class="help-block">For example: 003 for Anoka. This will be used frequently throughout scripts.</span>
+                  </div>
+                  <div class="form-group col-xs-12 col-md-4">
+                      <label for="EDMSchoice">Enter your EDMS (paperless system) choice:</label>
+                      <input type="text" class="form-control" id="EDMSchoice" />
+                      <span class="help-block">For example: OnBase, LaserFiche, SharePoint. Leave blank if no EDMS is used in your county. This will be used in places where a script must indicate where to store a document.</span>
+                  </div>
+                  <div class="form-group col-xs-12 col-md-4">
+                      <label for="supportemail">Local support email:</label>
+                      <input type="email" class="form-control" id="supportemail" placeholder="someone@example.com"/>
+                      <span class="help-block">This is a local email address (someone in your county) who is designated to receive emails regarding scripts. It can be a single individual, or a distribution list (uses the "mailto:" command).</span>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-12 col-md-8">
+                      <label for="addattorneyfield">Add a county attorney:</label>
+                      <div class="input-group">
+                          <input class="form-control" type="text" id="addattorneyfield" placeholder="Attorney name">
+                          <span class="input-group-btn">
+          	                   <button class="btn btn-success btn-add" type="button" id="addattorney" onclick="addAttorneys()"><span class="glyphicon glyphicon-plus"></span></button>
+                          </span>
+                      </div>
+                      <span class="help-block">For example: Bob Loblaw</span>
+                  </div>
+                  <div class="col-cs-12 col-md-4">
+                      <label for="countyattorneylist">County attorneys entered:</label>
+                      <ul id="countyattorneylist">
+                      </ul>
+                  </div>
+              </div>
+          </div>
         </div>
       </div>
       <div class="panel panel-default">
@@ -216,10 +175,12 @@
     <script type="text/javascript" src="js/jszip-utils-ie.js"></script>
     <![endif]-->
 
+    <!-- FileSaver is used to actually generate the zip file -->
     <script src="js/FileSaver.min.js"></script>
-    
-    
-    
+
+    <!-- Finally, our own custom functions -->
+    <script src="js/customfunctions.js"></script>
+
 
 
 
