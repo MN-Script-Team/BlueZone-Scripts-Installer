@@ -165,3 +165,16 @@ function scriptsSetupPRISM() {
         }
     });
 }
+
+function addAttorneys(){
+
+    var addattorneyfield = document.getElementById("addattorneyfield").value;
+
+
+    var ul = document.getElementById("countyattorneylist");
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(addattorneyfield));
+    ul.appendChild(li);
+
+    document.getElementById("addattorneyfield").value = ""
+}
