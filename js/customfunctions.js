@@ -98,7 +98,7 @@ function scriptsSetupPRISM() {
                 "\n" +
                 "\n" + "'This is used by the AGENCY CUSTOMIZED process, and can be used elsewhere if needed, but for now it's mostly informational" +
                 "\n" + "'	This is modified by the installer, which will determine if this is a scriptwriter or a production user." +
-                "\n" + "default_directory = \""+ filepath + "\"" +
+                "\n" + "default_directory = \""+ filepath + "\"Script Files \"" +
                 "\n" +
                 "\n" + "'DETAILS ABOUT STATISTICS AND GATHERING THEM ------------------------------------------------------------------------------------------" +
                 "\n" +
@@ -111,7 +111,7 @@ function scriptsSetupPRISM() {
                 "\n" + "'DETAILS ABOUT WHERE TO FIND DOCS AND WHICH TO USE ------------------------------------------------------------------------------------------" +
                 "\n" +
                 "\n" + "'This is the folder path for county-specific Word documents. Modify this with your shared-drive location for Word documents." +
-                "\n" + "word_documents_folder_path = \"C:\\DHS-PRISM-Scripts\\Word files for script usage\\\"" +
+                "\n" + "word_documents_folder_path = \""+ filepath + "\"Word files for script usage\\\"" +
                 "\n" +
                 "\n" + "'DETAILS ABOUT THE COUNTY ITSELF -------------------------------------------------------------------------------------------------------------" +
                 "\n" +
