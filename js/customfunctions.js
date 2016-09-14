@@ -5,7 +5,7 @@ function redirectFile(scriptToRedirectTo) {
 
     return "'LOADING GLOBAL VARIABLES--------------------------------------------------------------------"                                                                                  + "\n" +
         "Set run_another_script_fso = CreateObject(\"Scripting.FileSystemObject\")"                                                                                                         + "\n" +
-        "Set fso_command = run_another_script_fso.OpenTextFile(\"" + filepath + "\\SETTINGS - GLOBAL VARIABLES.vbs\")"                                                                      + "\n" +
+        "Set fso_command = run_another_script_fso.OpenTextFile(\"" + filepath + "Script Files\\SETTINGS - GLOBAL VARIABLES.vbs\")"                                                        + "\n" +
         "text_from_the_other_script = fso_command.ReadAll"                                                                                                                                  + "\n" +
         "fso_command.Close"                                                                                                                                                                 + "\n" +
         "Execute text_from_the_other_script"                                                                                                                                                + "\n" +
@@ -44,6 +44,7 @@ function scriptsSetupPRISM() {
     var countyCALIcode = document.getElementById("countyCALIcode").value;
     var EDMSchoice = document.getElementById("EDMSchoice").value;
     var supportemail = document.getElementById("supportemail").value;
+    var countybetalist = document.getElementById("countybetalist").value;
 
 
     JSZipUtils.getBinaryContent('https://raw.githubusercontent.com/MN-Script-Team/DHS-PRISM-Scripts/master/Script%20Files/PAD%20-%20CS.pad', function(err, data) {
@@ -94,11 +95,11 @@ function scriptsSetupPRISM() {
                 "\n" +
                 "\n" + "'This allows a \"beta user\" group to have access to master branch scripts, while everyone else uses release. This is helpful for counties that want to maintain a small test group." +
                 "\n" + "'Here is the list of agency super users. These users will have access to the test scripts. Enter the list of users' log-in IDs in the quotes below, comma separated" +
-                "\n" + "beta_users = \"\"" +
+                "\n" + "beta_users = \"" + countybetalist + "\"" +
                 "\n" +
                 "\n" + "'This is used by the AGENCY CUSTOMIZED process, and can be used elsewhere if needed, but for now it's mostly informational" +
                 "\n" + "'	This is modified by the installer, which will determine if this is a scriptwriter or a production user." +
-                "\n" + "default_directory = \""+ filepath + "\"Script Files \"" +
+                "\n" + "default_directory = \""+ filepath + "Script Files\"" +
                 "\n" +
                 "\n" + "'DETAILS ABOUT STATISTICS AND GATHERING THEM ------------------------------------------------------------------------------------------" +
                 "\n" +
@@ -111,7 +112,7 @@ function scriptsSetupPRISM() {
                 "\n" + "'DETAILS ABOUT WHERE TO FIND DOCS AND WHICH TO USE ------------------------------------------------------------------------------------------" +
                 "\n" +
                 "\n" + "'This is the folder path for county-specific Word documents. Modify this with your shared-drive location for Word documents." +
-                "\n" + "word_documents_folder_path = \""+ filepath + "\"Word files for script usage\\\"" +
+                "\n" + "word_documents_folder_path = \""+ filepath + "Word files for script usage\\\"" +
                 "\n" +
                 "\n" + "'DETAILS ABOUT THE COUNTY ITSELF -------------------------------------------------------------------------------------------------------------" +
                 "\n" +
@@ -143,7 +144,7 @@ function scriptsSetupPRISM() {
                 "\n" + "windows_user_ID = objNet.UserName" +
                 "\n" +
                 "\n" + "'This will assign beta users to the master branch." +
-                "\n" + "If InStr(beta_users, UCASE(windows_user_ID)) <> 0 then use_master_branch = true" +
+                "\n" + "If InStr(UCASE(beta_users), UCASE(windows_user_ID)) <> 0 then use_master_branch = true" +
                 "\n" +
                 "\n" + "'This is the URL of our script repository, and should only change if the agency is a scriptwriting agency. Scriptwriters can elect to use the master branch, allowing them to test new tools, etc." +
                 "\n" + "IF use_master_branch = TRUE THEN		'scriptwriters typically use the master branch" +
