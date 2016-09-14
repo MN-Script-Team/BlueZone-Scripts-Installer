@@ -58,7 +58,7 @@
         <div id="collapse1" class="panel-collapse collapse in">
           <div class="panel-body">
               <p>
-                  Your scripts need a place to go on your computer or shared drive. The file path you indicate here will be added to each script to ensure a proper connection all around.
+                  <em>Your scripts need a place to go on your computer or shared drive. The file path you indicate here will be added to each script to ensure a proper connection all around.</em>
               </p>
               <div class="form-group">
                   <label for="filepath">Enter your file path:</label>
@@ -78,7 +78,7 @@
         <div id="collapse2" class="panel-collapse collapse">
           <div class="panel-body">
               <p>
-                  Your county has attorneys, judges, and more. The information you select here will be added to pertinent scripts.
+                  <em>Your county has county-specific information that you will need to use within scripts. The information you select here will be added to pertinent scripts.</em>
               </p>
 
 
@@ -99,23 +99,7 @@
                       <span class="help-block">This is a local email address (someone in your county) who is designated to receive emails regarding scripts. It can be a single individual, or a distribution list (uses the "mailto:" command).</span>
                   </div>
               </div>
-              <div class="row">
-                  <div class="col-xs-12 col-md-8">
-                      <label for="addattorneyfield">Add a county attorney:</label>
-                      <div class="input-group">
-                          <input class="form-control" type="text" id="addattorneyfield" placeholder="Attorney name">
-                          <span class="input-group-btn">
-          	                   <button class="btn btn-success btn-add" type="button" id="addattorney" onclick="addAttorneys()"><span class="glyphicon glyphicon-plus"></span></button>
-                          </span>
-                      </div>
-                      <span class="help-block">For example: Bob Loblaw</span>
-                  </div>
-                  <div class="col-cs-12 col-md-4">
-                      <label for="countyattorneylist">County attorneys entered:</label>
-                      <ul id="countyattorneylist">
-                      </ul>
-                  </div>
-              </div>
+
           </div>
         </div>
       </div>
@@ -123,11 +107,63 @@
         <div class="panel-heading">
           <h4 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-            Step three: select where you'll keep script-related Word documents</a>
+            Step three: add your attorneys, magistrates, and judges</a>
           </h4>
         </div>
         <div id="collapse3" class="panel-collapse collapse">
-          <div class="panel-body">Scripts fill out some Word documents. You need to pick a place for these documents to go! Once the documents are added to your drive, you can feel free to modify the contents by adding anything your attorneys or management wants. Just make sure you leave the editable fields intact.</div>
+          <div class="panel-body">
+              <p>
+                  <em>Several scripts need to use your attorneys, magistrates, and judges to fill out documents or other fields. Add your information below. If you don't know this information, stop, and discuss with a Child Support supervisor before proceeding.</em>
+              </p>
+              <div class="row">
+                  <div class="col-xs-12 col-md-8">
+                      <label for="addattorneyfield">Add a county attorney:</label>
+                      <div class="input-group">
+                          <input class="form-control" type="text" id="addattorneyfield" placeholder="attorney name">
+                          <span class="input-group-btn">
+                                 <button class="btn btn-success btn-add" type="button" id="addattorney" onclick="addAttorneys()"><span class="glyphicon glyphicon-plus"></span></button>
+                          </span>
+                      </div>
+                  </div>
+                  <div class="col-xs-12 col-md-4">
+                      <label for="countyattorneylist">County attorneys entered:</label>
+                      <ul id="countyattorneylist">
+                      </ul>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-12 col-md-8">
+                      <label for="addmagistratefield">Add a county magistrate:</label>
+                      <div class="input-group">
+                          <input class="form-control" type="text" id="addmagistratefield" placeholder="magistrate name">
+                          <span class="input-group-btn">
+                                 <button class="btn btn-success btn-add" type="button" id="addmagistrate" onclick="addmagistrates()"><span class="glyphicon glyphicon-plus"></span></button>
+                          </span>
+                      </div>
+                  </div>
+                  <div class="col-xs-12 col-md-4">
+                      <label for="countymagistratelist">County magistrates entered:</label>
+                      <ul id="countymagistratelist">
+                      </ul>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-12 col-md-8">
+                      <label for="addjudgefield">Add a county judge:</label>
+                      <div class="input-group">
+                          <input class="form-control" type="text" id="addjudgefield" placeholder="judge name">
+                          <span class="input-group-btn">
+                                 <button class="btn btn-success btn-add" type="button" id="addjudge" onclick="addjudges()"><span class="glyphicon glyphicon-plus"></span></button>
+                          </span>
+                      </div>
+                  </div>
+                  <div class="col-xs-12 col-md-4">
+                      <label for="countyjudgelist">County judges entered:</label>
+                      <ul id="countyjudgelist">
+                      </ul>
+                  </div>
+              </div>
+          </div>
         </div>
       </div>
       <div class="panel panel-default">
@@ -138,7 +174,19 @@
           </h4>
         </div>
         <div id="collapse4" class="panel-collapse collapse">
-          <div class="panel-body">Some counties are collecting usage statistics or assigning "beta users" for testing purposes. If you don't know what any of that means, skip this part.</div>
+          <div class="panel-body">
+              <p>
+                  <em>If you don't know what any of that means, skip this part.</em>
+              </p>
+              <div class="form-group">
+                  <p>
+                      Some counties may want to assign "beta users" to try out scripts using the same branch that scriptwriters use. Enter your beta users Windows logon IDs here, separated by commas. <strong>Do not add individuals here without consulting with the DHS scripts coordinator first.</strong>
+                  </p>
+                  <label for="countybetalist">County beta users:</label>
+                  <input type="text" class="form-control" id="countybetalist" />
+                  <span class="help-block">Enter their logon IDs for Windows. For example, John F. Doe might be JFDOE. Each organization does this differently, so check with your user before assuming you know their IDs.</span>
+              </div>
+         </div>
         </div>
       </div>
     </div>

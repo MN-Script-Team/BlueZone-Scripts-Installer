@@ -5,7 +5,7 @@ function redirectFile(scriptToRedirectTo) {
 
     return "'LOADING GLOBAL VARIABLES--------------------------------------------------------------------"                                                                                  + "\n" +
         "Set run_another_script_fso = CreateObject(\"Scripting.FileSystemObject\")"                                                                                                         + "\n" +
-        "Set fso_command = run_another_script_fso.OpenTextFile(\"" + filepath + "\\SETTINGS - GLOBAL VARIABLES.vbs\")"                                                                      + "\n" +
+        "Set fso_command = run_another_script_fso.OpenTextFile(\"" + filepath + "Script Files\\SETTINGS - GLOBAL VARIABLES.vbs\")"                                                        + "\n" +
         "text_from_the_other_script = fso_command.ReadAll"                                                                                                                                  + "\n" +
         "fso_command.Close"                                                                                                                                                                 + "\n" +
         "Execute text_from_the_other_script"                                                                                                                                                + "\n" +
@@ -44,6 +44,7 @@ function scriptsSetupPRISM() {
     var countyCALIcode = document.getElementById("countyCALIcode").value;
     var EDMSchoice = document.getElementById("EDMSchoice").value;
     var supportemail = document.getElementById("supportemail").value;
+    var countybetalist = document.getElementById("countybetalist").value;
 
 
     JSZipUtils.getBinaryContent('https://raw.githubusercontent.com/MN-Script-Team/DHS-PRISM-Scripts/master/Script%20Files/PAD%20-%20CS.pad', function(err, data) {
@@ -94,11 +95,11 @@ function scriptsSetupPRISM() {
                 "\n" +
                 "\n" + "'This allows a \"beta user\" group to have access to master branch scripts, while everyone else uses release. This is helpful for counties that want to maintain a small test group." +
                 "\n" + "'Here is the list of agency super users. These users will have access to the test scripts. Enter the list of users' log-in IDs in the quotes below, comma separated" +
-                "\n" + "beta_users = \"\"" +
+                "\n" + "beta_users = \"" + countybetalist + "\"" +
                 "\n" +
                 "\n" + "'This is used by the AGENCY CUSTOMIZED process, and can be used elsewhere if needed, but for now it's mostly informational" +
                 "\n" + "'	This is modified by the installer, which will determine if this is a scriptwriter or a production user." +
-                "\n" + "default_directory = \""+ filepath + "\"" +
+                "\n" + "default_directory = \""+ filepath + "Script Files\"" +
                 "\n" +
                 "\n" + "'DETAILS ABOUT STATISTICS AND GATHERING THEM ------------------------------------------------------------------------------------------" +
                 "\n" +
@@ -111,21 +112,21 @@ function scriptsSetupPRISM() {
                 "\n" + "'DETAILS ABOUT WHERE TO FIND DOCS AND WHICH TO USE ------------------------------------------------------------------------------------------" +
                 "\n" +
                 "\n" + "'This is the folder path for county-specific Word documents. Modify this with your shared-drive location for Word documents." +
-                "\n" + "word_documents_folder_path = \"C:\\DHS-PRISM-Scripts\\Word files for script usage\\\"" +
+                "\n" + "word_documents_folder_path = \""+ filepath + "Word files for script usage\\\"" +
                 "\n" +
                 "\n" + "'DETAILS ABOUT THE COUNTY ITSELF -------------------------------------------------------------------------------------------------------------" +
                 "\n" +
                 "\n" + "'This is the county code on the CALI screen." +
                 "\n" + "county_cali_code = \"" + countyCALIcode + "\"" +
                 "\n" +
-                "\n" + "'An array of county attorneys. \"Select one:\" should ALWAYS be in there, and ALWAYS be first. Replace \"County Attorney #\" with your agency's county attorney names." +
-                "\n" + "county_attorney_array = array(\"County Attorney 1\", \"County Attorney 2\", \"County Attorney 3\", \"County Attorney 4\", \"County Attorney 5\")" +
+                "\n" + "'An array of county judges. \"Select one:\" should ALWAYS be in there, and ALWAYS be first. Replace \"County judge #\" with your agency's county attorney names." +
+                "\n" + "county_attorney_array = array(" + attorneylist + ")" +
                 "\n" +
                 "\n" + "'An array of child support magistrates. \"Select one:\" should ALWAYS be in there, and ALWAYS be first.  Replace \"Magistrate # with your agency's child support magistrate names." +
-                "\n" + "child_support_magistrates_array = array(\"Magistrate 1\", \"Magistrate 2\", \"Magistrate 3\", \"Magistrate 4\", \"Magistrate 5\")" +
+                "\n" + "child_support_magistrates_array = array(" + magistratelist + ")" +
                 "\n" +
                 "\n" + "'An array of judges. \"Select one:\" should ALWAYS be in there, and ALWAYS be first.  Replace \"Judge #\" with your agency's judges names." +
-                "\n" + "county_judge_array = array(\"Judge 1\", \"Judge 2\", \"Judge 3\", \"Judge 4\", \"Judge 5\")" +
+                "\n" + "county_judge_array = array(" + judgelist + ")" +
                 "\n" +
                 "\n" + "'This is used by scripts which tell the worker where to find a doc to send to a client (ie \"Send form using Compass Pilot\")" +
                 "\n" + "EDMS_choice = \"" + EDMSchoice + "\"" +
@@ -143,7 +144,7 @@ function scriptsSetupPRISM() {
                 "\n" + "windows_user_ID = objNet.UserName" +
                 "\n" +
                 "\n" + "'This will assign beta users to the master branch." +
-                "\n" + "If InStr(beta_users, UCASE(windows_user_ID)) <> 0 then use_master_branch = true" +
+                "\n" + "If InStr(UCASE(beta_users), UCASE(windows_user_ID)) <> 0 then use_master_branch = true" +
                 "\n" +
                 "\n" + "'This is the URL of our script repository, and should only change if the agency is a scriptwriting agency. Scriptwriters can elect to use the master branch, allowing them to test new tools, etc." +
                 "\n" + "IF use_master_branch = TRUE THEN		'scriptwriters typically use the master branch" +
@@ -166,6 +167,9 @@ function scriptsSetupPRISM() {
     });
 }
 
+// Variable which will contain the list of attorneys (addAttorneys should output it as a string)
+var attorneylist = "";
+
 function addAttorneys(){
 
     var addattorneyfield = document.getElementById("addattorneyfield").value;
@@ -176,5 +180,57 @@ function addAttorneys(){
     li.appendChild(document.createTextNode(addattorneyfield));
     ul.appendChild(li);
 
+    if (attorneylist == "") {
+        attorneylist = '"' + addattorneyfield + '"';
+    } else {
+        attorneylist += ', "' + addattorneyfield + '"';
+    };
+
     document.getElementById("addattorneyfield").value = ""
+
+
+}
+
+// Variable which will contain the list of magistrates (addmagistrates should output it as a string)
+var magistratelist = "";
+
+function addmagistrates(){
+
+    var addmagistratefield = document.getElementById("addmagistratefield").value;
+
+
+    var ul = document.getElementById("countymagistratelist");
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(addmagistratefield));
+    ul.appendChild(li);
+
+    if (magistratelist == "") {
+        magistratelist = '"' + addmagistratefield + '"';
+    } else {
+        magistratelist += ', "' + addmagistratefield + '"';
+    };
+
+    document.getElementById("addmagistratefield").value = ""
+}
+
+// Variable which will contain the list of judges (addjudges should output it as a string)
+var judgelist = "";
+
+function addjudges(){
+
+    var addjudgefield = document.getElementById("addjudgefield").value;
+
+
+    var ul = document.getElementById("countyjudgelist");
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(addjudgefield));
+    ul.appendChild(li);
+
+    if (judgelist == "") {
+        judgelist = '"' + addjudgefield + '"';
+    } else {
+        judgelist += ', "' + addjudgefield + '"';
+    };
+
+    document.getElementById("addjudgefield").value = ""
 }
