@@ -58,7 +58,7 @@
         <div id="collapse1" class="panel-collapse collapse in">
           <div class="panel-body">
               <p>
-                  Your scripts need a place to go on your computer or shared drive. The file path you indicate here will be added to each script to ensure a proper connection all around.
+                  <em>Your scripts need a place to go on your computer or shared drive. The file path you indicate here will be added to each script to ensure a proper connection all around.</em>
               </p>
               <div class="form-group">
                   <label for="filepath">Enter your file path:</label>
@@ -78,7 +78,7 @@
         <div id="collapse2" class="panel-collapse collapse">
           <div class="panel-body">
               <p>
-                  Your county has county-specific information that you will need to use within scripts. The information you select here will be added to pertinent scripts.
+                  <em>Your county has county-specific information that you will need to use within scripts. The information you select here will be added to pertinent scripts.</em>
               </p>
 
 
@@ -113,7 +113,7 @@
         <div id="collapse3" class="panel-collapse collapse">
           <div class="panel-body">
               <p>
-                  Several scripts need to use your attorneys, magistrates, and judges to fill out documents or other fields. Add your information below. If you don't know this information, stop, and discuss with a Child Support supervisor before proceeding.
+                  <em>Several scripts need to use your attorneys, magistrates, and judges to fill out documents or other fields. Add your information below. If you don't know this information, stop, and discuss with a Child Support supervisor before proceeding.</em>
               </p>
               <div class="row">
                   <div class="col-xs-12 col-md-8">
@@ -174,7 +174,19 @@
           </h4>
         </div>
         <div id="collapse4" class="panel-collapse collapse">
-          <div class="panel-body">Some counties are collecting usage statistics or assigning "beta users" for testing purposes. If you don't know what any of that means, skip this part.</div>
+          <div class="panel-body">
+              <p>
+                  <em>If you don't know what any of that means, skip this part.</em>
+              </p>
+              <div class="form-group">
+                  <p>
+                      Some counties may want to assign "beta users" to try out scripts using the same branch that scriptwriters use. Enter your beta users Windows logon IDs here, separated by commas. <strong>Do not add individuals here without consulting with the DHS scripts coordinator first.</strong>
+                  </p>
+                  <label for="countybetalist">County beta users:</label>
+                  <input type="text" class="form-control" id="countybetalist" />
+                  <span class="help-block">Enter their logon IDs for Windows. For example, John F. Doe might be JFDOE. Each organization does this differently, so check with your user before assuming you know their IDs.</span>
+              </div>
+         </div>
         </div>
       </div>
     </div>
