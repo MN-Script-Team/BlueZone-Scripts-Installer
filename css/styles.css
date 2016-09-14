@@ -1,3 +1,5 @@
+/* Custom Navbar coloring courtesy of http://work.smarchal.com/twbscolor/css/e74c3cc0392becf0f1ffbbbc0 */
+
 .navbar-default {
   background-color: #257e24;
   border-color: #f3fff3;
@@ -52,24 +54,6 @@
   color: #b4b397;
 }
 
-.btn-primary {
-    background-color: #257e24;
-    border-color: #257e24;
-}
-
-.btn-primary:hover {
-    background-color: #123c11;
-    border-color: #123c11;
-}
-
-body {
-    font-family: "Segoe UI", sans-serif;
-}
-
-.panel-default>.panel-heading {
-    background-color: #f3fff3;
-}
-
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #ecf0f1;
@@ -84,4 +68,30 @@ body {
     color: #b4b397;
     background-color: #f3fff3;
   }
+}
+
+/* End custom navbar coloring */
+
+/* Updating color of buttons */
+
+.btn-primary {
+    background-color: #257e24;
+    border-color: #257e24;
+}
+
+.btn-primary:hover {
+    background-color: #123c11;
+    border-color: #123c11;
+}
+
+/* Updating font */
+
+body {
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Updating color of panels */
+
+.panel-default>.panel-heading {
+    background-color: #f3fff3;
 }
