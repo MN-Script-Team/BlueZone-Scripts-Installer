@@ -118,14 +118,14 @@ function scriptsSetupPRISM() {
                 "\n" + "'This is the county code on the CALI screen." +
                 "\n" + "county_cali_code = \"" + countyCALIcode + "\"" +
                 "\n" +
-                "\n" + "'An array of county attorneys. \"Select one:\" should ALWAYS be in there, and ALWAYS be first. Replace \"County Attorney #\" with your agency's county attorney names." +
-                "\n" + "county_attorney_array = array(\"County Attorney 1\", \"County Attorney 2\", \"County Attorney 3\", \"County Attorney 4\", \"County Attorney 5\")" +
+                "\n" + "'An array of county judges. \"Select one:\" should ALWAYS be in there, and ALWAYS be first. Replace \"County judge #\" with your agency's county attorney names." +
+                "\n" + "county_attorney_array = array(" + attorneylist + ")" +
                 "\n" +
                 "\n" + "'An array of child support magistrates. \"Select one:\" should ALWAYS be in there, and ALWAYS be first.  Replace \"Magistrate # with your agency's child support magistrate names." +
-                "\n" + "child_support_magistrates_array = array(\"Magistrate 1\", \"Magistrate 2\", \"Magistrate 3\", \"Magistrate 4\", \"Magistrate 5\")" +
+                "\n" + "child_support_magistrates_array = array(" + magistratelist + ")" +
                 "\n" +
                 "\n" + "'An array of judges. \"Select one:\" should ALWAYS be in there, and ALWAYS be first.  Replace \"Judge #\" with your agency's judges names." +
-                "\n" + "county_judge_array = array(\"Judge 1\", \"Judge 2\", \"Judge 3\", \"Judge 4\", \"Judge 5\")" +
+                "\n" + "county_judge_array = array(" + judgelist + ")" +
                 "\n" +
                 "\n" + "'This is used by scripts which tell the worker where to find a doc to send to a client (ie \"Send form using Compass Pilot\")" +
                 "\n" + "EDMS_choice = \"" + EDMSchoice + "\"" +
@@ -166,6 +166,9 @@ function scriptsSetupPRISM() {
     });
 }
 
+// Variable which will contain the list of attorneys (addAttorneys should output it as a string)
+var attorneylist = "";
+
 function addAttorneys(){
 
     var addattorneyfield = document.getElementById("addattorneyfield").value;
@@ -176,5 +179,57 @@ function addAttorneys(){
     li.appendChild(document.createTextNode(addattorneyfield));
     ul.appendChild(li);
 
+    if (attorneylist == "") {
+        attorneylist = '"' + addattorneyfield + '"';
+    } else {
+        attorneylist += ', "' + addattorneyfield + '"';
+    };
+
     document.getElementById("addattorneyfield").value = ""
+
+
+}
+
+// Variable which will contain the list of magistrates (addmagistrates should output it as a string)
+var magistratelist = "";
+
+function addmagistrates(){
+
+    var addmagistratefield = document.getElementById("addmagistratefield").value;
+
+
+    var ul = document.getElementById("countymagistratelist");
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(addmagistratefield));
+    ul.appendChild(li);
+
+    if (magistratelist == "") {
+        magistratelist = '"' + addmagistratefield + '"';
+    } else {
+        magistratelist += ', "' + addmagistratefield + '"';
+    };
+
+    document.getElementById("addmagistratefield").value = ""
+}
+
+// Variable which will contain the list of judges (addjudges should output it as a string)
+var judgelist = "";
+
+function addjudges(){
+
+    var addjudgefield = document.getElementById("addjudgefield").value;
+
+
+    var ul = document.getElementById("countyjudgelist");
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(addjudgefield));
+    ul.appendChild(li);
+
+    if (judgelist == "") {
+        judgelist = '"' + addjudgefield + '"';
+    } else {
+        judgelist += ', "' + addjudgefield + '"';
+    };
+
+    document.getElementById("addjudgefield").value = ""
 }
