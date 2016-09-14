@@ -1,9 +1,13 @@
 BlueZone-Scripts-Installer
 ==========================
-This installer is a simple Windows Form which will download and configure the most recent version of DHS' BlueZone Scripts.
+This installer is a simple HTML/CSS/JavaScript form which will configure the most recent version of DHS' BlueZone Scripts (for MAXIS and PRISM), and export it to a zip file for easy installation in your agency.
 
-It's done using vb.net, using Visual Studio 2013. I've chosen this method as it involves the least work for my users, save for maybe a web application (which would be challenging for my employer to implement at this point). As a Windows Form, it will not install software on the users' computers (thus bypassing UAC issues). Contributions welcome!
+As a web form, it will not install software on the users' computers. It has been tested in Internet Explorer (v11), as well as Edge, Google Chrome, and Firefox.
 
-For more info on the BlueZone Scripts project, check out our repo at https://github.com/MN-Script-Team/DHS-MAXIS-Scripts.
+Contributions are welcome! Please see the installer issue list if you have questions or want to contribute.
+
+For more info on the BlueZone Scripts project, check out the repository for your program:
+* For MAXIS: https://github.com/MN-Script-Team/DHS-MAXIS-Scripts
+* For PRISM: https://github.com/MN-Script-Team/DHS-PRISM-Scripts
 
 Thank you!
