@@ -53,6 +53,12 @@
 .navbar-default .navbar-link:hover {
   color: #b4b397;
 }
+.jumbotron {
+	background-color: #257e24;
+	color: #fff;
+	text-align: center;
+
+}
 
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {

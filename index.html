@@ -13,7 +13,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
-    <title>BlueZone Scripts setup utility</title>
+    <title>BlueZone Scripts Configuration Utility</title>
 
     <link rel="shortcut icon" type="image/png" href="img/BlueZoneScripts.png"/>
 </head>
@@ -22,43 +22,113 @@
 
 
 
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">BlueZone Scripts Setup Utility</a>
-        </div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" href="index.html">BlueZone Scripts Configuration Utility</a></div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
 
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.html">How to use this installer</a></li>
-            <li><a href="MAXIS.html">MAXIS scripts</a></li>
-            <li><a href="PRISM.html">PRISM scripts</a></li>
+	  <ul class="nav navbar-nav navbar-right">
+		<li class="active"><a href="index.html">About</a></li>
+		<li><a href="MAXIS.html">MAXIS scripts</a></li>
+		<li><a href="PRISM.html">PRISM scripts</a></li>
 
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+	  </ul>
+	</div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+	
+<!-- Big page header -->
+<div class="jumbotron">
+	<h1>BlueZone Scripts - Configuration Utility</h1>
+</div>
 
+<!-- About section -->
+<div class="container"> 
+	<h1>About this utility</h1>
+	<p>Welcome to the BlueZone Scripts configuration utility!</p>
+	<p>This configuration utility allows a county to create a BlueZone Scripts installation directory with ease. The utility will ask a few questions relating to your county. Then, it will create a custom *.zip file containing the BlueZone Scripts, customized with your file path and county-specific variables.</p>
+	<p>After downloading the *.zip file containing your BlueZone Scripts, simply extract it to the directory indicated, and then configure BlueZone for use!</p>
+<p>For those who may be interested, this installer is written in HTML and JavaScript. Source code can be <a href="https://github.com/MN-Script-Team/bzs-config-utility">found here</a>.</p>
+	
+	<!-- Instructions -->
+	<hr>
+	<h1>How to use this utility to get BlueZone Scripts</h1>
+	<h2><small>First, identify key staff</small></h2>
+	<p>The first step before configuring and implementing BlueZone Scripts is to identify key staff that will be aware and involved in the rollout.</p>
+	<table class="table table-striped">
+		<tbody>
+			<tr>
+				<th scope="col">Role title</th>
+				<th scope="col">Description</th>
+				<th scope="col">Total staff</th>
+			</tr>
+			<tr>
+				<th scope="row">Alpha users</th>
+				<td>"Tech savvy" (or at least "tech comfortable") human services staff who receive announcements from DHS staff, and handle problem reporting/basic troubleshooting (with help from DHS staff when needed).</td>
+				<td>At least two per agency</td>
+			</tr>
+			<tr>
+				<th scope="row">Supervisor lead</th>
+				<td>A supervisor/manager who can review available scripts, and keep up with regular communications from DHS staff.</td>
+				<td>At least one per agency</td>
+			</tr>
+			<tr>
+				<th scope="row">IT lead</th>
+				<td>An IT, IS, or other technical staff person who is comfortable providing basic BlueZone-related troubleshooting to staff. This IT lead should be aware of BlueZone Scripts in general, and has authorized their use in your agency.</td>
+				<td>At least one per agency</td>
+			</tr>
+			<tr>
+				<th scope="row">Scriptwriter</th>
+				<td>A very tech savvy human services worker, who either knows how to program in VBScript, or is interested in learning. Trainings will be available on TrainLink in the coming months for providing additional information.</td>
+				<td>Optional</td>
+			</tr>
+		</tbody>
+		<caption>
+			A list of recommended roles for counties/agencies implementing BlueZone Scripts
+		</caption>
+	</table>
+	<p>Once the appropriate roles (as discussed above) have been defined, contact <a href="mailto:veronica.cary@state.mn.us">Veronica Cary at DHS</a> with your selections, including name, email address, role title, and phone number.</p>
+	<aside><p><small>Please note: agencies can continue through this installer without assigning roles or informing DHS as indicated above. However, doing so removes access to formal support from DHS staff.</small></p></aside>
+	<h2><small>Second, identify your shared drive</small></h2>
+	<p>Once you've established your basic roles and assigned users to fill those roles, it's time to select a &quot;shared drive&quot; location for your scripts to go. A &quot;shared drive&quot; is a shared network location that all users have in common. For example, many agencies assign a shared drive for documents used by all staff, such as &quot;T:\&quot; or &quot;Q:\&quot;. This drive is accessible to all staff, so it can easily become a place to house your BlueZone Scripts installation.</p>
+	<p>To navigate to a shared drive:</p>
+	<ol>
+		<li>Open Windows File Explorer by clicking on the Windows start menu, then just type &quot;File Explorer&quot;. The File Explorer app will pop-up. <br>
+			<aside><small>Note: depending on your version of Windows, you may also be able to click &quot;Computer&quot;, &quot;My Computer&quot;, or another shortcut.</small></aside>
+		</li>
+		<li>Navigate to your shared drive using the File Explorer application. If you do not know where your shared drive is, discuss this with your IT lead.</li>
+		<li>Create a new folder in your shared drive called &quot;BlueZone Scripts&quot;.</li>
+		<li>Copy the path of this folder by clicking on the title bar, exposing the file path. Copy this to your clipboard, and keep this window open while completing the next steps.</li>
+		</ol>
+	<h2><small>Next, fill out the form to establish your agency-customized variables</small></h2>
+	<p>Once the file location has been established, we need to fill out a form which modifies files to reference your directory, as well as establishes agency-customized variables such as your EDMS type, county attorneys (for Child Support), and certain income thresholds (for Public Assistance). <strong>It's best to fill out this form with multiple alpha users present</strong>. If you are an IT lead filling out the form, you are strongly encouraged to work with your alpha users and supervisors in determining what needs to be entered here.</p>
+	<p>The form is split into sections, and the sections have instructions specific to each area. If your agency has questions while filling this out, please <a href="mailto:veronica.cary@state.mn.us">contact Veronica at DHS</a> for guidance.</p>
+	<h2><small>Finally, download the file and extract it to your shared drive</small></h2>
+	<p>Now, simply extract the file to your shared drive! After this, follow the instructions in locally-installed-files/instructions.html.</p>
+	
+	<!-- What are scripts anyway?? -->
+	<hr>
+	<h1>What are these scripts anyway?</h1>
+	<p>This is a collaborative project between Minnesota Counties, Tribal Agencies, and State officials to build BlueZone Scripts for Public Assistance and Child Support processing. If you work in a human services agency and have additional questions, please contact <a href="mailto:veronica.cary@state.mn.us">Child Support lead Veronica Cary</a> or <a href="mailto:charles.d.potter@state.mn.us">Public Assistance lead Charles Potter</a> for more info. </p>
+</div>
 
-<div class="container">
-
-<p>
-    Go click on PRISM!
-</p>
-
-
-
-    </div>
-
+<!-- Footer! -->
+<footer class="footer">
+	<div class="container">
+		<hr>
+	    <p class="text-muted">This utility created by <a href="mailto:veronica.cary@state.mn.us">Veronica Cary, Minnesota Department of Human Services</a> in October 2016. The source code for this utility <a href="https://github.com/MN-Script-Team/bzs-config-utility">is available</a>.</p>
+	</div>
+</footer>
 
 
 </body>
