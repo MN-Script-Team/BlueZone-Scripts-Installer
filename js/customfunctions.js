@@ -5,7 +5,7 @@ function redirectFile(scriptToRedirectTo) {
     var lastcharfilepath = filepath.substr(filepath.length - 1);
     if (lastcharfilepath != "\\") {
         filepath += "\\";
-    };
+    }
 
     return     "'LOADING GLOBAL VARIABLES--------------------------------------------------------------------"
         + "\n" + "GlobVar_path = \"" + filepath + "locally-installed-files\\~globvar.vbs\"													'Setting a default path, which is modified by the installer"
@@ -59,7 +59,7 @@ function scriptsSetupPRISM() {
     var lastcharfilepath = filepath.substr(filepath.length - 1);
     if (lastcharfilepath != "\\") {
         filepath += "\\";
-    };
+    }
 
 
     JSZipUtils.getBinaryContent('https://raw.githubusercontent.com/MN-Script-Team/DHS-PRISM-Scripts/master/locally-installed-files/dhs-supported-prism.pad', function(err, data) {
@@ -181,6 +181,9 @@ function scriptsSetupPRISM() {
             });
         }
     });
+
+    window.open("thankyou.html");
+
 }
 
 // Variable which will contain the list of attorneys (addAttorneys should output it as a string)
@@ -200,7 +203,7 @@ function addAttorneys(){
         attorneylist = '"' + addattorneyfield + '"';
     } else {
         attorneylist += ', "' + addattorneyfield + '"';
-    };
+    }
 
     document.getElementById("addattorneyfield").value = ""
 
@@ -224,7 +227,7 @@ function addmagistrates(){
         magistratelist = '"' + addmagistratefield + '"';
     } else {
         magistratelist += ', "' + addmagistratefield + '"';
-    };
+    }
 
     document.getElementById("addmagistratefield").value = ""
 }
@@ -246,7 +249,7 @@ function addjudges(){
         judgelist = '"' + addjudgefield + '"';
     } else {
         judgelist += ', "' + addjudgefield + '"';
-    };
+    }
 
     document.getElementById("addjudgefield").value = ""
 }
