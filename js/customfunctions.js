@@ -185,6 +185,8 @@ function scriptsSetupPRISM() {
                 if (httpobj.readyState == 4 && httpobj.status == 200)                               //If the file is found
                 {
                     result = httpobj.responseText;                                                  //"result" is the response
+                    result = result.replace(/C:\\DHS-PRISM-Scripts\\/g, filepath);                  //Replace the default filepath with the indicated
+                    result = result.replace(/installed.locally@co.place.mn.us/g, supportemail);     //Replace the default support email with the indicated one
                     zip.file("locally-installed-files/instructions.html", result);                  //Write it in a file
                 }
             }
