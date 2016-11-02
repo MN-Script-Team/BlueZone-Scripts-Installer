@@ -115,9 +115,11 @@ function scriptsSetupPRISM() {
                 + "\n" + "'Here is the list of agency super users. These users will have access to the test scripts. Enter the list of users' log-in IDs in the quotes below, comma separated"
                 + "\n" + "beta_users = \"" + countybetalist + "\""
                 + "\n" + ""
-                + "\n" + "'This is used by the AGENCY CUSTOMIZED process, and can be used elsewhere if needed, but for now it's mostly informational"
-                + "\n" + "'	This is modified by the installer, which will determine if this is a scriptwriter or a production user."
+                + "\n" + "'	This is modified by the installer, which will determine the production directory. Don't update unless you're sure you know what you're doing."
                 + "\n" + "default_directory = \""+ filepath + "locally-installed-files\""
+                + "\n" + ""
+                + "\n" + "'	This is the default location for agency customized scripts. Don't update unless you're sure you know what you're doing."
+                + "\n" + "agency_custom_directory = \""+ filepath + "agency-custom\""
                 + "\n" + ""
                 + "\n" + "'DETAILS ABOUT STATISTICS AND GATHERING THEM ------------------------------------------------------------------------------------------"
                 + "\n" + ""
@@ -164,6 +166,10 @@ function scriptsSetupPRISM() {
                 + "\n" + "'This will assign beta users to the master branch."
                 + "\n" + "If InStr(UCASE(beta_users), UCASE(windows_user_ID)) <> 0 then use_master_branch = true"
                 + "\n" + ""
+                + "\n" + "'<<<<<TEMPORARY PILOTING REDIRECT, WILL STOP WORKING 01/01/2017, BY WHICH POINT RELEASE BRANCH SHOULD BE ESTABLISHED COMPLETELY AND THE PILOT WILL CEASE"
+                + "\n" + "If date < #01/01/2017# then use_master_branch = true"
+                + "\n" + "'<<<<<END TEMPORARY REDIRECT"        
+                + "\n" + ""
                 + "\n" + "'This is the URL of our script repository, and should only change if the agency is a scriptwriting agency. Scriptwriters can elect to use the master branch, allowing them to test new tools, etc."
                 + "\n" + "IF use_master_branch = TRUE THEN		'scriptwriters typically use the master branch"
                 + "\n" + "    script_repository = \"https://raw.githubusercontent.com/MN-Script-Team/DHS-PRISM-Scripts/master\/\""
@@ -195,6 +201,9 @@ function scriptsSetupPRISM() {
 
             //Send the XML request and do all of the above
             httpobj.send(null);
+
+            //Creating necessary agency-custom handling (folder with "how to use" file)
+            zip.file("agency-custom/How to use this folder and script.vbs", 'MsgBox ("This script (and folder) is designed to store any scripts that your county/agency made that are ""customized"" for your agency (meaning they aren\'t available statewide for some reason)." & vbCr & vbCr & "If your agency has made customized scripts, simply insert them into the folder located at """ & agency_custom_directory & """, and then have staff click this button again." & vbCr & vbCr & "Once you place a script there, this script will ""find"" it, and run it when selected." & vbCr & vbCr & "If you have any questions about how to use this button or folder, please have your scripts administrator contact a DHS BlueZone Scripts administrator. Thank you!") \n');
 
 
             //Save the zip file
