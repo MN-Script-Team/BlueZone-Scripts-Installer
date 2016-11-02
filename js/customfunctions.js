@@ -96,6 +96,7 @@ function scriptsSetupPRISM() {
             zip.file("locally-installed-files/redirect-utilities-changelog.vbs",                redirectFile("/utilities/changelog.vbs"));
             zip.file("locally-installed-files/redirect-utilities-external-resources.vbs",       redirectFile("/utilities/external-resources.vbs"));
             zip.file("locally-installed-files/redirect-utilities-email-scripts-support.vbs",    redirectFile("/utilities/email-scripts-support.vbs"));
+            zip.file("locally-installed-files/show-instructions.vbs",                           'CreateObject("WScript.Shell").Run("' + filepath + 'locally-installed-files\\instructions.html") \n');         //This file is a simple redirect for showing the instructions file
 
             //NOW WE NEED TO CREATE A GLOBAL VARIABLES FILE!
             var globVarContent =
