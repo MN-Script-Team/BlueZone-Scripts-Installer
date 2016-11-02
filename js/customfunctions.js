@@ -55,7 +55,7 @@ function scriptsSetupPRISM() {
     var EDMSchoice = document.getElementById("EDMSchoice").value;
     var supportemail = document.getElementById("supportemail").value;
     var countybetalist = document.getElementById("countybetalist").value;
-    
+
     var lastcharfilepath = filepath.substr(filepath.length - 1);
     if (lastcharfilepath != "\\") {
         filepath += "\\";
@@ -96,7 +96,6 @@ function scriptsSetupPRISM() {
             zip.file("locally-installed-files/redirect-utilities-changelog.vbs",                redirectFile("/utilities/changelog.vbs"));
             zip.file("locally-installed-files/redirect-utilities-external-resources.vbs",       redirectFile("/utilities/external-resources.vbs"));
             zip.file("locally-installed-files/redirect-utilities-email-script-support.vbs",     redirectFile("/utilities/email-scripts-support.vbs"));
-            zip.file("README.txt",                                                              "This is your BlueZone Scripts directory\n");        //README
 
             //NOW WE NEED TO CREATE A GLOBAL VARIABLES FILE!
             var globVarContent =
