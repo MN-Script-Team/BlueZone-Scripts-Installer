@@ -95,7 +95,7 @@ function scriptsSetupPRISM() {
             zip.file("locally-installed-files/redirect-utilities.vbs",                          redirectFile("/utilities/~utilities-menu.vbs"));
             zip.file("locally-installed-files/redirect-utilities-changelog.vbs",                redirectFile("/utilities/changelog.vbs"));
             zip.file("locally-installed-files/redirect-utilities-external-resources.vbs",       redirectFile("/utilities/external-resources.vbs"));
-            zip.file("locally-installed-files/redirect-utilities-email-script-support.vbs",     redirectFile("/utilities/email-scripts-support.vbs"));
+            zip.file("locally-installed-files/redirect-utilities-email-scripts-support.vbs",    redirectFile("/utilities/email-scripts-support.vbs"));
 
             //NOW WE NEED TO CREATE A GLOBAL VARIABLES FILE!
             var globVarContent =
