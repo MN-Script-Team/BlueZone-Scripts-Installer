@@ -56,11 +56,14 @@ function scriptsSetupPRISM() {
     var supportemail = document.getElementById("supportemail").value;
     var countybetalist = document.getElementById("countybetalist").value;
 
+    //This checks to make sure the last character is a slash. If it isn't, it will switch it back out.
     var lastcharfilepath = filepath.substr(filepath.length - 1);
     if (lastcharfilepath != "\\") {
         filepath += "\\";
     }
 
+    //This checks to make sure the end of the string isn't "locally-installed-files". That recursive-ness could get confusing. If it is, it'll automatically be replaced.
+    filepath = filepath.replace('locally-installed-files\\', '');
 
     JSZipUtils.getBinaryContent('https://raw.githubusercontent.com/MN-Script-Team/DHS-PRISM-Scripts/master/locally-installed-files/dhs-supported-prism.pad', function(err, data) {
         if(err) {
