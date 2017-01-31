@@ -77,28 +77,26 @@ function scriptsSetupPRISM() {
             zip.file("locally-installed-files/redirect-agency-custom.vbs",                      redirectFile("/agency-custom/source/agency-custom.vbs"));
             zip.file("locally-installed-files/redirect-bulk.vbs",                               redirectFile("/bulk/~bulk-menu.vbs"));
             zip.file("locally-installed-files/redirect-calculators.vbs",                        redirectFile("/calculators/~calculators-menu.vbs"));
-            zip.file("locally-installed-files/redirect-nav-caad.vbs",                           redirectFile("/nav/caad.vbs"));
-            zip.file("locally-installed-files/redirect-nav-cafs.vbs",                           redirectFile("/nav/cafs.vbs"));
-            zip.file("locally-installed-files/redirect-nav-caps.vbs",                           redirectFile("/nav/caps.vbs"));
-            zip.file("locally-installed-files/redirect-nav-cast.vbs",                           redirectFile("/nav/cast.vbs"));
-            zip.file("locally-installed-files/redirect-nav-cawt.vbs",                           redirectFile("/nav/cawt.vbs"));
-            zip.file("locally-installed-files/redirect-nav-cpdd.vbs",                           redirectFile("/nav/cpdd.vbs"));
-            zip.file("locally-installed-files/redirect-nav-enfl.vbs",                           redirectFile("/nav/enfl.vbs"));
-            zip.file("locally-installed-files/redirect-nav-maxis-screen-finder.vbs",            redirectFile("/nav/maxis-screen-finder.vbs"));
-            zip.file("locally-installed-files/redirect-nav-ncdd.vbs",                           redirectFile("/nav/ncdd.vbs"));
-            zip.file("locally-installed-files/redirect-nav-ncid.vbs",                           redirectFile("/nav/ncid.vbs"));
-            zip.file("locally-installed-files/redirect-nav-palc.vbs",                           redirectFile("/nav/palc.vbs"));
-            zip.file("locally-installed-files/redirect-nav-papl.vbs",                           redirectFile("/nav/papl.vbs"));
-            zip.file("locally-installed-files/redirect-nav-pese.vbs",                           redirectFile("/nav/pese.vbs"));
-            zip.file("locally-installed-files/redirect-nav-prism-screen-finder.vbs",            redirectFile("/nav/prism-screen-finder.vbs"));
-            zip.file("locally-installed-files/redirect-nav-sucw.vbs",                           redirectFile("/nav/sucw.vbs"));
-            zip.file("locally-installed-files/redirect-nav-uswd.vbs",                           redirectFile("/nav/uswd.vbs"));
+            zip.file("locally-installed-files/redirect-favorites-ctrl-f1.vbs",                  redirectFile("/favorites/ctrl-f1.vbs"));
+            zip.file("locally-installed-files/redirect-favorites-ctrl-f2.vbs",                  redirectFile("/favorites/ctrl-f2.vbs"));
+            zip.file("locally-installed-files/redirect-favorites-ctrl-f3.vbs",                  redirectFile("/favorites/ctrl-f3.vbs"));
+            zip.file("locally-installed-files/redirect-favorites-ctrl-f4.vbs",                  redirectFile("/favorites/ctrl-f4.vbs"));
+            zip.file("locally-installed-files/redirect-favorites-ctrl-f5.vbs",                  redirectFile("/favorites/ctrl-f5.vbs"));
+            zip.file("locally-installed-files/redirect-favorites-ctrl-f6.vbs",                  redirectFile("/favorites/ctrl-f6.vbs"));
+            zip.file("locally-installed-files/redirect-favorites-ctrl-f7.vbs",                  redirectFile("/favorites/ctrl-f7.vbs"));
+            zip.file("locally-installed-files/redirect-favorites-ctrl-f8.vbs",                  redirectFile("/favorites/ctrl-f8.vbs"));
+            zip.file("locally-installed-files/redirect-favorites-ctrl-f9.vbs",                  redirectFile("/favorites/ctrl-f9.vbs"));
+            zip.file("locally-installed-files/redirect-favorites-ctrl-f10.vbs",                 redirectFile("/favorites/ctrl-f10.vbs"));
+            zip.file("locally-installed-files/redirect-favorites-ctrl-f11.vbs",                 redirectFile("/favorites/ctrl-f11.vbs"));
+            zip.file("locally-installed-files/redirect-favorites-ctrl-f12.vbs",                 redirectFile("/favorites/ctrl-f12.vbs"));
             zip.file("locally-installed-files/redirect-notes.vbs",                              redirectFile("/notes/~notes-menu.vbs"));
-            zip.file("locally-installed-files/redirect-notes-quick-caad.vbs",                   redirectFile("/notes/quick-caad.vbs"));
             zip.file("locally-installed-files/redirect-utilities.vbs",                          redirectFile("/utilities/~utilities-menu.vbs"));
             zip.file("locally-installed-files/redirect-utilities-changelog.vbs",                redirectFile("/utilities/changelog.vbs"));
             zip.file("locally-installed-files/redirect-utilities-external-resources.vbs",       redirectFile("/utilities/external-resources.vbs"));
             zip.file("locally-installed-files/redirect-utilities-email-scripts-support.vbs",    redirectFile("/utilities/email-scripts-support.vbs"));
+            zip.file("locally-installed-files/redirect-utilities-favorites-list.vbs",           redirectFile("/utilities/favorites-list.vbs"));
+            zip.file("locally-installed-files/redirect-utilities-quick-caad.vbs",               redirectFile("/utilities/quick-caad.vbs"));
+            zip.file("locally-installed-files/redirect-utilities-quick-dord.vbs",               redirectFile("/utilities/quick-dord.vbs"));
             zip.file("locally-installed-files/show-instructions.vbs",                           'CreateObject("WScript.Shell").Run("""' + filepath + 'locally-installed-files\\instructions.html""") \n');         //This file is a simple redirect for showing the instructions file
 
             //NOW WE NEED TO CREATE A GLOBAL VARIABLES FILE!
